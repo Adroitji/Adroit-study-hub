@@ -3,10 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Adroit Study Hub - Smart Learning Portal</title>
-  <!-- Tailwind CSS CDN -->
+  <title>Adroit Study Hub - Class 10 Portal</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- FontAwesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
@@ -16,39 +14,34 @@
 <body class="bg-slate-900 text-slate-100 min-h-screen flex flex-col">
 
   <!-- Header / Navbar -->
-  <header class="bg-slate-800/80 backdrop-blur-md border-b border-slate-700 sticky top-0 z-50">
+  <header class="bg-slate-800/90 backdrop-blur-md border-b border-slate-700 sticky top-0 z-50">
     <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
-      <div class="flex items-center space-x-3 cursor-pointer" onclick="switchView('home')">
+      <div class="flex items-center space-x-3 cursor-pointer" onclick="switchView('student')">
         <div class="w-10 h-10 rounded-xl bg-indigo-600 flex items-center justify-center font-bold text-xl shadow-lg shadow-indigo-500/30">
-          A
+          10
         </div>
         <div>
           <h1 class="text-xl font-bold bg-gradient-to-r from-indigo-400 to-cyan-400 bg-clip-text text-transparent">Adroit Study Hub</h1>
-          <p class="text-xs text-slate-400">Exclusive Student Learning Portal</p>
+          <p class="text-xs text-slate-400">Class 10th Science & Social Science Portal</p>
         </div>
       </div>
 
-      <!-- Navigation & User Info -->
-      <div id="navRight" class="flex items-center space-x-3">
-        <!-- JS filled -->
-      </div>
+      <div id="navRight" class="flex items-center space-x-3"></div>
     </div>
   </header>
 
-  <!-- Main Container -->
   <main class="flex-grow max-w-7xl w-full mx-auto p-4 sm:p-6">
 
-    <!-- VIEW 1: AUTHENTICATION (Login / Register) -->
+    <!-- VIEW 1: AUTHENTICATION -->
     <div id="authView" class="max-w-md mx-auto my-10 bg-slate-800 p-8 rounded-2xl border border-slate-700 shadow-2xl">
       <div class="flex border-b border-slate-700 mb-6">
         <button id="loginTab" onclick="setAuthMode('login')" class="flex-1 py-2 font-semibold text-center border-b-2 border-indigo-500 text-indigo-400">Login</button>
-        <button id="registerTab" onclick="setAuthMode('register')" class="flex-1 py-2 font-semibold text-center border-b-2 border-transparent text-slate-400 hover:text-slate-200">Student Register</button>
+        <button id="registerTab" onclick="setAuthMode('register')" class="flex-1 py-2 font-semibold text-center border-b-2 border-transparent text-slate-400">Student Register</button>
       </div>
 
-      <!-- Login Form -->
       <form id="loginForm" onsubmit="handleLogin(event)" class="space-y-4">
         <div>
-          <label class="block text-sm text-slate-300 mb-1">Email / Phone</label>
+          <label class="block text-sm text-slate-300 mb-1">Mobile Number / Email</label>
           <input type="text" id="loginId" required class="w-full bg-slate-900 border border-slate-700 rounded-lg p-3 text-white focus:outline-none focus:border-indigo-500">
         </div>
         <div>
@@ -58,150 +51,145 @@
         <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-500 py-3 rounded-lg font-semibold transition shadow-lg shadow-indigo-600/30">Login</button>
       </form>
 
-      <!-- Register Form -->
       <form id="registerForm" onsubmit="handleRegister(event)" class="space-y-4 hidden">
         <div>
           <label class="block text-sm text-slate-300 mb-1">Full Name</label>
-          <input type="text" id="regName" required class="w-full bg-slate-900 border border-slate-700 rounded-lg p-3 text-white focus:outline-none focus:border-indigo-500">
+          <input type="text" id="regName" required class="w-full bg-slate-900 border border-slate-700 rounded-lg p-3 text-white">
         </div>
         <div>
-          <label class="block text-sm text-slate-300 mb-1">Email / Mobile Number</label>
-          <input type="text" id="regId" required class="w-full bg-slate-900 border border-slate-700 rounded-lg p-3 text-white focus:outline-none focus:border-indigo-500">
+          <label class="block text-sm text-slate-300 mb-1">Mobile Number</label>
+          <input type="text" id="regId" required class="w-full bg-slate-900 border border-slate-700 rounded-lg p-3 text-white">
         </div>
         <div>
-          <label class="block text-sm text-slate-300 mb-1">Class / Target Exam</label>
-          <input type="text" id="regClass" placeholder="e.g. Class 10th / REET / NEET" required class="w-full bg-slate-900 border border-slate-700 rounded-lg p-3 text-white focus:outline-none focus:border-indigo-500">
+          <label class="block text-sm text-slate-300 mb-1">Class / Section</label>
+          <input type="text" id="regClass" value="Class 10th" required class="w-full bg-slate-900 border border-slate-700 rounded-lg p-3 text-white">
         </div>
         <div>
           <label class="block text-sm text-slate-300 mb-1">Create Password</label>
-          <input type="password" id="regPass" required class="w-full bg-slate-900 border border-slate-700 rounded-lg p-3 text-white focus:outline-none focus:border-indigo-500">
+          <input type="password" id="regPass" required class="w-full bg-slate-900 border border-slate-700 rounded-lg p-3 text-white">
         </div>
-        <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-500 py-3 rounded-lg font-semibold transition shadow-lg shadow-emerald-600/30">Request Student Account</button>
-        <p class="text-xs text-slate-400 text-center">Registration requests require Teacher Approval before accessing notes & videos.</p>
+        <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-500 py-3 rounded-lg font-semibold transition">Request Student Account</button>
       </form>
     </div>
 
-    <!-- VIEW 2: PENDING APPROVAL SCREEN -->
+    <!-- VIEW 2: PENDING APPROVAL -->
     <div id="pendingView" class="hidden max-w-lg mx-auto my-12 text-center bg-slate-800 p-8 rounded-2xl border border-amber-500/30 shadow-xl">
       <div class="w-16 h-16 bg-amber-500/20 text-amber-400 rounded-full flex items-center justify-center mx-auto mb-4 text-3xl">
-        <i class="fa-solid fa-clock-rotate-left"></i>
+        <i class="fa-solid fa-user-clock"></i>
       </div>
       <h2 class="text-2xl font-bold text-amber-400 mb-2">Account Approval Pending</h2>
-      <p class="text-slate-300 mb-6">नमस्ते! आपका अकाउंट बन चुका है। टीचर द्वारा अप्रूवल मिलने के बाद आप सभी नोट्स, पेपर्स और वीडियो देख पाएँगे।</p>
+      <p class="text-slate-300 mb-6">नमस्ते! आपका रजिस्ट्रेशन हो चुका है। सर द्वारा अप्रूवल मिलने के बाद आप क्लास 10th के सभी नोट्स और टेस्ट देख पाएँगे।</p>
       <div class="p-4 bg-slate-900 rounded-lg text-sm text-slate-400 border border-slate-700">
-        संपर्क करें: <span class="text-indigo-400 font-medium">9610279787</span> पर व्हाट्सएप करके तुरंत अप्रूवल लें।
+        तुरंत अप्रूवल के लिए व्हाट्सएप करें: <span class="text-indigo-400 font-bold">9610279787</span>
       </div>
     </div>
 
-    <!-- VIEW 3: STUDENT PORTAL (Approved Access) -->
+    <!-- VIEW 3: STUDENT PORTAL -->
     <div id="studentView" class="hidden space-y-6">
-      <!-- Tabs Navigation -->
-      <div class="flex space-x-2 border-b border-slate-700 pb-2 overflow-x-auto">
-        <button onclick="switchTab('notes')" id="tab-notes" class="px-4 py-2 rounded-lg font-medium bg-indigo-600 text-white flex items-center space-x-2">
-          <i class="fa-solid fa-book"></i> <span>Study Notes</span>
+      
+      <!-- Subject Selection Filter -->
+      <div class="flex flex-wrap gap-2 border-b border-slate-700 pb-3">
+        <button onclick="setSubject('science')" id="sub-science" class="px-5 py-2.5 rounded-xl font-bold bg-indigo-600 text-white shadow-lg shadow-indigo-600/30 flex items-center space-x-2">
+          <i class="fa-solid fa-flask"></i> <span>Science (विज्ञान)</span>
         </button>
-        <button onclick="switchTab('papers')" id="tab-papers" class="px-4 py-2 rounded-lg font-medium bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center space-x-2">
-          <i class="fa-solid fa-file-lines"></i> <span>Exam Papers</span>
-        </button>
-        <button onclick="switchTab('quizzes')" id="tab-quizzes" class="px-4 py-2 rounded-lg font-medium bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center space-x-2">
-          <i class="fa-solid fa-brain"></i> <span>Interactive Quizzes</span>
-        </button>
-        <button onclick="switchTab('videos')" id="tab-videos" class="px-4 py-2 rounded-lg font-medium bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center space-x-2">
-          <i class="fa-solid fa-circle-play"></i> <span>Video Lectures</span>
+        <button onclick="setSubject('sst')" id="sub-sst" class="px-5 py-2.5 rounded-xl font-bold bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center space-x-2">
+          <i class="fa-solid fa-earth-americas"></i> <span>Social Science (सामाजिक विज्ञान)</span>
         </button>
       </div>
 
-      <!-- Tab Content Area -->
-      <div id="tabContent" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        <!-- Dynamically Populated -->
+      <!-- Content Type Tabs -->
+      <div class="flex space-x-3 bg-slate-800/60 p-1.5 rounded-xl border border-slate-700/50 w-fit">
+        <button onclick="setTab('notes')" id="tab-notes" class="px-4 py-2 rounded-lg font-medium bg-indigo-500 text-white text-sm">
+          <i class="fa-solid fa-book-open mr-1.5"></i> Chapter Notes
+        </button>
+        <button onclick="setTab('quizzes')" id="tab-quizzes" class="px-4 py-2 rounded-lg font-medium text-slate-400 hover:text-white text-sm">
+          <i class="fa-solid fa-brain mr-1.5"></i> Online Quizzes
+        </button>
+      </div>
+
+      <!-- Chapters List Grid -->
+      <div id="chapterGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <!-- Dynamically Filled -->
       </div>
     </div>
 
-    <!-- VIEW 4: ADMIN / TEACHER DASHBOARD -->
-    <div id="adminView" class="hidden space-y-8">
-      <div class="flex justify-between items-center bg-slate-800 p-4 rounded-xl border border-slate-700">
+    <!-- VIEW 4: ADMIN DASHBOARD -->
+    <div id="adminView" class="hidden space-y-6">
+      <div class="bg-slate-800 p-5 rounded-2xl border border-slate-700 flex justify-between items-center">
         <div>
-          <h2 class="text-xl font-bold text-indigo-400"><i class="fa-solid fa-user-shield mr-2"></i>Teacher Control Panel</h2>
-          <p class="text-xs text-slate-400">Manage Students, Notes, Exams & Quizzes</p>
+          <h2 class="text-xl font-bold text-indigo-400"><i class="fa-solid fa-user-shield mr-2"></i> Teacher Approval Panel</h2>
+          <p class="text-xs text-slate-400">Approve or Block registered students</p>
         </div>
-        <button onclick="switchView('student')" class="bg-indigo-600 hover:bg-indigo-500 px-4 py-2 rounded-lg text-sm">Preview Student View</button>
+        <button onclick="switchView('student')" class="bg-indigo-600 hover:bg-indigo-500 px-4 py-2 rounded-lg text-sm">Student Mode</button>
       </div>
 
-      <!-- Section: Student Approvals -->
-      <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700 space-y-4">
-        <h3 class="text-lg font-bold text-white flex items-center"><i class="fa-solid fa-users-check mr-2 text-emerald-400"></i> Student Access Approvals</h3>
+      <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700">
+        <h3 class="text-lg font-bold mb-4 text-slate-200">Registered Student Requests</h3>
         <div class="overflow-x-auto">
           <table class="w-full text-left text-sm text-slate-300">
             <thead class="bg-slate-900 text-slate-400 uppercase text-xs">
               <tr>
-                <th class="p-3">Name</th>
-                <th class="p-3">ID / Mobile</th>
+                <th class="p-3">Student Name</th>
+                <th class="p-3">Mobile / ID</th>
                 <th class="p-3">Class</th>
                 <th class="p-3">Status</th>
                 <th class="p-3">Action</th>
               </tr>
             </thead>
-            <tbody id="studentTableBody" class="divide-y divide-slate-700">
-              <!-- Populated by JS -->
-            </tbody>
+            <tbody id="studentTableBody" class="divide-y divide-slate-700"></tbody>
           </table>
         </div>
-      </div>
-
-      <!-- Section: Add New Study Material -->
-      <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700 space-y-4">
-        <h3 class="text-lg font-bold text-white"><i class="fa-solid fa-cloud-arrow-up mr-2 text-indigo-400"></i> Add New Study Material</h3>
-        <form onsubmit="handleAddContent(event)" class="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div>
-            <label class="block text-xs text-slate-400 mb-1">Category</label>
-            <select id="contentCategory" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-white">
-              <option value="notes">Study Notes (PDF/Link)</option>
-              <option value="papers">Question Paper</option>
-              <option value="videos">Video Lecture (YouTube Embed Link)</option>
-            </select>
-          </div>
-          <div>
-            <label class="block text-xs text-slate-400 mb-1">Title</label>
-            <input type="text" id="contentTitle" placeholder="e.g. Class 10 Science Chapter 1 Notes" required class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-white">
-          </div>
-          <div class="md:col-span-2">
-            <label class="block text-xs text-slate-400 mb-1">Resource Link (Google Drive / PDF URL / YouTube Link)</label>
-            <input type="url" id="contentUrl" placeholder="https://..." required class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-white">
-          </div>
-          <div class="md:col-span-2">
-            <button type="submit" class="bg-emerald-600 hover:bg-emerald-500 w-full py-3 rounded-lg font-semibold transition">Upload to Portal</button>
-          </div>
-        </form>
       </div>
     </div>
 
   </main>
 
-  <!-- JavaScript Logic -->
   <script>
-    // LocalStorage Initialization
+    // Chapter Data Pre-configured with Static Folder Paths
+    const scienceChapters = [
+      { num: 1, title: 'रासायनिक अभिक्रियाएं एवं समीकरण', file: 'notes/science-ch1.html' },
+      { num: 2, title: 'अम्ल, क्षारक एवं लवण', file: 'notes/science-ch2.html' },
+      { num: 3, title: 'धातु एवं अधातु', file: 'notes/science-ch3.html' },
+      { num: 4, title: 'कार्बन एवं उसके यौगिक', file: 'notes/science-ch4.html' },
+      { num: 5, title: 'जैव प्रक्रम (Life Processes)', file: 'notes/science-ch5.html' },
+      { num: 6, title: 'नियंत्रण एवं समन्वय', file: 'notes/science-ch6.html' },
+      { num: 7, title: 'जीव जनन कैसे करते हैं?', file: 'notes/science-ch7.html' },
+      { num: 8, title: 'आनुवंशिकता एवं जैव विकास', file: 'notes/science-ch8.html' },
+      { num: 9, title: 'प्रकाश – परावर्तन तथा अपवर्तन', file: 'notes/science-ch9.html' },
+      { num: 10, title: 'मानव नेत्र तथा रंगबिरंगा संसार', file: 'notes/science-ch10.html' },
+      { num: 11, title: 'विद्युत (Electricity)', file: 'notes/science-ch11.html' },
+      { num: 12, title: 'विद्युत धारा के चुंबकीय प्रभाव', file: 'notes/science-ch12.html' },
+      { num: 13, title: 'हमारा पर्यावरण', file: 'notes/science-ch13.html' }
+    ];
+
+    const sstChapters = [
+      { num: 1, title: 'इतिहास: यूरोप में राष्ट्रवाद का उदय', file: 'notes/sst-ch1.html' },
+      { num: 2, title: 'इतिहास: भारत में राष्ट्रवाद', file: 'notes/sst-ch2.html' },
+      { num: 3, title: 'इतिहास: भूमंडलीकृत विश्व का बनना', file: 'notes/sst-ch3.html' },
+      { num: 4, title: 'भूगोल: संसाधन एवं विकास', file: 'notes/sst-ch4.html' },
+      { num: 5, title: 'भूगोल: वन और वन्यजीव संसाधन', file: 'notes/sst-ch5.html' },
+      { num: 6, title: 'भूगोल: जल संसाधन', file: 'notes/sst-ch6.html' },
+      { num: 7, title: 'भूगोल: कृषि (Agriculture)', file: 'notes/sst-ch7.html' },
+      { num: 8, title: 'राजनीति: सत्ता की साझेदारी', file: 'notes/sst-ch8.html' },
+      { num: 9, title: 'राजनीति: संघवाद (Federalism)', file: 'notes/sst-ch9.html' },
+      { num: 10, title: 'राजनीति: जाति, धर्म और लैंगिक मसले', file: 'notes/sst-ch10.html' },
+      { num: 11, title: 'अर्थशास्त्र: विकास (Development)', file: 'notes/sst-ch11.html' },
+      { num: 12, title: 'अर्थशास्त्र: भारतीय अर्थव्यवस्था के क्षेत्रक', file: 'notes/sst-ch12.html' },
+      { num: 13, title: 'अर्थशास्त्र: मुद्रा और साख', file: 'notes/sst-ch13.html' }
+    ];
+
+    let currentSubject = 'science';
+    let currentTab = 'notes';
+
     let users = JSON.parse(localStorage.getItem('adh_users')) || [
-      { id: 'admin@hub.com', pass: 'admin123', name: 'Teacher (Admin)', class: 'Admin', status: 'approved', role: 'admin' },
-      { id: '9610279787', pass: '123456', name: 'Demo Student', class: 'Class 10', status: 'approved', role: 'student' }
-    ];
-
-    let materials = JSON.parse(localStorage.getItem('adh_materials')) || [
-      { id: 1, category: 'notes', title: 'Class 10 Science - Chemical Reactions PDF', url: 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf' },
-      { id: 2, category: 'papers', title: 'RBSE Board Model Paper 2026', url: 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf' },
-      { id: 3, category: 'videos', title: 'NCERT Biology Chapter 1 Video', url: 'https://www.youtube.com/embed/dQw4w9WgXcQ' }
-    ];
-
-    let quizzes = [
-      { id: 1, title: 'Science Quiz 1: Chemical Reactions', questions: 10, time: '15 mins' },
-      { id: 2, title: 'Rajasthan General Knowledge Mock Test', questions: 20, time: '20 mins' }
+      { id: 'admin@hub.com', pass: 'admin123', name: 'Adroit Sir (Teacher)', class: 'Admin', status: 'approved', role: 'admin' },
+      { id: '9610279787', pass: '123456', name: 'Demo Student', class: 'Class 10th', status: 'approved', role: 'student' }
     ];
 
     let currentUser = JSON.parse(localStorage.getItem('adh_current_user')) || null;
-    let activeTab = 'notes';
 
     function saveState() {
       localStorage.setItem('adh_users', JSON.stringify(users));
-      localStorage.setItem('adh_materials', JSON.stringify(materials));
       localStorage.setItem('adh_current_user', JSON.stringify(currentUser));
     }
 
@@ -216,14 +204,14 @@
       e.preventDefault();
       const id = document.getElementById('loginId').value.trim();
       const pass = document.getElementById('loginPass').value.trim();
-
       const found = users.find(u => u.id === id && u.pass === pass);
+
       if (found) {
         currentUser = found;
         saveState();
         renderPortal();
       } else {
-        alert('गलत ID या पासवर्ड! कृपया दोबारा जांचें।');
+        alert('गलत आईडी या पासवर्ड!');
       }
     }
 
@@ -235,7 +223,7 @@
       const pass = document.getElementById('regPass').value.trim();
 
       if (users.some(u => u.id === id)) {
-        alert('यह मोबाइल/ईमेल पहले से रजिस्टर्ड है!');
+        alert('यह मोबाइल नंबर पहले से रजिस्टर्ड है!');
         return;
       }
 
@@ -255,12 +243,12 @@
     function renderNav() {
       const navRight = document.getElementById('navRight');
       if (!currentUser) {
-        navRight.innerHTML = `<button onclick="switchView('auth')" class="bg-indigo-600 hover:bg-indigo-500 px-4 py-2 rounded-lg text-sm font-medium">Student Login</button>`;
+        navRight.innerHTML = `<button onclick="switchView('auth')" class="bg-indigo-600 hover:bg-indigo-500 px-4 py-2 rounded-lg text-sm font-medium">Login</button>`;
       } else {
         navRight.innerHTML = `
           <div class="text-right hidden sm:block">
             <div class="text-sm font-medium text-white">${currentUser.name}</div>
-            <div class="text-xs text-slate-400">${currentUser.role === 'admin' ? 'Teacher' : currentUser.class}</div>
+            <div class="text-xs text-indigo-400">${currentUser.role === 'admin' ? 'Teacher' : currentUser.class}</div>
           </div>
           ${currentUser.role === 'admin' ? '<button onclick="switchView(\'admin\')" class="bg-slate-700 hover:bg-slate-600 px-3 py-1.5 rounded-lg text-xs"><i class="fa-solid fa-gear mr-1"></i> Admin</button>' : ''}
           <button onclick="logout()" class="bg-rose-600/20 hover:bg-rose-600/30 text-rose-400 px-3 py-1.5 rounded-lg text-xs border border-rose-500/30">Logout</button>
@@ -269,120 +257,89 @@
     }
 
     function switchView(viewName) {
-      document.getElementById('authView').classList.add('hidden');
-      document.getElementById('pendingView').classList.add('hidden');
-      document.getElementById('studentView').classList.add('hidden');
-      document.getElementById('adminView').classList.add('hidden');
-
+      ['authView', 'pendingView', 'studentView', 'adminView'].forEach(v => document.getElementById(v).classList.add('hidden'));
       if (viewName === 'auth') document.getElementById('authView').classList.remove('hidden');
       if (viewName === 'pending') document.getElementById('pendingView').classList.remove('hidden');
       if (viewName === 'student') {
         document.getElementById('studentView').classList.remove('hidden');
-        renderStudentContent();
+        renderContent();
       }
       if (viewName === 'admin') {
         document.getElementById('adminView').classList.remove('hidden');
-        renderAdminPanel();
+        renderAdmin();
       }
     }
 
     function renderPortal() {
       renderNav();
-      if (!currentUser) {
-        switchView('auth');
-      } else if (currentUser.role === 'admin') {
-        switchView('admin');
-      } else if (currentUser.status === 'pending') {
-        switchView('pending');
-      } else {
-        switchView('student');
-      }
+      if (!currentUser) switchView('auth');
+      else if (currentUser.role === 'admin') switchView('admin');
+      else if (currentUser.status === 'pending') switchView('pending');
+      else switchView('student');
     }
 
-    function switchTab(tab) {
-      activeTab = tab;
-      ['notes', 'papers', 'quizzes', 'videos'].forEach(t => {
-        const btn = document.getElementById(`tab-${t}`);
-        if (t === tab) {
-          btn.className = 'px-4 py-2 rounded-lg font-medium bg-indigo-600 text-white flex items-center space-x-2';
-        } else {
-          btn.className = 'px-4 py-2 rounded-lg font-medium bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center space-x-2';
-        }
-      });
-      renderStudentContent();
+    function setSubject(sub) {
+      currentSubject = sub;
+      document.getElementById('sub-science').className = sub === 'science' ? 'px-5 py-2.5 rounded-xl font-bold bg-indigo-600 text-white shadow-lg shadow-indigo-600/30 flex items-center space-x-2' : 'px-5 py-2.5 rounded-xl font-bold bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center space-x-2';
+      document.getElementById('sub-sst').className = sub === 'sst' ? 'px-5 py-2.5 rounded-xl font-bold bg-indigo-600 text-white shadow-lg shadow-indigo-600/30 flex items-center space-x-2' : 'px-5 py-2.5 rounded-xl font-bold bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center space-x-2';
+      renderContent();
     }
 
-    function renderStudentContent() {
-      const container = document.getElementById('tabContent');
-      container.innerHTML = '';
+    function setTab(tab) {
+      currentTab = tab;
+      document.getElementById('tab-notes').className = tab === 'notes' ? 'px-4 py-2 rounded-lg font-medium bg-indigo-500 text-white text-sm' : 'px-4 py-2 rounded-lg font-medium text-slate-400 hover:text-white text-sm';
+      document.getElementById('tab-quizzes').className = tab === 'quizzes' ? 'px-4 py-2 rounded-lg font-medium bg-indigo-500 text-white text-sm' : 'px-4 py-2 rounded-lg font-medium text-slate-400 hover:text-white text-sm';
+      renderContent();
+    }
 
-      if (activeTab === 'quizzes') {
-        quizzes.forEach(q => {
-          container.innerHTML += `
-            <div class="bg-slate-800 p-5 rounded-xl border border-slate-700 hover:border-indigo-500/50 transition">
-              <div class="text-xs text-indigo-400 font-bold uppercase tracking-wider mb-1">Online Test</div>
-              <h4 class="font-semibold text-white mb-2">${q.title}</h4>
-              <p class="text-xs text-slate-400 mb-4">${q.questions} Questions • ${q.time}</p>
-              <button onclick="alert('Quiz starting...')" class="w-full bg-indigo-600 hover:bg-indigo-500 py-2 rounded-lg text-sm font-medium">Start Quiz</button>
-            </div>
-          `;
-        });
-        return;
-      }
+    function renderContent() {
+      const grid = document.getElementById('chapterGrid');
+      grid.innerHTML = '';
+      const list = currentSubject === 'science' ? scienceChapters : sstChapters;
 
-      const filtered = materials.filter(m => m.category === activeTab);
-      if (filtered.length === 0) {
-        container.innerHTML = `<div class="col-span-full text-center py-12 text-slate-500">अभी कोई कंटेंट उपलब्ध नहीं है।</div>`;
-        return;
-      }
-
-      filtered.forEach(item => {
-        if (item.category === 'videos') {
-          container.innerHTML += `
-            <div class="bg-slate-800 rounded-xl overflow-hidden border border-slate-700">
-              <div class="aspect-video">
-                <iframe class="w-full h-full" src="${item.url}" frameborder="0" allowfullscreen></iframe>
-              </div>
-              <div class="p-4">
-                <h4 class="font-semibold text-white text-sm">${item.title}</h4>
-              </div>
-            </div>
-          `;
-        } else {
-          container.innerHTML += `
+      list.forEach(ch => {
+        if (currentTab === 'notes') {
+          grid.innerHTML += `
             <div class="bg-slate-800 p-5 rounded-xl border border-slate-700 hover:border-indigo-500/50 transition flex flex-col justify-between">
               <div>
-                <div class="text-xs text-emerald-400 font-bold uppercase tracking-wider mb-1">${item.category === 'notes' ? 'Study Note PDF' : 'Exam Paper'}</div>
-                <h4 class="font-semibold text-white mb-4">${item.title}</h4>
+                <span class="text-xs font-bold text-indigo-400 uppercase tracking-wider">Chapter ${ch.num}</span>
+                <h3 class="font-semibold text-white mt-1 mb-4">${ch.title}</h3>
               </div>
-              <a href="${item.url}" target="_blank" class="w-full text-center bg-slate-700 hover:bg-slate-600 py-2 rounded-lg text-sm font-medium text-indigo-300">
-                <i class="fa-solid fa-download mr-1"></i> View / Download
+              <a href="${ch.file}" target="_blank" class="w-full text-center bg-indigo-600 hover:bg-indigo-500 text-white py-2 rounded-lg text-sm font-medium transition shadow-md shadow-indigo-600/20">
+                <i class="fa-solid fa-file-lines mr-1.5"></i> Read Notes
               </a>
             </div>
           `;
+        } else {
+          grid.innerHTML += `
+            <div class="bg-slate-800 p-5 rounded-xl border border-slate-700 hover:border-emerald-500/50 transition flex flex-col justify-between">
+              <div>
+                <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider">Quiz Test • Chapter ${ch.num}</span>
+                <h3 class="font-semibold text-white mt-1 mb-4">${ch.title}</h3>
+              </div>
+              <button onclick="alert('Chapter ${ch.num} Test is starting...')" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white py-2 rounded-lg text-sm font-medium transition shadow-md shadow-emerald-600/20">
+                <i class="fa-solid fa-play mr-1.5"></i> Start Online Quiz
+              </button>
+            </div>
+          `;
         }
       });
     }
 
-    function renderAdminPanel() {
+    function renderAdmin() {
       const tbody = document.getElementById('studentTableBody');
       tbody.innerHTML = '';
-
-      users.filter(u => u.role !== 'admin').forEach(student => {
+      users.filter(u => u.role !== 'admin').forEach(s => {
         tbody.innerHTML += `
           <tr>
-            <td class="p-3 font-medium text-white">${student.name}</td>
-            <td class="p-3">${student.id}</td>
-            <td class="p-3">${student.class}</td>
-            <td class="p-3">
-              <span class="px-2 py-1 rounded text-xs ${student.status === 'approved' ? 'bg-emerald-500/20 text-emerald-400' : 'bg-amber-500/20 text-amber-400'}">
-                ${student.status}
-              </span>
-            </td>
+            <td class="p-3 font-medium text-white">${s.name}</td>
+            <td class="p-3">${s.id}</td>
+            <td class="p-3">${s.class}</td>
+            <td class="p-3"><span class="px-2 py-1 rounded text-xs ${s.status === 'approved' ? 'bg-emerald-500/20 text-emerald-400' : 'bg-amber-500/20 text-amber-400'}">${s.status}</span></td>
             <td class="p-3 space-x-2">
-              ${student.status === 'pending' ? 
-                `<button onclick="toggleApprove('${student.id}', 'approved')" class="bg-emerald-600 hover:bg-emerald-500 px-3 py-1 rounded text-xs text-white">Approve</button>` : 
-                `<button onclick="toggleApprove('${student.id}', 'pending')" class="bg-amber-600 hover:bg-amber-500 px-3 py-1 rounded text-xs text-white">Block</button>`
+              ${s.status === 'pending' ? 
+                `<button onclick="toggleApprove('${s.id}', 'approved')" class="bg-emerald-600 hover:bg-emerald-500 px-3 py-1 rounded text-xs">Approve</button>` : 
+                `<button onclick="toggleApprove('${s.id}', 'pending')" class="bg-amber-600 hover:bg-amber-500 px-3 py-1 rounded text-xs">Block</button>`
               }
             </td>
           </tr>
@@ -395,24 +352,10 @@
       if (target) {
         target.status = status;
         saveState();
-        renderAdminPanel();
+        renderAdmin();
       }
     }
 
-    function handleAddContent(e) {
-      e.preventDefault();
-      const category = document.getElementById('contentCategory').value;
-      const title = document.getElementById('contentTitle').value.trim();
-      const url = document.getElementById('contentUrl').value.trim();
-
-      materials.push({ id: Date.now(), category, title, url });
-      saveState();
-      alert('नया कंटेंट पोर्टल में जोड़ दिया गया है!');
-      document.getElementById('contentTitle').value = '';
-      document.getElementById('contentUrl').value = '';
-    }
-
-    // App Initialization
     renderPortal();
   </script>
 </body>

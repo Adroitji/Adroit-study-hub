@@ -138,12 +138,17 @@
 
         /* Modals */
         .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); z-index: 2000; display: none; align-items: center; justify-content: center; padding: 20px; }
-        .modal-content { width: 100%; max-width: 450px; border-radius: 30px; padding: 35px; position: relative; animation: popupIn 0.5s ease; text-align:center; }
+        .modal-content { width: 100%; max-width: 480px; border-radius: 30px; padding: 35px; position: relative; animation: popupIn 0.5s ease; text-align:center; }
         .modal-close { position: absolute; top: 20px; right: 25px; font-size: 24px; color: var(--text-muted); cursor: pointer; transition:0.3s; }
         .modal-close:hover { color: var(--accent); transform:rotate(90deg); }
 
         .auth-input { width: 100%; padding: 14px 20px; border-radius: 14px; border: 1px solid var(--glass-border); background: rgba(0,0,0,0.4); color: white; margin-bottom: 15px; outline: none; font-size: 14px; }
         
+        /* Auth Tabs UI */
+        .auth-tabs { display: flex; border-bottom: 1px solid var(--glass-border); margin-bottom: 25px; }
+        .auth-tab-btn { flex: 1; padding: 12px; font-weight: 700; font-size: 14px; background: none; border: none; color: var(--text-muted); cursor: pointer; transition: 0.3s; border-bottom: 2px solid transparent; }
+        .auth-tab-btn.active { color: var(--primary); border-bottom-color: var(--primary); }
+
         /* Advanced Video Player Specific */
         .video-wrapper { width: 100%; max-width: 1000px; background: #000; border-radius: 20px; position: relative; border: 1px solid var(--glass-border); box-shadow: 0 20px 50px rgba(0,0,0,0.6); overflow: hidden; }
         .plyr { border-radius: 20px; max-height: 75vh; }
@@ -187,7 +192,7 @@
             <a href="https://www.youtube.com/@becomeadroit" target="_blank" class="btn-glass" style="color:#ff0000;" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
             <a href="https://www.instagram.com/adroit_krishna_kushwaha?dlrf=aTh0bGx4a2V1emZp" target="_blank" class="btn-glass" style="color:#e1306c;" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
             <a href="https://wa.me/919610279787" target="_blank" class="btn-glass" style="color:#25d366;" title="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
-            <button class="btn-glass" id="auth-nav-btn" onclick="openAuthModal()"><i class="fa-solid fa-user-lock"></i> Login</button>
+            <button class="btn-glass" id="auth-nav-btn" onclick="openAuthModal('login')"><i class="fa-solid fa-user-lock"></i> Login / Register</button>
             <button class="btn-glass" id="admin-nav-btn" style="display:none; background:var(--accent); color:white; border:none;" onclick="openAdminModal()"><i class="fa-solid fa-user-shield"></i> Admin Panel</button>
         </div>
     </header>
@@ -196,10 +201,11 @@
         <!-- VIEW 0: RESTRICTED / PENDING APPROVAL SCREEN -->
         <div id="view-locked" class="view-section active" style="text-align: center; padding: 60px 20px;">
             <div style="font-size: 70px; color: var(--accent); margin-bottom: 20px;"><i class="fa-solid fa-lock"></i></div>
-            <h2 id="lock-title" style="font-weight: 800; font-size: 26px; margin-bottom: 10px;">Student Authentication Required</h2>
-            <p id="lock-desc" style="color: var(--text-muted); max-width: 450px; margin: 0 auto 30px auto; font-size: 14px;">Please login or register an account. Study material and video chapters will be unlocked once approved by Adroit Sir.</p>
-            <div style="display: flex; gap: 15px; justify-content: center;">
-                <button class="btn-glass" style="background: var(--primary); color: white; border: none; padding: 14px 25px; font-size: 15px;" onclick="openAuthModal()">Login / Register Now</button>
+            <h2 id="lock-title" style="font-weight: 800; font-size: 26px; margin-bottom: 10px;">Student Access Restricted</h2>
+            <p id="lock-desc" style="color: var(--text-muted); max-width: 480px; margin: 0 auto 30px auto; font-size: 14px;">Please login or create a new student account. All study modules and notes will unlock once approved by Adroit Sir.</p>
+            <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+                <button class="btn-glass" style="background: var(--primary); color: white; border: none; padding: 14px 25px; font-size: 15px;" onclick="openAuthModal('login')">Login</button>
+                <button class="btn-glass" style="background: #10b981; color: white; border: none; padding: 14px 25px; font-size: 15px;" onclick="openAuthModal('register')"><i class="fa-solid fa-user-plus"></i> New Student Register</button>
                 <a href="https://wa.me/919610279787?text=Sir%20please%20approve%20my%20Adroit%20Study%20Hub%20account" target="_blank" class="btn-glass" style="background: #25d366; color: white; border: none; padding: 14px 25px; font-size: 15px;"><i class="fa-brands fa-whatsapp"></i> Get Instant Approval</a>
             </div>
         </div>
@@ -271,22 +277,43 @@
         <div class="nav-item" onclick="openSettings(); playSound();"><i class="fa-solid fa-gear"></i><span>Settings</span></div>
     </footer>
 
-    <!-- AUTH MODAL (Login / Register) -->
+    <!-- AUTH MODAL (Login / Register Tabs) -->
     <div id="auth-modal" class="modal-overlay">
         <div class="modal-content glass">
             <i class="fa-solid fa-xmark modal-close" onclick="closeModal('auth-modal')"></i>
-            <h3 id="auth-title" style="margin-bottom:20px; font-weight:800;">Student Portal Login</h3>
             
-            <div id="auth-form" style="text-align: left;">
+            <div class="auth-tabs">
+                <button class="auth-tab-btn active" id="tab-login-btn" onclick="switchAuthTab('login')">Login</button>
+                <button class="auth-tab-btn" id="tab-register-btn" onclick="switchAuthTab('register')">New Register</button>
+            </div>
+
+            <!-- LOGIN FORM -->
+            <div id="form-login" style="text-align: left;">
                 <label style="font-size: 12px; color: var(--text-muted); display: block; margin-bottom: 5px;">Email or Mobile Number</label>
-                <input type="text" id="auth-email" class="auth-input" placeholder="Enter ID / Mobile">
+                <input type="text" id="login-id" class="auth-input" placeholder="Enter ID / Mobile">
                 
                 <label style="font-size: 12px; color: var(--text-muted); display: block; margin-bottom: 5px;">Password</label>
-                <input type="password" id="auth-password" class="auth-input" placeholder="Enter Password">
+                <input type="password" id="login-pass" class="auth-input" placeholder="Enter Password">
                 
-                <button class="btn-glass" style="width:100%; justify-content:center; margin-top: 10px; background:var(--primary); color:white; border:none; padding:14px; font-size:15px;" onclick="handleAuth()">Login</button>
-                
-                <p style="font-size:13px; color:var(--text-muted); margin-top:20px; text-align: center; cursor:pointer;" onclick="toggleAuthMode()">Don't have an account? <b style="color:var(--primary);">Register here</b></p>
+                <button class="btn-glass" style="width:100%; justify-content:center; margin-top: 10px; background:var(--primary); color:white; border:none; padding:14px; font-size:15px;" onclick="handleLogin()">Login to Account</button>
+            </div>
+
+            <!-- REGISTRATION FORM -->
+            <div id="form-register" style="text-align: left; display: none;">
+                <label style="font-size: 12px; color: var(--text-muted); display: block; margin-bottom: 5px;">Full Student Name</label>
+                <input type="text" id="reg-name" class="auth-input" placeholder="e.g. Rahul Sharma">
+
+                <label style="font-size: 12px; color: var(--text-muted); display: block; margin-bottom: 5px;">Email or Mobile Number</label>
+                <input type="text" id="reg-id" class="auth-input" placeholder="Enter Mobile / Email">
+
+                <label style="font-size: 12px; color: var(--text-muted); display: block; margin-bottom: 5px;">Class / Exam</label>
+                <input type="text" id="reg-class" class="auth-input" placeholder="e.g. Class 10th / REET / NEET">
+
+                <label style="font-size: 12px; color: var(--text-muted); display: block; margin-bottom: 5px;">Create Password</label>
+                <input type="password" id="reg-pass" class="auth-input" placeholder="Create new password">
+
+                <button class="btn-glass" style="width:100%; justify-content:center; margin-top: 10px; background:#10b981; color:white; border:none; padding:14px; font-size:15px;" onclick="handleRegister()">Register Student Account</button>
+                <p style="font-size:11px; color:var(--text-muted); margin-top:10px; text-align:center;">Account requires approval by Adroit Sir after registration.</p>
             </div>
         </div>
     </div>
@@ -573,7 +600,6 @@
         let currentSubject = '';
         let currentTopic = '';
         let currentFolder = '';
-        let isRegisterMode = false;
 
         window.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => {
@@ -625,8 +651,77 @@
             document.getElementById(modalId).style.display = 'none';
         }
 
-        function openAuthModal() {
+        function openAuthModal(defaultTab = 'login') {
             document.getElementById('auth-modal').style.display = 'flex';
+            switchAuthTab(defaultTab);
+        }
+
+        function switchAuthTab(type) {
+            if(type === 'login') {
+                document.getElementById('form-login').style.display = 'block';
+                document.getElementById('form-register').style.display = 'none';
+                document.getElementById('tab-login-btn').classList.add('active');
+                document.getElementById('tab-register-btn').classList.remove('active');
+            } else {
+                document.getElementById('form-login').style.display = 'none';
+                document.getElementById('form-register').style.display = 'block';
+                document.getElementById('tab-register-btn').classList.add('active');
+                document.getElementById('tab-login-btn').classList.remove('active');
+            }
+        }
+
+        function handleLogin() {
+            const email = document.getElementById('login-id').value.trim();
+            const pass = document.getElementById('login-pass').value.trim();
+            if(!email || !pass) { alert("Please fill all fields"); return; }
+
+            // Admin Master Credentials
+            if(email === "admin@adroit.com" && pass === "adroit123") {
+                localStorage.setItem('current_user', JSON.stringify({ email: "Admin", role: "admin", approved: true }));
+                closeModal('auth-modal');
+                checkSession();
+                showToast("Logged in as Admin!");
+                return;
+            }
+
+            let students = JSON.parse(localStorage.getItem('registered_students')) || [];
+            let student = students.find(s => s.email === email && s.pass === pass);
+            
+            if(student) {
+                if(!student.approved) {
+                    alert("Your account is pending approval by Adroit Sir. Please contact via WhatsApp for instant approval.");
+                    return;
+                }
+                localStorage.setItem('current_user', JSON.stringify({ email: student.email, role: "student", approved: true }));
+                closeModal('auth-modal');
+                checkSession();
+                showToast("Login Successful!");
+            } else {
+                alert("Invalid credentials or account not registered.");
+            }
+        }
+
+        function handleRegister() {
+            const name = document.getElementById('reg-name').value.trim();
+            const email = document.getElementById('reg-id').value.trim();
+            const studentClass = document.getElementById('reg-class').value.trim();
+            const pass = document.getElementById('reg-pass').value.trim();
+
+            if(!name || !email || !studentClass || !pass) {
+                alert("Please fill in all registration fields.");
+                return;
+            }
+
+            let students = JSON.parse(localStorage.getItem('registered_students')) || [];
+            if(students.some(s => s.email === email)) {
+                alert("This Email / Mobile is already registered!");
+                return;
+            }
+
+            students.push({ name, email, class: studentClass, pass, approved: false });
+            localStorage.setItem('registered_students', JSON.stringify(students));
+            alert("Registration submitted successfully! Your account will be activated once approved by Adroit Sir.");
+            switchAuthTab('login');
         }
 
         function openAdminModal() {
@@ -645,12 +740,13 @@
                 div.className = 'list-item glass';
                 div.innerHTML = `
                     <div>
-                        <div style="font-weight:600; font-size:14px;">${stu.email}</div>
-                        <div style="font-size:11px; color:${stu.approved ? '#10b981' : '#f59e0b'};">${stu.approved ? 'Approved' : 'Pending Approval'}</div>
+                        <div style="font-weight:700; font-size:14px; color:var(--text-main);">${stu.name || stu.email}</div>
+                        <div style="font-size:12px; color:var(--text-muted);">${stu.email} • ${stu.class || 'N/A'}</div>
+                        <div style="font-size:11px; color:${stu.approved ? '#10b981' : '#f59e0b'}; font-weight:700;">${stu.approved ? 'Approved' : 'Pending Approval'}</div>
                     </div>
                     <div>
                         ${stu.approved ? 
-                            `<button class="btn-glass" style="background:var(--accent); color:white; border:none;" onclick="toggleApprove(${index}, false)">Revoke</button>` : 
+                            `<button class="btn-glass" style="background:var(--accent); color:white; border:none;" onclick="toggleApprove(${index}, false)">Block</button>` : 
                             `<button class="btn-glass" style="background:#10b981; color:white; border:none;" onclick="toggleApprove(${index}, true)">Approve</button>`
                         }
                     </div>
@@ -665,54 +761,6 @@
             localStorage.setItem('registered_students', JSON.stringify(students));
             openAdminModal();
             showToast(status ? "Student Approved!" : "Approval Revoked.");
-        }
-
-        function toggleAuthMode() {
-            isRegisterMode = !isRegisterMode;
-            document.getElementById('auth-title').innerText = isRegisterMode ? "Student Registration" : "Student Portal Login";
-            event.target.parentElement.innerHTML = isRegisterMode ? 
-                `Already have an account? <b style="color:var(--primary); cursor:pointer;" onclick="toggleAuthMode()">Login here</b>` : 
-                `Don't have an account? <b style="color:var(--primary); cursor:pointer;" onclick="toggleAuthMode()">Register here</b>`;
-        }
-
-        function handleAuth() {
-            const email = document.getElementById('auth-email').value.trim();
-            const pass = document.getElementById('auth-password').value.trim();
-            if(!email || !pass) { alert("Please fill all fields"); return; }
-
-            // Master Admin Login Credentials
-            if(email === "admin@adroit.com" && pass === "adroit123") {
-                localStorage.setItem('current_user', JSON.stringify({ email: "Admin", role: "admin", approved: true }));
-                closeModal('auth-modal');
-                checkSession();
-                showToast("Logged in as Admin!");
-                return;
-            }
-
-            let students = JSON.parse(localStorage.getItem('registered_students')) || [];
-
-            if(isRegisterMode) {
-                if(students.some(s => s.email === email)) { alert("Email / Mobile already registered!"); return; }
-                students.push({ email, pass, approved: false });
-                localStorage.setItem('registered_students', JSON.stringify(students));
-                alert("Registration successful! Your account is pending approval by Adroit Sir.");
-                isRegisterMode = false;
-                toggleAuthMode();
-            } else {
-                let student = students.find(s => s.email === email && s.pass === pass);
-                if(student) {
-                    if(!student.approved) {
-                        alert("Your account is pending approval by Adroit Sir. Please contact via WhatsApp for instant approval.");
-                        return;
-                    }
-                    localStorage.setItem('current_user', JSON.stringify({ email: student.email, role: "student", approved: true }));
-                    closeModal('auth-modal');
-                    checkSession();
-                    showToast("Login Successful!");
-                } else {
-                    alert("Invalid credentials or account not found.");
-                }
-            }
         }
 
         function checkSession() {

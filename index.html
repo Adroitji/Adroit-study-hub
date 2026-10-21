@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="hi">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Adroit Study Hub - Class 10 Portal</title>
+  <title>Adroit Study Hub - Class 10 Learning Portal</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
@@ -42,11 +42,11 @@
       <form id="loginForm" onsubmit="handleLogin(event)" class="space-y-4">
         <div>
           <label class="block text-sm text-slate-300 mb-1">Mobile Number / Email</label>
-          <input type="text" id="loginId" required class="w-full bg-slate-900 border border-slate-700 rounded-lg p-3 text-white focus:outline-none focus:border-indigo-500">
+          <input type="text" id="loginId" placeholder="Enter Mobile Number / Email" required class="w-full bg-slate-900 border border-slate-700 rounded-lg p-3 text-white focus:outline-none focus:border-indigo-500">
         </div>
         <div>
           <label class="block text-sm text-slate-300 mb-1">Password</label>
-          <input type="password" id="loginPass" required class="w-full bg-slate-900 border border-slate-700 rounded-lg p-3 text-white focus:outline-none focus:border-indigo-500">
+          <input type="password" id="loginPass" placeholder="Enter Password" required class="w-full bg-slate-900 border border-slate-700 rounded-lg p-3 text-white focus:outline-none focus:border-indigo-500">
         </div>
         <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-500 py-3 rounded-lg font-semibold transition shadow-lg shadow-indigo-600/30">Login</button>
       </form>
@@ -54,11 +54,11 @@
       <form id="registerForm" onsubmit="handleRegister(event)" class="space-y-4 hidden">
         <div>
           <label class="block text-sm text-slate-300 mb-1">Full Name</label>
-          <input type="text" id="regName" required class="w-full bg-slate-900 border border-slate-700 rounded-lg p-3 text-white">
+          <input type="text" id="regName" placeholder="Enter Your Full Name" required class="w-full bg-slate-900 border border-slate-700 rounded-lg p-3 text-white">
         </div>
         <div>
           <label class="block text-sm text-slate-300 mb-1">Mobile Number</label>
-          <input type="text" id="regId" required class="w-full bg-slate-900 border border-slate-700 rounded-lg p-3 text-white">
+          <input type="text" id="regId" placeholder="Enter Mobile Number" required class="w-full bg-slate-900 border border-slate-700 rounded-lg p-3 text-white">
         </div>
         <div>
           <label class="block text-sm text-slate-300 mb-1">Class / Section</label>
@@ -66,7 +66,7 @@
         </div>
         <div>
           <label class="block text-sm text-slate-300 mb-1">Create Password</label>
-          <input type="password" id="regPass" required class="w-full bg-slate-900 border border-slate-700 rounded-lg p-3 text-white">
+          <input type="password" id="regPass" placeholder="Create Password" required class="w-full bg-slate-900 border border-slate-700 rounded-lg p-3 text-white">
         </div>
         <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-500 py-3 rounded-lg font-semibold transition">Request Student Account</button>
       </form>
@@ -78,9 +78,9 @@
         <i class="fa-solid fa-user-clock"></i>
       </div>
       <h2 class="text-2xl font-bold text-amber-400 mb-2">Account Approval Pending</h2>
-      <p class="text-slate-300 mb-6">नमस्ते! आपका रजिस्ट्रेशन हो चुका है। सर द्वारा अप्रूवल मिलने के बाद आप क्लास 10th के सभी नोट्स और टेस्ट देख पाएँगे।</p>
+      <p class="text-slate-300 mb-6">Hello! Your registration request has been submitted. Once approved by the teacher, you will be able to access all Class 10 notes and quizzes.</p>
       <div class="p-4 bg-slate-900 rounded-lg text-sm text-slate-400 border border-slate-700">
-        तुरंत अप्रूवल के लिए व्हाट्सएप करें: <span class="text-indigo-400 font-bold">9610279787</span>
+        For instant approval, contact on WhatsApp: <span class="text-indigo-400 font-bold">9610279787</span>
       </div>
     </div>
 
@@ -90,10 +90,10 @@
       <!-- Subject Selection Filter -->
       <div class="flex flex-wrap gap-2 border-b border-slate-700 pb-3">
         <button onclick="setSubject('science')" id="sub-science" class="px-5 py-2.5 rounded-xl font-bold bg-indigo-600 text-white shadow-lg shadow-indigo-600/30 flex items-center space-x-2">
-          <i class="fa-solid fa-flask"></i> <span>Science (विज्ञान)</span>
+          <i class="fa-solid fa-flask"></i> <span>Science</span>
         </button>
         <button onclick="setSubject('sst')" id="sub-sst" class="px-5 py-2.5 rounded-xl font-bold bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center space-x-2">
-          <i class="fa-solid fa-earth-americas"></i> <span>Social Science (सामाजिक विज्ञान)</span>
+          <i class="fa-solid fa-earth-americas"></i> <span>Social Science</span>
         </button>
       </div>
 
@@ -145,37 +145,37 @@
   </main>
 
   <script>
-    // Chapter Data Pre-configured with Static Folder Paths
+    // Chapter Data Pre-configured with Chapter Topics and Static Folder Paths
     const scienceChapters = [
-      { num: 1, title: 'रासायनिक अभिक्रियाएं एवं समीकरण', file: 'notes/science-ch1.html' },
-      { num: 2, title: 'अम्ल, क्षारक एवं लवण', file: 'notes/science-ch2.html' },
-      { num: 3, title: 'धातु एवं अधातु', file: 'notes/science-ch3.html' },
-      { num: 4, title: 'कार्बन एवं उसके यौगिक', file: 'notes/science-ch4.html' },
-      { num: 5, title: 'जैव प्रक्रम (Life Processes)', file: 'notes/science-ch5.html' },
-      { num: 6, title: 'नियंत्रण एवं समन्वय', file: 'notes/science-ch6.html' },
-      { num: 7, title: 'जीव जनन कैसे करते हैं?', file: 'notes/science-ch7.html' },
-      { num: 8, title: 'आनुवंशिकता एवं जैव विकास', file: 'notes/science-ch8.html' },
-      { num: 9, title: 'प्रकाश – परावर्तन तथा अपवर्तन', file: 'notes/science-ch9.html' },
-      { num: 10, title: 'मानव नेत्र तथा रंगबिरंगा संसार', file: 'notes/science-ch10.html' },
-      { num: 11, title: 'विद्युत (Electricity)', file: 'notes/science-ch11.html' },
-      { num: 12, title: 'विद्युत धारा के चुंबकीय प्रभाव', file: 'notes/science-ch12.html' },
-      { num: 13, title: 'हमारा पर्यावरण', file: 'notes/science-ch13.html' }
+      { num: 1, title: 'Chemical Reactions and Equations', file: 'notes/science-ch1.html', summary: 'Types of chemical reactions, balancing equations, oxidation & reduction, corrosion & rancidity.' },
+      { num: 2, title: 'Acids, Bases and Salts', file: 'notes/science-ch2.html', summary: 'Properties of acids & bases, pH scale, indicator tests, preparation of salts like bleaching powder & plaster of Paris.' },
+      { num: 3, title: 'Metals and Non-metals', file: 'notes/science-ch3.html', summary: 'Physical & chemical properties, reactivity series, ionic bond formation, metallurgy & alloy creation.' },
+      { num: 4, title: 'Carbon and its Compounds', file: 'notes/science-ch4.html', summary: 'Covalent bonding, allotropes of carbon, homologous series, functional groups, soaps & detergents.' },
+      { num: 5, title: 'Life Processes', file: 'notes/science-ch5.html', summary: 'Autotrophic & heterotrophic nutrition, human digestive system, respiration, double circulation & excretion.' },
+      { num: 6, title: 'Control and Coordination', file: 'notes/science-ch6.html', summary: 'Nervous system, reflex arc, human brain structure, plant hormones (phytohormones) & endocrine glands.' },
+      { num: 7, title: 'How do Organisms Reproduce?', file: 'notes/science-ch7.html', summary: 'Asexual reproduction methods, flower structure, human male & female reproductive systems, contraception.' },
+      { num: 8, title: 'Heredity and Evolution', file: 'notes/science-ch8.html', summary: 'Mendel laws of inheritance, monohybrid & dihybrid crosses, sex determination in human beings.' },
+      { num: 9, title: 'Light – Reflection and Refraction', file: 'notes/science-ch9.html', summary: 'Laws of reflection & refraction, mirror formula, lens formula, magnification & ray diagrams.' },
+      { num: 10, title: 'Human Eye and Colourful World', file: 'notes/science-ch10.html', summary: 'Structure of human eye, vision defects (Myopia, Hypermetropia), glass prism refraction & atmospheric phenomenon.' },
+      { num: 11, title: 'Electricity', file: 'notes/science-ch11.html', summary: 'Ohm law, electric current, resistance factors, series & parallel resistor combinations, Joule heating effect.' },
+      { num: 12, title: 'Magnetic Effects of Electric Current', file: 'notes/science-ch12.html', summary: 'Magnetic field lines, Oersted experiment, Fleming left-hand rule, solenoid & domestic electric circuits.' },
+      { num: 13, title: 'Our Environment', file: 'notes/science-ch13.html', summary: 'Ecosystem components, food chains & webs, 10% energy flow law, ozone layer depletion & waste management.' }
     ];
 
     const sstChapters = [
-      { num: 1, title: 'इतिहास: यूरोप में राष्ट्रवाद का उदय', file: 'notes/sst-ch1.html' },
-      { num: 2, title: 'इतिहास: भारत में राष्ट्रवाद', file: 'notes/sst-ch2.html' },
-      { num: 3, title: 'इतिहास: भूमंडलीकृत विश्व का बनना', file: 'notes/sst-ch3.html' },
-      { num: 4, title: 'भूगोल: संसाधन एवं विकास', file: 'notes/sst-ch4.html' },
-      { num: 5, title: 'भूगोल: वन और वन्यजीव संसाधन', file: 'notes/sst-ch5.html' },
-      { num: 6, title: 'भूगोल: जल संसाधन', file: 'notes/sst-ch6.html' },
-      { num: 7, title: 'भूगोल: कृषि (Agriculture)', file: 'notes/sst-ch7.html' },
-      { num: 8, title: 'राजनीति: सत्ता की साझेदारी', file: 'notes/sst-ch8.html' },
-      { num: 9, title: 'राजनीति: संघवाद (Federalism)', file: 'notes/sst-ch9.html' },
-      { num: 10, title: 'राजनीति: जाति, धर्म और लैंगिक मसले', file: 'notes/sst-ch10.html' },
-      { num: 11, title: 'अर्थशास्त्र: विकास (Development)', file: 'notes/sst-ch11.html' },
-      { num: 12, title: 'अर्थशास्त्र: भारतीय अर्थव्यवस्था के क्षेत्रक', file: 'notes/sst-ch12.html' },
-      { num: 13, title: 'अर्थशास्त्र: मुद्रा और साख', file: 'notes/sst-ch13.html' }
+      { num: 1, title: 'History: The Rise of Nationalism in Europe', file: 'notes/sst-ch1.html', summary: 'French Revolution idea of nation, Napoleonic Code, liberal nationalism, Italian & German unification.' },
+      { num: 2, title: 'History: Nationalism in India', file: 'notes/sst-ch2.html', summary: 'First World War impact, Satyagraha concept, Non-Cooperation Movement, Dandi March & Civil Disobedience.' },
+      { num: 3, title: 'History: The Making of a Global World', file: 'notes/sst-ch3.html', summary: 'Pre-modern trade routes, Silk Routes, indentured labour migration, Great Depression & Bretton Woods system.' },
+      { num: 4, title: 'Geography: Resources and Development', file: 'notes/sst-ch4.html', summary: 'Classification of resources, resource planning in India, soil types & soil erosion conservation methods.' },
+      { num: 5, title: 'Geography: Forest and Wildlife Resources', file: 'notes/sst-ch5.html', summary: 'Flora and fauna biodiversity, endangered species, reserved & protected forests, community conservation.' },
+      { num: 6, title: 'Geography: Water Resources', file: 'notes/sst-ch6.html', summary: 'Water scarcity factors, multi-purpose river valley projects, pros & cons of dams, traditional rainwater harvesting.' },
+      { num: 7, title: 'Geography: Agriculture', file: 'notes/sst-ch7.html', summary: 'Farming types (subsistence, commercial), major cropping patterns (Rabi, Kharif, Zaid), food security reforms.' },
+      { num: 8, title: 'Democratic Politics: Power Sharing', file: 'notes/sst-ch8.html', summary: 'Case studies of Belgium & Sri Lanka, majoritarianism vs accommodation, horizontal & vertical power division.' },
+      { num: 9, title: 'Democratic Politics: Federalism', file: 'notes/sst-ch9.html', summary: 'Key features of federalism, Union, State & Concurrent lists, decentralisation in India (Panchayati Raj).' },
+      { num: 10, title: 'Democratic Politics: Gender, Religion and Caste', file: 'notes/sst-ch10.html', summary: 'Women political representation, secular state constitutional provisions, caste system impact on democracy.' },
+      { num: 11, title: 'Economics: Development', file: 'notes/sst-ch11.html', summary: 'Per capita income measurement, Human Development Index (HDI) metrics, sustainable development goals.' },
+      { num: 12, title: 'Economics: Sectors of the Indian Economy', file: 'notes/sst-ch12.html', summary: 'Primary, Secondary & Tertiary economic sectors, GDP contribution, organised vs unorganised employment.' },
+      { num: 13, title: 'Economics: Money and Credit', file: 'notes/sst-ch13.html', summary: 'Functions of money, modern currency forms, RBI role, formal vs informal credit sources & Self Help Groups (SHGs).' }
     ];
 
     let currentSubject = 'science';
@@ -211,7 +211,7 @@
         saveState();
         renderPortal();
       } else {
-        alert('गलत आईडी या पासवर्ड!');
+        alert('Invalid ID or Password!');
       }
     }
 
@@ -223,7 +223,7 @@
       const pass = document.getElementById('regPass').value.trim();
 
       if (users.some(u => u.id === id)) {
-        alert('यह मोबाइल नंबर पहले से रजिस्टर्ड है!');
+        alert('This mobile number is already registered!');
         return;
       }
 
@@ -303,7 +303,8 @@
             <div class="bg-slate-800 p-5 rounded-xl border border-slate-700 hover:border-indigo-500/50 transition flex flex-col justify-between">
               <div>
                 <span class="text-xs font-bold text-indigo-400 uppercase tracking-wider">Chapter ${ch.num}</span>
-                <h3 class="font-semibold text-white mt-1 mb-4">${ch.title}</h3>
+                <h3 class="font-semibold text-white mt-1 mb-2">${ch.title}</h3>
+                <p class="text-xs text-slate-400 mb-4 line-clamp-3">${ch.summary}</p>
               </div>
               <a href="${ch.file}" target="_blank" class="w-full text-center bg-indigo-600 hover:bg-indigo-500 text-white py-2 rounded-lg text-sm font-medium transition shadow-md shadow-indigo-600/20">
                 <i class="fa-solid fa-file-lines mr-1.5"></i> Read Notes
@@ -315,7 +316,8 @@
             <div class="bg-slate-800 p-5 rounded-xl border border-slate-700 hover:border-emerald-500/50 transition flex flex-col justify-between">
               <div>
                 <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider">Quiz Test • Chapter ${ch.num}</span>
-                <h3 class="font-semibold text-white mt-1 mb-4">${ch.title}</h3>
+                <h3 class="font-semibold text-white mt-1 mb-2">${ch.title}</h3>
+                <p class="text-xs text-slate-400 mb-4">Practice chapter-wise multiple choice questions and review your performance.</p>
               </div>
               <button onclick="alert('Chapter ${ch.num} Test is starting...')" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white py-2 rounded-lg text-sm font-medium transition shadow-md shadow-emerald-600/20">
                 <i class="fa-solid fa-play mr-1.5"></i> Start Online Quiz

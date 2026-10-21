@@ -1,364 +1,1054 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Adroit Study Hub - Class 10 Learning Portal</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
-    body { font-family: 'Poppins', sans-serif; }
-  </style>
-</head>
-<body class="bg-slate-900 text-slate-100 min-h-screen flex flex-col">
+    <meta charset="UTF-8">
+    <meta name="viewport" id="viewport-meta" content="width=device-width, initial-scale=1.0">
+    <title>Adroit Study Hub - Class 10 Premium Portal</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
 
-  <!-- Header / Navbar -->
-  <header class="bg-slate-800/90 backdrop-blur-md border-b border-slate-700 sticky top-0 z-50">
-    <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
-      <div class="flex items-center space-x-3 cursor-pointer" onclick="switchView('student')">
-        <div class="w-10 h-10 rounded-xl bg-indigo-600 flex items-center justify-center font-bold text-xl shadow-lg shadow-indigo-500/30">
-          10
-        </div>
-        <div>
-          <h1 class="text-xl font-bold bg-gradient-to-r from-indigo-400 to-cyan-400 bg-clip-text text-transparent">Adroit Study Hub</h1>
-          <p class="text-xs text-slate-400">Class 10th Science & Social Science Portal</p>
-        </div>
-      </div>
-
-      <div id="navRight" class="flex items-center space-x-3"></div>
-    </div>
-  </header>
-
-  <main class="flex-grow max-w-7xl w-full mx-auto p-4 sm:p-6">
-
-    <!-- VIEW 1: AUTHENTICATION -->
-    <div id="authView" class="max-w-md mx-auto my-10 bg-slate-800 p-8 rounded-2xl border border-slate-700 shadow-2xl">
-      <div class="flex border-b border-slate-700 mb-6">
-        <button id="loginTab" onclick="setAuthMode('login')" class="flex-1 py-2 font-semibold text-center border-b-2 border-indigo-500 text-indigo-400">Login</button>
-        <button id="registerTab" onclick="setAuthMode('register')" class="flex-1 py-2 font-semibold text-center border-b-2 border-transparent text-slate-400">Student Register</button>
-      </div>
-
-      <form id="loginForm" onsubmit="handleLogin(event)" class="space-y-4">
-        <div>
-          <label class="block text-sm text-slate-300 mb-1">Mobile Number / Email</label>
-          <input type="text" id="loginId" placeholder="Enter Mobile Number / Email" required class="w-full bg-slate-900 border border-slate-700 rounded-lg p-3 text-white focus:outline-none focus:border-indigo-500">
-        </div>
-        <div>
-          <label class="block text-sm text-slate-300 mb-1">Password</label>
-          <input type="password" id="loginPass" placeholder="Enter Password" required class="w-full bg-slate-900 border border-slate-700 rounded-lg p-3 text-white focus:outline-none focus:border-indigo-500">
-        </div>
-        <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-500 py-3 rounded-lg font-semibold transition shadow-lg shadow-indigo-600/30">Login</button>
-      </form>
-
-      <form id="registerForm" onsubmit="handleRegister(event)" class="space-y-4 hidden">
-        <div>
-          <label class="block text-sm text-slate-300 mb-1">Full Name</label>
-          <input type="text" id="regName" placeholder="Enter Your Full Name" required class="w-full bg-slate-900 border border-slate-700 rounded-lg p-3 text-white">
-        </div>
-        <div>
-          <label class="block text-sm text-slate-300 mb-1">Mobile Number</label>
-          <input type="text" id="regId" placeholder="Enter Mobile Number" required class="w-full bg-slate-900 border border-slate-700 rounded-lg p-3 text-white">
-        </div>
-        <div>
-          <label class="block text-sm text-slate-300 mb-1">Class / Section</label>
-          <input type="text" id="regClass" value="Class 10th" required class="w-full bg-slate-900 border border-slate-700 rounded-lg p-3 text-white">
-        </div>
-        <div>
-          <label class="block text-sm text-slate-300 mb-1">Create Password</label>
-          <input type="password" id="regPass" placeholder="Create Password" required class="w-full bg-slate-900 border border-slate-700 rounded-lg p-3 text-white">
-        </div>
-        <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-500 py-3 rounded-lg font-semibold transition">Request Student Account</button>
-      </form>
-    </div>
-
-    <!-- VIEW 2: PENDING APPROVAL -->
-    <div id="pendingView" class="hidden max-w-lg mx-auto my-12 text-center bg-slate-800 p-8 rounded-2xl border border-amber-500/30 shadow-xl">
-      <div class="w-16 h-16 bg-amber-500/20 text-amber-400 rounded-full flex items-center justify-center mx-auto mb-4 text-3xl">
-        <i class="fa-solid fa-user-clock"></i>
-      </div>
-      <h2 class="text-2xl font-bold text-amber-400 mb-2">Account Approval Pending</h2>
-      <p class="text-slate-300 mb-6">Hello! Your registration request has been submitted. Once approved by the teacher, you will be able to access all Class 10 notes and quizzes.</p>
-      <div class="p-4 bg-slate-900 rounded-lg text-sm text-slate-400 border border-slate-700">
-        For instant approval, contact on WhatsApp: <span class="text-indigo-400 font-bold">9610279787</span>
-      </div>
-    </div>
-
-    <!-- VIEW 3: STUDENT PORTAL -->
-    <div id="studentView" class="hidden space-y-6">
-      
-      <!-- Subject Selection Filter -->
-      <div class="flex flex-wrap gap-2 border-b border-slate-700 pb-3">
-        <button onclick="setSubject('science')" id="sub-science" class="px-5 py-2.5 rounded-xl font-bold bg-indigo-600 text-white shadow-lg shadow-indigo-600/30 flex items-center space-x-2">
-          <i class="fa-solid fa-flask"></i> <span>Science</span>
-        </button>
-        <button onclick="setSubject('sst')" id="sub-sst" class="px-5 py-2.5 rounded-xl font-bold bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center space-x-2">
-          <i class="fa-solid fa-earth-americas"></i> <span>Social Science</span>
-        </button>
-      </div>
-
-      <!-- Content Type Tabs -->
-      <div class="flex space-x-3 bg-slate-800/60 p-1.5 rounded-xl border border-slate-700/50 w-fit">
-        <button onclick="setTab('notes')" id="tab-notes" class="px-4 py-2 rounded-lg font-medium bg-indigo-500 text-white text-sm">
-          <i class="fa-solid fa-book-open mr-1.5"></i> Chapter Notes
-        </button>
-        <button onclick="setTab('quizzes')" id="tab-quizzes" class="px-4 py-2 rounded-lg font-medium text-slate-400 hover:text-white text-sm">
-          <i class="fa-solid fa-brain mr-1.5"></i> Online Quizzes
-        </button>
-      </div>
-
-      <!-- Chapters List Grid -->
-      <div id="chapterGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        <!-- Dynamically Filled -->
-      </div>
-    </div>
-
-    <!-- VIEW 4: ADMIN DASHBOARD -->
-    <div id="adminView" class="hidden space-y-6">
-      <div class="bg-slate-800 p-5 rounded-2xl border border-slate-700 flex justify-between items-center">
-        <div>
-          <h2 class="text-xl font-bold text-indigo-400"><i class="fa-solid fa-user-shield mr-2"></i> Teacher Approval Panel</h2>
-          <p class="text-xs text-slate-400">Approve or Block registered students</p>
-        </div>
-        <button onclick="switchView('student')" class="bg-indigo-600 hover:bg-indigo-500 px-4 py-2 rounded-lg text-sm">Student Mode</button>
-      </div>
-
-      <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700">
-        <h3 class="text-lg font-bold mb-4 text-slate-200">Registered Student Requests</h3>
-        <div class="overflow-x-auto">
-          <table class="w-full text-left text-sm text-slate-300">
-            <thead class="bg-slate-900 text-slate-400 uppercase text-xs">
-              <tr>
-                <th class="p-3">Student Name</th>
-                <th class="p-3">Mobile / ID</th>
-                <th class="p-3">Class</th>
-                <th class="p-3">Status</th>
-                <th class="p-3">Action</th>
-              </tr>
-            </thead>
-            <tbody id="studentTableBody" class="divide-y divide-slate-700"></tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-
-  </main>
-
-  <script>
-    // Chapter Data Pre-configured with Chapter Topics and Static Folder Paths
-    const scienceChapters = [
-      { num: 1, title: 'Chemical Reactions and Equations', file: 'notes/science-ch1.html', summary: 'Types of chemical reactions, balancing equations, oxidation & reduction, corrosion & rancidity.' },
-      { num: 2, title: 'Acids, Bases and Salts', file: 'notes/science-ch2.html', summary: 'Properties of acids & bases, pH scale, indicator tests, preparation of salts like bleaching powder & plaster of Paris.' },
-      { num: 3, title: 'Metals and Non-metals', file: 'notes/science-ch3.html', summary: 'Physical & chemical properties, reactivity series, ionic bond formation, metallurgy & alloy creation.' },
-      { num: 4, title: 'Carbon and its Compounds', file: 'notes/science-ch4.html', summary: 'Covalent bonding, allotropes of carbon, homologous series, functional groups, soaps & detergents.' },
-      { num: 5, title: 'Life Processes', file: 'notes/science-ch5.html', summary: 'Autotrophic & heterotrophic nutrition, human digestive system, respiration, double circulation & excretion.' },
-      { num: 6, title: 'Control and Coordination', file: 'notes/science-ch6.html', summary: 'Nervous system, reflex arc, human brain structure, plant hormones (phytohormones) & endocrine glands.' },
-      { num: 7, title: 'How do Organisms Reproduce?', file: 'notes/science-ch7.html', summary: 'Asexual reproduction methods, flower structure, human male & female reproductive systems, contraception.' },
-      { num: 8, title: 'Heredity and Evolution', file: 'notes/science-ch8.html', summary: 'Mendel laws of inheritance, monohybrid & dihybrid crosses, sex determination in human beings.' },
-      { num: 9, title: 'Light – Reflection and Refraction', file: 'notes/science-ch9.html', summary: 'Laws of reflection & refraction, mirror formula, lens formula, magnification & ray diagrams.' },
-      { num: 10, title: 'Human Eye and Colourful World', file: 'notes/science-ch10.html', summary: 'Structure of human eye, vision defects (Myopia, Hypermetropia), glass prism refraction & atmospheric phenomenon.' },
-      { num: 11, title: 'Electricity', file: 'notes/science-ch11.html', summary: 'Ohm law, electric current, resistance factors, series & parallel resistor combinations, Joule heating effect.' },
-      { num: 12, title: 'Magnetic Effects of Electric Current', file: 'notes/science-ch12.html', summary: 'Magnetic field lines, Oersted experiment, Fleming left-hand rule, solenoid & domestic electric circuits.' },
-      { num: 13, title: 'Our Environment', file: 'notes/science-ch13.html', summary: 'Ecosystem components, food chains & webs, 10% energy flow law, ozone layer depletion & waste management.' }
-    ];
-
-    const sstChapters = [
-      { num: 1, title: 'History: The Rise of Nationalism in Europe', file: 'notes/sst-ch1.html', summary: 'French Revolution idea of nation, Napoleonic Code, liberal nationalism, Italian & German unification.' },
-      { num: 2, title: 'History: Nationalism in India', file: 'notes/sst-ch2.html', summary: 'First World War impact, Satyagraha concept, Non-Cooperation Movement, Dandi March & Civil Disobedience.' },
-      { num: 3, title: 'History: The Making of a Global World', file: 'notes/sst-ch3.html', summary: 'Pre-modern trade routes, Silk Routes, indentured labour migration, Great Depression & Bretton Woods system.' },
-      { num: 4, title: 'Geography: Resources and Development', file: 'notes/sst-ch4.html', summary: 'Classification of resources, resource planning in India, soil types & soil erosion conservation methods.' },
-      { num: 5, title: 'Geography: Forest and Wildlife Resources', file: 'notes/sst-ch5.html', summary: 'Flora and fauna biodiversity, endangered species, reserved & protected forests, community conservation.' },
-      { num: 6, title: 'Geography: Water Resources', file: 'notes/sst-ch6.html', summary: 'Water scarcity factors, multi-purpose river valley projects, pros & cons of dams, traditional rainwater harvesting.' },
-      { num: 7, title: 'Geography: Agriculture', file: 'notes/sst-ch7.html', summary: 'Farming types (subsistence, commercial), major cropping patterns (Rabi, Kharif, Zaid), food security reforms.' },
-      { num: 8, title: 'Democratic Politics: Power Sharing', file: 'notes/sst-ch8.html', summary: 'Case studies of Belgium & Sri Lanka, majoritarianism vs accommodation, horizontal & vertical power division.' },
-      { num: 9, title: 'Democratic Politics: Federalism', file: 'notes/sst-ch9.html', summary: 'Key features of federalism, Union, State & Concurrent lists, decentralisation in India (Panchayati Raj).' },
-      { num: 10, title: 'Democratic Politics: Gender, Religion and Caste', file: 'notes/sst-ch10.html', summary: 'Women political representation, secular state constitutional provisions, caste system impact on democracy.' },
-      { num: 11, title: 'Economics: Development', file: 'notes/sst-ch11.html', summary: 'Per capita income measurement, Human Development Index (HDI) metrics, sustainable development goals.' },
-      { num: 12, title: 'Economics: Sectors of the Indian Economy', file: 'notes/sst-ch12.html', summary: 'Primary, Secondary & Tertiary economic sectors, GDP contribution, organised vs unorganised employment.' },
-      { num: 13, title: 'Economics: Money and Credit', file: 'notes/sst-ch13.html', summary: 'Functions of money, modern currency forms, RBI role, formal vs informal credit sources & Self Help Groups (SHGs).' }
-    ];
-
-    let currentSubject = 'science';
-    let currentTab = 'notes';
-
-    let users = JSON.parse(localStorage.getItem('adh_users')) || [
-      { id: 'admin@hub.com', pass: 'admin123', name: 'Adroit Sir (Teacher)', class: 'Admin', status: 'approved', role: 'admin' },
-      { id: '9610279787', pass: '123456', name: 'Demo Student', class: 'Class 10th', status: 'approved', role: 'student' }
-    ];
-
-    let currentUser = JSON.parse(localStorage.getItem('adh_current_user')) || null;
-
-    function saveState() {
-      localStorage.setItem('adh_users', JSON.stringify(users));
-      localStorage.setItem('adh_current_user', JSON.stringify(currentUser));
-    }
-
-    function setAuthMode(mode) {
-      document.getElementById('loginForm').classList.toggle('hidden', mode !== 'login');
-      document.getElementById('registerForm').classList.toggle('hidden', mode !== 'register');
-      document.getElementById('loginTab').className = mode === 'login' ? 'flex-1 py-2 font-semibold text-center border-b-2 border-indigo-500 text-indigo-400' : 'flex-1 py-2 font-semibold text-center border-b-2 border-transparent text-slate-400';
-      document.getElementById('registerTab').className = mode === 'register' ? 'flex-1 py-2 font-semibold text-center border-b-2 border-emerald-500 text-emerald-400' : 'flex-1 py-2 font-semibold text-center border-b-2 border-transparent text-slate-400';
-    }
-
-    function handleLogin(e) {
-      e.preventDefault();
-      const id = document.getElementById('loginId').value.trim();
-      const pass = document.getElementById('loginPass').value.trim();
-      const found = users.find(u => u.id === id && u.pass === pass);
-
-      if (found) {
-        currentUser = found;
-        saveState();
-        renderPortal();
-      } else {
-        alert('Invalid ID or Password!');
-      }
-    }
-
-    function handleRegister(e) {
-      e.preventDefault();
-      const name = document.getElementById('regName').value.trim();
-      const id = document.getElementById('regId').value.trim();
-      const studentClass = document.getElementById('regClass').value.trim();
-      const pass = document.getElementById('regPass').value.trim();
-
-      if (users.some(u => u.id === id)) {
-        alert('This mobile number is already registered!');
-        return;
-      }
-
-      const newUser = { id, pass, name, class: studentClass, status: 'pending', role: 'student' };
-      users.push(newUser);
-      currentUser = newUser;
-      saveState();
-      renderPortal();
-    }
-
-    function logout() {
-      currentUser = null;
-      saveState();
-      renderPortal();
-    }
-
-    function renderNav() {
-      const navRight = document.getElementById('navRight');
-      if (!currentUser) {
-        navRight.innerHTML = `<button onclick="switchView('auth')" class="bg-indigo-600 hover:bg-indigo-500 px-4 py-2 rounded-lg text-sm font-medium">Login</button>`;
-      } else {
-        navRight.innerHTML = `
-          <div class="text-right hidden sm:block">
-            <div class="text-sm font-medium text-white">${currentUser.name}</div>
-            <div class="text-xs text-indigo-400">${currentUser.role === 'admin' ? 'Teacher' : currentUser.class}</div>
-          </div>
-          ${currentUser.role === 'admin' ? '<button onclick="switchView(\'admin\')" class="bg-slate-700 hover:bg-slate-600 px-3 py-1.5 rounded-lg text-xs"><i class="fa-solid fa-gear mr-1"></i> Admin</button>' : ''}
-          <button onclick="logout()" class="bg-rose-600/20 hover:bg-rose-600/30 text-rose-400 px-3 py-1.5 rounded-lg text-xs border border-rose-500/30">Logout</button>
-        `;
-      }
-    }
-
-    function switchView(viewName) {
-      ['authView', 'pendingView', 'studentView', 'adminView'].forEach(v => document.getElementById(v).classList.add('hidden'));
-      if (viewName === 'auth') document.getElementById('authView').classList.remove('hidden');
-      if (viewName === 'pending') document.getElementById('pendingView').classList.remove('hidden');
-      if (viewName === 'student') {
-        document.getElementById('studentView').classList.remove('hidden');
-        renderContent();
-      }
-      if (viewName === 'admin') {
-        document.getElementById('adminView').classList.remove('hidden');
-        renderAdmin();
-      }
-    }
-
-    function renderPortal() {
-      renderNav();
-      if (!currentUser) switchView('auth');
-      else if (currentUser.role === 'admin') switchView('admin');
-      else if (currentUser.status === 'pending') switchView('pending');
-      else switchView('student');
-    }
-
-    function setSubject(sub) {
-      currentSubject = sub;
-      document.getElementById('sub-science').className = sub === 'science' ? 'px-5 py-2.5 rounded-xl font-bold bg-indigo-600 text-white shadow-lg shadow-indigo-600/30 flex items-center space-x-2' : 'px-5 py-2.5 rounded-xl font-bold bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center space-x-2';
-      document.getElementById('sub-sst').className = sub === 'sst' ? 'px-5 py-2.5 rounded-xl font-bold bg-indigo-600 text-white shadow-lg shadow-indigo-600/30 flex items-center space-x-2' : 'px-5 py-2.5 rounded-xl font-bold bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center space-x-2';
-      renderContent();
-    }
-
-    function setTab(tab) {
-      currentTab = tab;
-      document.getElementById('tab-notes').className = tab === 'notes' ? 'px-4 py-2 rounded-lg font-medium bg-indigo-500 text-white text-sm' : 'px-4 py-2 rounded-lg font-medium text-slate-400 hover:text-white text-sm';
-      document.getElementById('tab-quizzes').className = tab === 'quizzes' ? 'px-4 py-2 rounded-lg font-medium bg-indigo-500 text-white text-sm' : 'px-4 py-2 rounded-lg font-medium text-slate-400 hover:text-white text-sm';
-      renderContent();
-    }
-
-    function renderContent() {
-      const grid = document.getElementById('chapterGrid');
-      grid.innerHTML = '';
-      const list = currentSubject === 'science' ? scienceChapters : sstChapters;
-
-      list.forEach(ch => {
-        if (currentTab === 'notes') {
-          grid.innerHTML += `
-            <div class="bg-slate-800 p-5 rounded-xl border border-slate-700 hover:border-indigo-500/50 transition flex flex-col justify-between">
-              <div>
-                <span class="text-xs font-bold text-indigo-400 uppercase tracking-wider">Chapter ${ch.num}</span>
-                <h3 class="font-semibold text-white mt-1 mb-2">${ch.title}</h3>
-                <p class="text-xs text-slate-400 mb-4 line-clamp-3">${ch.summary}</p>
-              </div>
-              <a href="${ch.file}" target="_blank" class="w-full text-center bg-indigo-600 hover:bg-indigo-500 text-white py-2 rounded-lg text-sm font-medium transition shadow-md shadow-indigo-600/20">
-                <i class="fa-solid fa-file-lines mr-1.5"></i> Read Notes
-              </a>
-            </div>
-          `;
-        } else {
-          grid.innerHTML += `
-            <div class="bg-slate-800 p-5 rounded-xl border border-slate-700 hover:border-emerald-500/50 transition flex flex-col justify-between">
-              <div>
-                <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider">Quiz Test • Chapter ${ch.num}</span>
-                <h3 class="font-semibold text-white mt-1 mb-2">${ch.title}</h3>
-                <p class="text-xs text-slate-400 mb-4">Practice chapter-wise multiple choice questions and review your performance.</p>
-              </div>
-              <button onclick="alert('Chapter ${ch.num} Test is starting...')" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white py-2 rounded-lg text-sm font-medium transition shadow-md shadow-emerald-600/20">
-                <i class="fa-solid fa-play mr-1.5"></i> Start Online Quiz
-              </button>
-            </div>
-          `;
+        /* Dynamic Theming */
+        :root[data-theme="dark"] {
+            --bg-color: #050505;
+            --glass-bg: rgba(20, 20, 25, 0.4);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --text-main: #ffffff;
+            --text-muted: #94a3b8;
+            --primary: #3b82f6;
+            --accent: #f43f5e;
+            --card-hover: rgba(255, 255, 255, 0.15);
+            --plyr-color-main: #3b82f6;
+            --liquid-color-1: #ff0055;
+            --liquid-color-2: #0088ff;
         }
-      });
-    }
+        :root[data-theme="light"] {
+            --bg-color: #f8fafc;
+            --glass-bg: rgba(255, 255, 255, 0.6);
+            --glass-border: rgba(0, 0, 0, 0.1);
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --primary: #2563eb;
+            --accent: #e11d48;
+            --card-hover: rgba(0, 0, 0, 0.08);
+            --plyr-color-main: #2563eb;
+            --liquid-color-1: #ff758c;
+            --liquid-color-2: #73c8ff;
+        }
 
-    function renderAdmin() {
-      const tbody = document.getElementById('studentTableBody');
-      tbody.innerHTML = '';
-      users.filter(u => u.role !== 'admin').forEach(s => {
-        tbody.innerHTML += `
-          <tr>
-            <td class="p-3 font-medium text-white">${s.name}</td>
-            <td class="p-3">${s.id}</td>
-            <td class="p-3">${s.class}</td>
-            <td class="p-3"><span class="px-2 py-1 rounded text-xs ${s.status === 'approved' ? 'bg-emerald-500/20 text-emerald-400' : 'bg-amber-500/20 text-amber-400'}">${s.status}</span></td>
-            <td class="p-3 space-x-2">
-              ${s.status === 'pending' ? 
-                `<button onclick="toggleApprove('${s.id}', 'approved')" class="bg-emerald-600 hover:bg-emerald-500 px-3 py-1 rounded text-xs">Approve</button>` : 
-                `<button onclick="toggleApprove('${s.id}', 'pending')" class="bg-amber-600 hover:bg-amber-500 px-3 py-1 rounded text-xs">Block</button>`
-              }
-            </td>
-          </tr>
-        `;
-      });
-    }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; -webkit-tap-highlight-color: transparent; }
+        
+        body {
+            background-color: var(--bg-color); color: var(--text-main);
+            min-height: 100vh; display: flex; flex-direction: column; overflow-x: hidden;
+            padding-top: 80px; padding-bottom: 90px;
+            position: relative; transition: background-color 0.5s ease;
+        }
 
-    function toggleApprove(id, status) {
-      const target = users.find(u => u.id === id);
-      if (target) {
-        target.status = status;
-        saveState();
-        renderAdmin();
-      }
-    }
+        /* Liquid Animated Background Effects */
+        .bg-bubbles {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1; overflow: hidden;
+            background: var(--bg-color);
+        }
+        .bubble {
+            position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.5;
+            animation: floatBubble 10s infinite alternate ease-in-out;
+        }
+        .bubble:nth-child(1) { width: 300px; height: 300px; background: var(--liquid-color-1); top: 10%; left: 20%; animation-duration: 12s; }
+        .bubble:nth-child(2) { width: 400px; height: 400px; background: var(--liquid-color-2); bottom: 10%; right: 10%; animation-duration: 15s; }
+        .bubble:nth-child(3) { width: 250px; height: 250px; background: #a855f7; top: 50%; left: 50%; animation-duration: 10s; }
 
-    renderPortal();
-  </script>
+        @keyframes floatBubble { 0% { transform: translate(0, 0) scale(1); } 100% { transform: translate(30px, -50px) scale(1.2); } }
+        @keyframes popupIn { 0% { opacity: 0; transform: scale(0.9) translateY(20px); } 100% { opacity: 1; transform: scale(1) translateY(0); } }
+        @keyframes slideIn { 0% { opacity: 0; transform: translateX(20px); } 100% { opacity: 1; transform: translateX(0); } }
+
+        /* Premium Liquid Glass Mixin */
+        .glass {
+            background: var(--glass-bg); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
+            border: 1px solid var(--glass-border); box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.15);
+        }
+
+        /* Global Loader */
+        #global-loader {
+            position: fixed; top:0; left:0; width:100%; height:100%; background: var(--bg-color); z-index: 9999;
+            display: flex; flex-direction: column; align-items: center; justify-content: center; transition: opacity 0.5s;
+        }
+        .loader-ring { width: 60px; height: 60px; border: 5px solid rgba(255,255,255,0.1); border-top: 5px solid var(--primary); border-radius: 50%; animation: spin 1s linear infinite; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+        /* Header & Footer */
+        header { position: fixed; top: 0; left: 0; width: 100%; height: 70px; z-index: 1000; display: flex; justify-content: space-between; align-items: center; padding: 0 20px; border-bottom-left-radius: 20px; border-bottom-right-radius: 20px; }
+        .logo { font-size: 18px; font-weight: 800; display:flex; align-items:center; gap:8px; background: linear-gradient(45deg, var(--primary), var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .header-links { display: flex; gap: 8px; align-items: center; }
+        .btn-glass { padding: 8px 14px; border-radius: 12px; font-size: 12px; font-weight: 600; color: var(--text-main); text-decoration: none; display: flex; align-items: center; gap: 6px; cursor: pointer; border: 1px solid var(--glass-border); background: var(--glass-bg); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+        .btn-glass:hover { background: var(--card-hover); transform: translateY(-2px) scale(1.02); box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
+
+        footer { position: fixed; bottom: 15px; left: 50%; transform: translateX(-50%); width: 95%; max-width: 600px; height: 65px; z-index: 1000; border-radius: 30px; display: flex; justify-content: space-around; align-items: center; padding: 0 10px; }
+        .nav-item { display: flex; flex-direction: column; align-items: center; gap: 4px; color: var(--text-muted); cursor: pointer; flex: 1; text-align: center; transition: 0.3s; }
+        .nav-item.active { color: var(--primary); text-shadow: 0 0 10px rgba(59,130,246,0.5); transform: translateY(-5px) scale(1.1); }
+        .nav-item i { font-size: 20px; }
+        .nav-item span { font-size: 10px; font-weight: 700; }
+
+        /* Main Container */
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; width: 100%; }
+        .view-section { display: none; animation: popupIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
+        .view-section.active { display: block; }
+
+        /* Grid & Lists */
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; }
+        .card { padding: 25px 15px; border-radius: 24px; text-align: center; cursor: pointer; transition: 0.4s; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 150px; position: relative; overflow: hidden; }
+        .card:hover { background: var(--card-hover); transform: translateY(-8px); border-color: var(--primary); box-shadow: 0 15px 30px rgba(0,0,0,0.3); }
+        .card i { font-size: 40px; margin-bottom: 15px; transition: 0.4s; }
+        .card:hover i { color: var(--accent); transform: scale(1.2) rotate(5deg); }
+        .card span { font-size: 14px; font-weight: 700; word-break: break-word; line-height: 1.4; z-index: 1; }
+
+        /* Combo Batch Card */
+        .combo-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
+        .combo-card { border-radius: 20px; overflow: hidden; display: flex; flex-direction: column; transition: 0.3s; cursor:pointer; }
+        .combo-card:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(0,0,0,0.4); border-color:var(--primary); }
+        .combo-thumb { width: 100%; height: 160px; object-fit: cover; border-bottom: 1px solid var(--glass-border); transition: 0.4s; }
+        .combo-card:hover .combo-thumb { transform: scale(1.05); }
+        .combo-info { padding: 20px; z-index: 2; background: var(--glass-bg); flex:1; display:flex; flex-direction:column; justify-content:space-between; }
+        .combo-id { font-size: 11px; color: var(--primary); font-weight: 800; letter-spacing: 1px; margin-bottom: 5px; }
+        .combo-title { font-size: 15px; font-weight: 600; margin-bottom: 15px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+        .combo-btn { width: 100%; padding: 12px; border-radius: 12px; background: linear-gradient(45deg, var(--primary), #00c6ff); color: white; border: none; font-weight: 600; cursor: pointer; transition: 0.3s; display:flex; align-items:center; justify-content:center; gap:8px; }
+        .combo-btn:hover { filter: brightness(1.2); box-shadow: 0 5px 15px rgba(59,130,246,0.5); }
+
+        .folder-card { border-left: 5px solid var(--primary); }
+        .folder-card.videos { border-left-color: #3b82f6; }
+        .folder-card.pdfs { border-left-color: #ef4444; }
+        .folder-card.notes { border-left-color: #10b981; }
+        .folder-card .badge { position: absolute; top: 10px; right: 10px; background: rgba(255,255,255,0.15); padding: 4px 10px; border-radius: 12px; font-size: 11px; font-weight: 800; }
+
+        .list-item { display: flex; align-items: center; justify-content: space-between; padding: 18px; margin-bottom: 15px; border-radius: 20px; cursor: pointer; transition: 0.3s; animation: slideIn 0.3s ease-out forwards; }
+        .list-item:hover { background: var(--card-hover); transform: translateX(5px); border-left: 4px solid var(--primary); }
+        .item-info { display: flex; align-items: center; gap: 15px; flex: 1; }
+        .item-icon { width: 45px; height: 45px; border-radius: 14px; background: rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: center; font-size: 20px; box-shadow: inset 0 0 10px rgba(255,255,255,0.05); }
+        .item-title { font-size: 14px; font-weight: 500; color: var(--text-main); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; line-height:1.4; }
+
+        .action-btns { display: flex; gap: 10px; }
+        .btn-play, .btn-dl, .btn-add { width: 38px; height: 38px; border-radius: 12px; border: none; display: flex; align-items: center; justify-content: center; cursor: pointer; color: white; transition: 0.3s; font-size: 14px; text-decoration: none; }
+        .btn-play { background: linear-gradient(135deg, var(--primary), #00c6ff); }
+        .btn-dl { background: linear-gradient(135deg, #10b981, #059669); }
+        .btn-add { background: linear-gradient(135deg, var(--accent), #ff758c); }
+        .btn-play:hover, .btn-dl:hover, .btn-add:hover { transform: scale(1.15) rotate(5deg); box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
+
+        /* Modals */
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); z-index: 2000; display: none; align-items: center; justify-content: center; padding: 20px; }
+        .modal-content { width: 100%; max-width: 450px; border-radius: 30px; padding: 35px; position: relative; animation: popupIn 0.5s ease; text-align:center; }
+        .modal-close { position: absolute; top: 20px; right: 25px; font-size: 24px; color: var(--text-muted); cursor: pointer; transition:0.3s; }
+        .modal-close:hover { color: var(--accent); transform:rotate(90deg); }
+
+        .auth-input { width: 100%; padding: 14px 20px; border-radius: 14px; border: 1px solid var(--glass-border); background: rgba(0,0,0,0.4); color: white; margin-bottom: 15px; outline: none; font-size: 14px; }
+        
+        /* Advanced Video Player Specific */
+        .video-wrapper { width: 100%; max-width: 1000px; background: #000; border-radius: 20px; position: relative; border: 1px solid var(--glass-border); box-shadow: 0 20px 50px rgba(0,0,0,0.6); overflow: hidden; }
+        .plyr { border-radius: 20px; max-height: 75vh; }
+        
+        .rotated { transform: rotate(90deg); width: 100vh !important; height: 100vw !important; z-index: 9999; position: fixed; top: 0; left: 0; background: black; border-radius:0; max-height: 100vw; }
+        .rotated .plyr, .rotated video, .rotated iframe { height: 100vw !important; width: 100vh !important; max-height: 100vw; border-radius: 0; }
+
+        .internal-controls { position: absolute; top: 15px; left: 15px; z-index: 100; display: flex; gap: 10px; background: rgba(0, 0, 0, 0.5); padding: 8px; border-radius: 14px; backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.1); transition: opacity 0.3s; opacity: 0; }
+        .video-wrapper:hover .internal-controls, .internal-controls:hover { opacity: 1; }
+        .btn-ctrl { background: rgba(255, 255, 255, 0.15); border: none; color: white; width: 38px; height: 38px; border-radius: 10px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: 0.3s; font-size: 15px; text-decoration: none; }
+        .btn-ctrl:hover { background: var(--primary); transform: scale(1.1); }
+
+        .search-bar { width: 100%; padding: 18px 25px; border-radius: 50px; border: 1px solid var(--primary); background: rgba(0,0,0,0.3); color: var(--text-main); font-size: 16px; margin-bottom: 25px; outline: none; transition: 0.3s; box-shadow: inset 0 2px 5px rgba(0,0,0,0.2); backdrop-filter: blur(10px); }
+        .search-bar:focus { box-shadow: 0 0 20px rgba(59,130,246,0.4); }
+        
+        .premium-setting-row { display: flex; justify-content: space-between; align-items: center; padding: 18px; background: rgba(255,255,255,0.03); border: 1px solid var(--glass-border); border-radius: 20px; margin-bottom: 15px; transition: 0.3s; }
+        .premium-setting-row:hover { background: rgba(255,255,255,0.08); transform: translateY(-3px); }
+        .premium-select { background: rgba(0,0,0,0.6); color: var(--text-main); border: 1px solid var(--glass-border); padding: 10px 15px; border-radius: 12px; outline: none; font-family: 'Poppins', sans-serif; cursor: pointer; font-size: 14px; }
+        
+        #toast-container { position: fixed; top: 20px; right: 20px; z-index: 9999; display: flex; flex-direction: column; gap: 10px; }
+        .toast { background: var(--glass-bg); backdrop-filter: blur(15px); border: 1px solid var(--glass-border); padding: 15px 25px; border-radius: 15px; color: white; font-weight: 600; display: flex; align-items: center; gap: 10px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+    </style>
+</head>
+<body>
+    <div class="bg-bubbles">
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+    </div>
+
+    <div id="global-loader">
+        <div class="loader-ring"></div>
+        <h3 style="margin-top:20px; font-weight:700; background: linear-gradient(45deg, var(--primary), var(--accent)); -webkit-background-clip:text; color:transparent;">Loading Adroit Study Hub...</h3>
+    </div>
+
+    <div id="toast-container"></div>
+    
+    <header class="glass">
+        <div class="logo"><i class="fa-solid fa-atom"></i> Adroit Study Hub</div>
+        <div class="header-links">
+            <a href="https://www.youtube.com/@becomeadroit" target="_blank" class="btn-glass" style="color:#ff0000;" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
+            <a href="https://www.instagram.com/adroit_krishna_kushwaha?dlrf=aTh0bGx4a2V1emZp" target="_blank" class="btn-glass" style="color:#e1306c;" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://wa.me/919610279787" target="_blank" class="btn-glass" style="color:#25d366;" title="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+            <button class="btn-glass" id="auth-nav-btn" onclick="openAuthModal()"><i class="fa-solid fa-user-lock"></i> Login</button>
+            <button class="btn-glass" id="admin-nav-btn" style="display:none; background:var(--accent); color:white; border:none;" onclick="openAdminModal()"><i class="fa-solid fa-user-shield"></i> Admin Panel</button>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- VIEW 0: RESTRICTED / PENDING APPROVAL SCREEN -->
+        <div id="view-locked" class="view-section active" style="text-align: center; padding: 60px 20px;">
+            <div style="font-size: 70px; color: var(--accent); margin-bottom: 20px;"><i class="fa-solid fa-lock"></i></div>
+            <h2 id="lock-title" style="font-weight: 800; font-size: 26px; margin-bottom: 10px;">Student Authentication Required</h2>
+            <p id="lock-desc" style="color: var(--text-muted); max-width: 450px; margin: 0 auto 30px auto; font-size: 14px;">Please login or register an account. Study material and video chapters will be unlocked once approved by Adroit Sir.</p>
+            <div style="display: flex; gap: 15px; justify-content: center;">
+                <button class="btn-glass" style="background: var(--primary); color: white; border: none; padding: 14px 25px; font-size: 15px;" onclick="openAuthModal()">Login / Register Now</button>
+                <a href="https://wa.me/919610279787?text=Sir%20please%20approve%20my%20Adroit%20Study%20Hub%20account" target="_blank" class="btn-glass" style="background: #25d366; color: white; border: none; padding: 14px 25px; font-size: 15px;"><i class="fa-brands fa-whatsapp"></i> Get Instant Approval</a>
+            </div>
+        </div>
+
+        <!-- VIEW 1: 8 TOPICS / BATCHES (Unlocked Content) -->
+        <div id="view-batches" class="view-section">
+            <h3 style="margin-bottom: 25px; font-weight:800; display:flex; align-items:center; gap:10px;"><i class="fa-solid fa-layer-group" style="color:var(--primary);"></i> Class 10th Study Hub (All 8 Modules)</h3>
+            <div class="grid" id="batch-grid"></div>
+        </div>
+
+        <div id="view-combos" class="view-section">
+            <div style="display:flex; align-items:center; gap:15px; margin-bottom:25px;">
+                <div class="btn-glass" onclick="navTo('view-batches'); playSound();" style="padding:12px;"><i class="fa-solid fa-arrow-left"></i></div>
+                <h3 id="combo-title" style="font-weight:700;"></h3>
+            </div>
+            <div class="combo-grid" id="combo-grid"></div>
+        </div>
+
+        <div id="view-subjects" class="view-section">
+            <div style="display:flex; align-items:center; gap:15px; margin-bottom:25px;">
+                <div class="btn-glass" onclick="navTo('view-combos'); playSound();" style="padding:12px;"><i class="fa-solid fa-arrow-left"></i></div>
+                <h3 id="subject-main-title" style="font-weight:700;"></h3>
+            </div>
+            <div id="subject-list"></div>
+        </div>
+
+        <div id="view-topics" class="view-section">
+            <div style="display:flex; align-items:center; gap:15px; margin-bottom:25px;">
+                <div class="btn-glass" onclick="navTo('view-subjects'); playSound();" style="padding:12px;"><i class="fa-solid fa-arrow-left"></i></div>
+                <h3 id="topic-main-title" style="font-weight:700;"></h3>
+            </div>
+            <div id="topic-list"></div>
+        </div>
+
+        <div id="view-folders" class="view-section">
+            <div style="display:flex; align-items:center; gap:15px; margin-bottom:25px;">
+                <div class="btn-glass" onclick="navTo('view-topics'); playSound();" style="padding:12px;"><i class="fa-solid fa-arrow-left"></i></div>
+                <h3 id="folder-main-title" style="font-size:16px; font-weight:700;"></h3>
+            </div>
+            <div class="grid" id="folder-grid"></div>
+        </div>
+
+        <div id="view-content" class="view-section">
+            <div style="display:flex; align-items:center; gap:15px; margin-bottom:25px;">
+                <div class="btn-glass" onclick="navTo('view-folders'); playSound();" style="padding:12px;"><i class="fa-solid fa-arrow-left"></i></div>
+                <h3 id="content-main-title" style="font-size:16px; color:var(--primary); font-weight:700;"></h3>
+            </div>
+            <div id="content-list"></div>
+        </div>
+
+        <div id="view-search" class="view-section">
+            <input type="text" id="searchInput" class="search-bar" placeholder="Search across all content..." onkeyup="performSearch()">
+            <div id="search-results"></div>
+        </div>
+
+        <div id="view-playlist" class="view-section">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:25px;">
+                <h3 style="font-weight:700;"><i class="fa-solid fa-bookmark"></i> Saved Chapters</h3>
+                <button class="btn-glass" onclick="clearPlaylist(); playSound();"><i class="fa-solid fa-trash"></i> Clear</button>
+            </div>
+            <div id="playlist-list"></div>
+        </div>
+    </main>
+
+    <footer class="glass" id="app-footer" style="display: none;">
+        <div class="nav-item active" onclick="switchTab('view-batches', this); playSound();"><i class="fa-solid fa-house"></i><span>Home</span></div>
+        <div class="nav-item" onclick="switchTab('view-search', this); playSound();"><i class="fa-solid fa-magnifying-glass"></i><span>Search</span></div>
+        <div class="nav-item" onclick="switchTab('view-playlist', this); loadPlaylist(); playSound();"><i class="fa-solid fa-bookmark"></i><span>Saved</span></div>
+        <div class="nav-item" onclick="openSettings(); playSound();"><i class="fa-solid fa-gear"></i><span>Settings</span></div>
+    </footer>
+
+    <!-- AUTH MODAL (Login / Register) -->
+    <div id="auth-modal" class="modal-overlay">
+        <div class="modal-content glass">
+            <i class="fa-solid fa-xmark modal-close" onclick="closeModal('auth-modal')"></i>
+            <h3 id="auth-title" style="margin-bottom:20px; font-weight:800;">Student Portal Login</h3>
+            
+            <div id="auth-form" style="text-align: left;">
+                <label style="font-size: 12px; color: var(--text-muted); display: block; margin-bottom: 5px;">Email or Mobile Number</label>
+                <input type="text" id="auth-email" class="auth-input" placeholder="Enter ID / Mobile">
+                
+                <label style="font-size: 12px; color: var(--text-muted); display: block; margin-bottom: 5px;">Password</label>
+                <input type="password" id="auth-password" class="auth-input" placeholder="Enter Password">
+                
+                <button class="btn-glass" style="width:100%; justify-content:center; margin-top: 10px; background:var(--primary); color:white; border:none; padding:14px; font-size:15px;" onclick="handleAuth()">Login</button>
+                
+                <p style="font-size:13px; color:var(--text-muted); margin-top:20px; text-align: center; cursor:pointer;" onclick="toggleAuthMode()">Don't have an account? <b style="color:var(--primary);">Register here</b></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ADMIN APPROVAL MODAL -->
+    <div id="admin-modal" class="modal-overlay">
+        <div class="modal-content glass" style="max-width: 650px;">
+            <i class="fa-solid fa-xmark modal-close" onclick="closeModal('admin-modal')"></i>
+            <h3 style="margin-bottom:20px; font-weight:800;"><i class="fa-solid fa-user-shield"></i> Teacher Approval Dashboard</h3>
+            <div id="pending-students-list" style="max-height: 400px; overflow-y: auto; text-align: left;"></div>
+        </div>
+    </div>
+
+    <!-- Video Player Modal -->
+    <div id="player-modal" class="modal-overlay">
+        <div style="display:flex; flex-direction:column; width:100%; max-width:1000px; align-items:center;">
+            <div style="width:100%; display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
+                <button class="btn-glass" onclick="openNotepad(); playSound();" style="background:var(--accent); color:white; border:none;"><i class="fa-solid fa-pen"></i> Notes</button>
+                <i class="fa-solid fa-circle-xmark" style="font-size:35px; color:var(--accent); cursor:pointer; transition:0.3s;" onclick="closePlayer(); playSound();"></i>
+            </div>
+            
+            <div class="video-wrapper" id="vid-wrapper">
+                <div id="watermark" style="position: absolute; top: 20px; right: 20px; z-index: 99; color: rgba(255,255,255,0.4); font-weight: 800; font-size: 20px; pointer-events: none;">Adroit Study Hub</div>
+                
+                <div class="internal-controls">
+                    <button class="btn-ctrl" onclick="if(window.player) window.player.rewind(10); playSound();" title="Rewind 10s"><i class="fa-solid fa-backward-10"></i></button>
+                    <button class="btn-ctrl" onclick="if(window.player) window.player.forward(10); playSound();" title="Forward 10s"><i class="fa-solid fa-forward-10"></i></button>
+                    <button class="btn-ctrl" onclick="rotateScreen(); playSound();" title="Rotate Screen"><i class="fa-solid fa-mobile-screen-button"></i></button>
+                </div>
+                
+                <div id="player-container" style="width:100%;"></div>
+            </div>
+            
+            <h4 id="now-playing-title" style="margin-top: 20px; text-align: center; color: var(--primary); font-size: 16px; font-weight:600; padding:0 20px;"></h4>
+        </div>
+    </div>
+
+    <!-- Settings Modal -->
+    <div id="settings-modal" class="modal-overlay">
+        <div class="modal-content glass">
+            <i class="fa-solid fa-xmark modal-close" onclick="closeModal('settings-modal'); playSound();"></i>
+            <h3 style="margin-bottom:25px; font-weight: 800;"><i class="fa-solid fa-sliders" style="color:var(--primary);"></i> Settings</h3>
+            
+            <div class="premium-setting-row">
+                <div style="display:flex; align-items:center; gap:15px;">
+                    <div style="background: rgba(59, 130, 246, 0.15); color: #3b82f6; width: 42px; height: 42px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 18px;">
+                        <i class="fa-solid fa-palette"></i>
+                    </div>
+                    <div style="display:flex; flex-direction:column; text-align:left;">
+                        <span style="font-size:15px; font-weight:700;">App Theme</span>
+                        <span style="font-size:12px; color:var(--text-muted);">Change visual style</span>
+                    </div>
+                </div>
+                <select id="theme-select" class="premium-select" onchange="changeTheme(this.value); playSound();">
+                    <option value="dark">Dark Glass</option>
+                    <option value="light">Light Glass</option>
+                </select>
+            </div>
+            <button class="btn-glass" style="width:100%; justify-content:center; background:var(--accent); color:white; border:none; padding:12px; margin-top: 15px;" onclick="logoutStudent()"><i class="fa-solid fa-right-from-bracket"></i> Logout</button>
+        </div>
+    </div>
+
+    <!-- Notepad Modal -->
+    <div id="notepad-modal" class="modal-overlay">
+        <div class="modal-content glass" style="max-width: 600px; height: 60vh; display:flex; flex-direction:column;">
+            <i class="fa-solid fa-xmark modal-close" onclick="closeModal('notepad-modal'); playSound();"></i>
+            <h3 style="margin-bottom:15px; font-weight:700;"><i class="fa-solid fa-book-open"></i> Live Notes Pad</h3>
+            <textarea id="notepad-area" style="flex:1; width:100%; background:rgba(0,0,0,0.4); border:1px solid var(--glass-border); color:white; padding:15px; border-radius:15px; outline:none; font-family:'Poppins', sans-serif; resize:none;" placeholder="Write your notes here. Auto-saves locally..." oninput="saveNotes()"></textarea>
+            <button class="btn-glass" style="width:100%; justify-content:center; padding:15px; margin-top:15px; background: linear-gradient(135deg, var(--primary), #00c6ff); color: white; border: none; font-size:15px;" onclick="downloadNotes(); playSound();"><i class="fa-solid fa-download"></i> Download Notes (TXT)</button>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+    <script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js"></script>
+    <script>
+        const db = {
+            "1. Complete Notes (Science & SST)": {
+                "Science Notes & Chapters": {
+                    "thumb": "https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&w=600&q=80",
+                    "subjects": {
+                        "Science (13 Chapters)": {
+                            "Chapter Notes": {
+                                "Videos": [
+                                    { title: "Science Full Course Overview", url: "https://www.w3schools.com/html/mov_bbb.mp4" }
+                                ],
+                                "PDFs": [
+                                    { title: "Chemical Reactions and Equations", url: "notes/science-ch1.html" },
+                                    { title: "Acids, Bases and Salts", url: "notes/science-ch2.html" },
+                                    { title: "Metals and Non-metals", url: "notes/science-ch3.html" },
+                                    { title: "Carbon and its Compounds", url: "notes/science-ch4.html" },
+                                    { title: "Life Processes", url: "notes/science-ch5.html" },
+                                    { title: "Control and Coordination", url: "notes/science-ch6.html" },
+                                    { title: "How do Organisms Reproduce?", url: "notes/science-ch7.html" },
+                                    { title: "Heredity and Evolution", url: "notes/science-ch8.html" },
+                                    { title: "Light – Reflection & Refraction", url: "notes/science-ch9.html" },
+                                    { title: "Human Eye & Colourful World", url: "notes/science-ch10.html" },
+                                    { title: "Electricity", url: "notes/science-ch11.html" },
+                                    { title: "Magnetic Effects of Electric Current", url: "notes/science-ch12.html" },
+                                    { title: "Our Environment", url: "notes/science-ch13.html" }
+                                ],
+                                "Notes & Links": []
+                            }
+                        }
+                    }
+                },
+                "Social Science Notes & Chapters": {
+                    "thumb": "https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?auto=format&fit=crop&w=600&q=80",
+                    "subjects": {
+                        "History (इतिहास)": {
+                            "Chapters": {
+                                "Videos": [],
+                                "PDFs": [
+                                    { title: "The Rise of Nationalism in Europe", url: "notes/sst-ch1.html" },
+                                    { title: "Nationalism in India", url: "notes/sst-ch2.html" },
+                                    { title: "The Making of a Global World", url: "notes/sst-ch3.html" },
+                                    { title: "The Age of Industrialisation", url: "notes/sst-ch4.html" },
+                                    { title: "Print Culture and the Modern World", url: "notes/sst-ch5.html" }
+                                ],
+                                "Notes & Links": []
+                            }
+                        },
+                        "Geography (भूगोल)": {
+                            "Chapters": {
+                                "Videos": [],
+                                "PDFs": [
+                                    { title: "Resources and Development", url: "notes/sst-ch6.html" },
+                                    { title: "Forest and Wildlife Resources", url: "notes/sst-ch7.html" },
+                                    { title: "Water Resources", url: "notes/sst-ch8.html" },
+                                    { title: "Agriculture", url: "notes/sst-ch9.html" },
+                                    { title: "Minerals and Energy Resources", url: "notes/sst-ch10.html" },
+                                    { title: "Manufacturing Industries", url: "notes/sst-ch11.html" },
+                                    { title: "Lifelines of National Economy", url: "notes/sst-ch12.html" }
+                                ],
+                                "Notes & Links": []
+                            }
+                        },
+                        "Political Science (राजनीति विज्ञान)": {
+                            "Chapters": {
+                                "Videos": [],
+                                "PDFs": [
+                                    { title: "Power Sharing", url: "notes/sst-ch13.html" },
+                                    { title: "Federalism", url: "notes/sst-ch14.html" },
+                                    { title: "Gender, Religion and Caste", url: "notes/sst-ch15.html" },
+                                    { title: "Political Parties", url: "notes/sst-ch16.html" },
+                                    { title: "Outcomes of Democracy", url: "notes/sst-ch17.html" }
+                                ],
+                                "Notes & Links": []
+                            }
+                        },
+                        "Economics (अर्थशास्त्र)": {
+                            "Chapters": {
+                                "Videos": [],
+                                "PDFs": [
+                                    { title: "Development", url: "notes/sst-ch18.html" },
+                                    { title: "Sectors of the Indian Economy", url: "notes/sst-ch19.html" },
+                                    { title: "Money and Credit", url: "notes/sst-ch20.html" },
+                                    { title: "Globalisation and the Indian Economy", url: "notes/sst-ch21.html" },
+                                    { title: "Consumer Rights", url: "notes/sst-ch22.html" }
+                                ],
+                                "Notes & Links": []
+                            }
+                        }
+                    }
+                }
+            },
+            "2. Previous Years Question Papers": {
+                "PYQ Sets": {
+                    "thumb": "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=600&q=80",
+                    "subjects": {
+                        "Board Exam Papers (2020-2025)": {
+                            "Papers": {
+                                "Videos": [],
+                                "PDFs": [
+                                    { title: "CBSE Class 10 Science Paper 2025.pdf", url: "#" },
+                                    { title: "CBSE Class 10 Social Science Paper 2025.pdf", url: "#" }
+                                ],
+                                "Notes & Links": []
+                            }
+                        }
+                    }
+                }
+            },
+            "3. PYQ Papers with Solutions": {
+                "PYQ Solutions": {
+                    "thumb": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=600&q=80",
+                    "subjects": {
+                        "Solved Board Papers": {
+                            "Solutions": {
+                                "Videos": [],
+                                "PDFs": [
+                                    { title: "Solved Science Paper 2025 (With Answers).pdf", url: "#" }
+                                ],
+                                "Notes & Links": []
+                            }
+                        }
+                    }
+                }
+            },
+            "4. All Science & SST Diagrams": {
+                "Diagram Bank": {
+                    "thumb": "https://images.unsplash.com/photo-1507668077129-56e32842fceb?auto=format&fit=crop&w=600&q=80",
+                    "subjects": {
+                        "Important Diagrams": {
+                            "Diagrams": {
+                                "Videos": [],
+                                "PDFs": [
+                                    { title: "All Important Diagrams PDF.pdf", url: "#" }
+                                ],
+                                "Notes & Links": []
+                            }
+                        }
+                    }
+                }
+            },
+            "5. Test Papers & Mock Tests": {
+                "Mock Tests": {
+                    "thumb": "https://images.unsplash.com/photo-1606326608606-aa0b62935f2b?auto=format&fit=crop&w=600&q=80",
+                    "subjects": {
+                        "Chapter-wise Tests": {
+                            "Tests": {
+                                "Videos": [],
+                                "PDFs": [
+                                    { title: "Practice Test Paper - Science.pdf", url: "#" }
+                                ],
+                                "Notes & Links": []
+                            }
+                        }
+                    }
+                }
+            },
+            "6. MCQ Quizzes": {
+                "MCQ Practice": {
+                    "thumb": "https://images.unsplash.com/photo-1543269865-cbf427effbad?auto=format&fit=crop&w=600&q=80",
+                    "subjects": {
+                        "Objective Questions": {
+                            "Quizzes": {
+                                "Videos": [],
+                                "PDFs": [
+                                    { title: "500+ Important MCQs PDF.pdf", url: "#" }
+                                ],
+                                "Notes & Links": []
+                            }
+                        }
+                    }
+                }
+            },
+            "7. Most Important Questions": {
+                "Imp Q&A": {
+                    "thumb": "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&w=600&q=80",
+                    "subjects": {
+                        "Board Question Bank": {
+                            "Questions": {
+                                "Videos": [],
+                                "PDFs": [
+                                    { title: "Most Important Questions Chapter-wise.pdf", url: "#" }
+                                ],
+                                "Notes & Links": []
+                            }
+                        }
+                    }
+                }
+            },
+            "8. NCERT Textbooks": {
+                "NCERT Textbook": {
+                    "thumb": "https://images.unsplash.com/photo-1497633762265-9d179a990aa6?auto=format&fit=crop&w=600&q=80",
+                    "subjects": {
+                        "Official Textbooks": {
+                            "Books": {
+                                "Videos": [],
+                                "PDFs": [
+                                    { title: "NCERT Class 10 Science Textbook.pdf", url: "#" },
+                                    { title: "NCERT Class 10 Social Science Textbooks.pdf", url: "#" }
+                                ],
+                                "Notes & Links": []
+                            }
+                        }
+                    }
+                }
+            }
+        };
+
+        let currentBatch = '';
+        let currentCombo = '';
+        let currentSubject = '';
+        let currentTopic = '';
+        let currentFolder = '';
+        let isRegisterMode = false;
+
+        window.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                const loader = document.getElementById('global-loader');
+                if(loader) {
+                    loader.style.opacity = '0';
+                    setTimeout(() => loader.style.display = 'none', 500);
+                }
+            }, 400);
+            
+            checkSession();
+            renderBatches();
+
+            const savedNotes = localStorage.getItem('user_study_notes');
+            if(savedNotes) {
+                document.getElementById('notepad-area').value = savedNotes;
+            }
+        });
+
+        function playSound() {}
+
+        function changeTheme(theme) {
+            document.documentElement.setAttribute('data-theme', theme);
+            localStorage.setItem('app_theme', theme);
+        }
+
+        const savedTheme = localStorage.getItem('app_theme');
+        if(savedTheme) {
+            document.documentElement.setAttribute('data-theme', savedTheme);
+            window.addEventListener('DOMContentLoaded', () => {
+                const select = document.getElementById('theme-select');
+                if(select) select.value = savedTheme;
+            });
+        }
+
+        function navTo(viewId) {
+            document.querySelectorAll('.view-section').forEach(el => el.classList.remove('active'));
+            document.getElementById(viewId).classList.add('active');
+            window.scrollTo(0, 0);
+        }
+
+        function switchTab(viewId, element) {
+            document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+            if(element) element.classList.add('active');
+            navTo(viewId);
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        }
+
+        function openAuthModal() {
+            document.getElementById('auth-modal').style.display = 'flex';
+        }
+
+        function openAdminModal() {
+            document.getElementById('admin-modal').style.display = 'flex';
+            let students = JSON.parse(localStorage.getItem('registered_students')) || [];
+            let listEl = document.getElementById('pending-students-list');
+            listEl.innerHTML = '';
+
+            if(students.length === 0) {
+                listEl.innerHTML = '<p style="color:var(--text-muted); text-align:center; padding:20px;">No students registered yet.</p>';
+                return;
+            }
+
+            students.forEach((stu, index) => {
+                let div = document.createElement('div');
+                div.className = 'list-item glass';
+                div.innerHTML = `
+                    <div>
+                        <div style="font-weight:600; font-size:14px;">${stu.email}</div>
+                        <div style="font-size:11px; color:${stu.approved ? '#10b981' : '#f59e0b'};">${stu.approved ? 'Approved' : 'Pending Approval'}</div>
+                    </div>
+                    <div>
+                        ${stu.approved ? 
+                            `<button class="btn-glass" style="background:var(--accent); color:white; border:none;" onclick="toggleApprove(${index}, false)">Revoke</button>` : 
+                            `<button class="btn-glass" style="background:#10b981; color:white; border:none;" onclick="toggleApprove(${index}, true)">Approve</button>`
+                        }
+                    </div>
+                `;
+                listEl.appendChild(div);
+            });
+        }
+
+        function toggleApprove(index, status) {
+            let students = JSON.parse(localStorage.getItem('registered_students')) || [];
+            students[index].approved = status;
+            localStorage.setItem('registered_students', JSON.stringify(students));
+            openAdminModal();
+            showToast(status ? "Student Approved!" : "Approval Revoked.");
+        }
+
+        function toggleAuthMode() {
+            isRegisterMode = !isRegisterMode;
+            document.getElementById('auth-title').innerText = isRegisterMode ? "Student Registration" : "Student Portal Login";
+            event.target.parentElement.innerHTML = isRegisterMode ? 
+                `Already have an account? <b style="color:var(--primary); cursor:pointer;" onclick="toggleAuthMode()">Login here</b>` : 
+                `Don't have an account? <b style="color:var(--primary); cursor:pointer;" onclick="toggleAuthMode()">Register here</b>`;
+        }
+
+        function handleAuth() {
+            const email = document.getElementById('auth-email').value.trim();
+            const pass = document.getElementById('auth-password').value.trim();
+            if(!email || !pass) { alert("Please fill all fields"); return; }
+
+            // Master Admin Login Credentials
+            if(email === "admin@adroit.com" && pass === "adroit123") {
+                localStorage.setItem('current_user', JSON.stringify({ email: "Admin", role: "admin", approved: true }));
+                closeModal('auth-modal');
+                checkSession();
+                showToast("Logged in as Admin!");
+                return;
+            }
+
+            let students = JSON.parse(localStorage.getItem('registered_students')) || [];
+
+            if(isRegisterMode) {
+                if(students.some(s => s.email === email)) { alert("Email / Mobile already registered!"); return; }
+                students.push({ email, pass, approved: false });
+                localStorage.setItem('registered_students', JSON.stringify(students));
+                alert("Registration successful! Your account is pending approval by Adroit Sir.");
+                isRegisterMode = false;
+                toggleAuthMode();
+            } else {
+                let student = students.find(s => s.email === email && s.pass === pass);
+                if(student) {
+                    if(!student.approved) {
+                        alert("Your account is pending approval by Adroit Sir. Please contact via WhatsApp for instant approval.");
+                        return;
+                    }
+                    localStorage.setItem('current_user', JSON.stringify({ email: student.email, role: "student", approved: true }));
+                    closeModal('auth-modal');
+                    checkSession();
+                    showToast("Login Successful!");
+                } else {
+                    alert("Invalid credentials or account not found.");
+                }
+            }
+        }
+
+        function checkSession() {
+            let user = JSON.parse(localStorage.getItem('current_user'));
+            if(user && user.approved) {
+                document.getElementById('view-locked').classList.remove('active');
+                document.getElementById('view-batches').classList.add('active');
+                document.getElementById('app-footer').style.display = 'flex';
+                document.getElementById('auth-nav-btn').style.display = 'none';
+                
+                if(user.role === 'admin') {
+                    document.getElementById('admin-nav-btn').style.display = 'flex';
+                }
+            } else {
+                document.querySelectorAll('.view-section').forEach(el => el.classList.remove('active'));
+                document.getElementById('view-locked').classList.add('active');
+                document.getElementById('app-footer').style.display = 'none';
+                document.getElementById('auth-nav-btn').style.display = 'flex';
+                document.getElementById('admin-nav-btn').style.display = 'none';
+            }
+        }
+
+        function logoutStudent() {
+            localStorage.removeItem('current_user');
+            closeModal('settings-modal');
+            checkSession();
+            showToast("Logged out successfully.");
+        }
+
+        function openSettings() {
+            document.getElementById('settings-modal').style.display = 'flex';
+        }
+
+        function openNotepad() {
+            document.getElementById('notepad-modal').style.display = 'flex';
+        }
+
+        function saveNotes() {
+            const text = document.getElementById('notepad-area').value;
+            localStorage.setItem('user_study_notes', text);
+        }
+
+        function downloadNotes() {
+            const text = document.getElementById('notepad-area').value;
+            const blob = new Blob([text], { type: 'text/plain' });
+            const anchor = document.createElement('a');
+            anchor.href = window.URL.createObjectURL(blob);
+            anchor.download = 'StudyNotes.txt';
+            anchor.click();
+        }
+
+        function showToast(message) {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = 'toast glass';
+            toast.innerHTML = `<i class="fa-solid fa-circle-check" style="color:var(--primary);"></i> ${message}`;
+            container.appendChild(toast);
+            setTimeout(() => toast.remove(), 3000);
+        }
+
+        function renderBatches() {
+            const grid = document.getElementById('batch-grid');
+            if(!grid) return;
+            grid.innerHTML = '';
+            
+            Object.keys(db).forEach(batchName => {
+                const card = document.createElement('div');
+                card.className = 'card glass';
+                card.innerHTML = `<i class="fa-solid fa-book-open-reader" style="color:var(--primary);"></i><span>${batchName}</span>`;
+                card.onclick = () => {
+                    currentBatch = batchName;
+                    renderCombos(batchName);
+                    playSound();
+                };
+                grid.appendChild(card);
+            });
+        }
+
+        function renderCombos(batchName) {
+            const grid = document.getElementById('combo-grid');
+            const titleEl = document.getElementById('combo-title');
+            if(!grid) return;
+            grid.innerHTML = '';
+            titleEl.innerText = batchName;
+
+            const combos = db[batchName];
+            Object.keys(combos).forEach(comboKey => {
+                const comboData = combos[comboKey];
+                const card = document.createElement('div');
+                card.className = 'combo-card glass';
+                card.innerHTML = `
+                    <img src="${comboData.thumb || 'https://via.placeholder.com/300x180'}" class="combo-thumb" alt="Thumbnail">
+                    <div class="combo-info">
+                        <div>
+                            <div class="combo-id">STUDY MODULE</div>
+                            <div class="combo-title">${comboKey}</div>
+                        </div>
+                        <button class="combo-btn"><i class="fa-solid fa-folder-open"></i> Open Section</button>
+                    </div>
+                `;
+                card.onclick = () => {
+                    currentCombo = comboKey;
+                    renderSubjects(batchName, comboKey);
+                    playSound();
+                };
+                grid.appendChild(card);
+            });
+            navTo('view-combos');
+        }
+
+        function renderSubjects(batchName, comboKey) {
+            const listContainer = document.getElementById('subject-list');
+            const titleEl = document.getElementById('subject-main-title');
+            if(!listContainer) return;
+            listContainer.innerHTML = '';
+            titleEl.innerText = comboKey;
+
+            const subjects = db[batchName][comboKey].subjects;
+            Object.keys(subjects).forEach(subjectName => {
+                const item = document.createElement('div');
+                item.className = 'list-item glass';
+                item.innerHTML = `
+                    <div class="item-info">
+                        <div class="item-icon"><i class="fa-solid fa-book" style="color:var(--primary);"></i></div>
+                        <div class="item-title">${subjectName}</div>
+                    </div>
+                    <i class="fa-solid fa-chevron-right" style="color:var(--text-muted);"></i>
+                `;
+                item.onclick = () => {
+                    currentSubject = subjectName;
+                    renderTopics(batchName, comboKey, subjectName);
+                    playSound();
+                };
+                listContainer.appendChild(item);
+            });
+            navTo('view-subjects');
+        }
+
+        function renderTopics(batchName, comboKey, subjectName) {
+            const listContainer = document.getElementById('topic-list');
+            const titleEl = document.getElementById('topic-main-title');
+            if(!listContainer) return;
+            listContainer.innerHTML = '';
+            titleEl.innerText = subjectName;
+
+            const topics = db[batchName][comboKey].subjects[subjectName];
+            Object.keys(topics).forEach(topicName => {
+                const item = document.createElement('div');
+                item.className = 'list-item glass';
+                item.innerHTML = `
+                    <div class="item-info">
+                        <div class="item-icon"><i class="fa-solid fa-folder" style="color:#f59e0b;"></i></div>
+                        <div class="item-title">${topicName}</div>
+                    </div>
+                    <i class="fa-solid fa-chevron-right" style="color:var(--text-muted);"></i>
+                `;
+                item.onclick = () => {
+                    currentTopic = topicName;
+                    renderFolders(batchName, comboKey, subjectName, topicName);
+                    playSound();
+                };
+                listContainer.appendChild(item);
+            });
+            navTo('view-topics');
+        }
+
+        function renderFolders(batchName, comboKey, subjectName, topicName) {
+            const grid = document.getElementById('folder-grid');
+            const titleEl = document.getElementById('folder-main-title');
+            if(!grid) return;
+            grid.innerHTML = '';
+            titleEl.innerText = `${subjectName} > ${topicName}`;
+
+            const topicData = db[batchName][comboKey].subjects[subjectName][topicName];
+            
+            const folders = [
+                { key: 'Videos', label: 'Videos', icon: 'fa-video', color: 'videos', count: (topicData.Videos || []).length },
+                { key: 'PDFs', label: 'Chapters & PDFs', icon: 'fa-file-pdf', color: 'pdfs', count: (topicData.PDFs || []).length },
+                { key: 'Notes & Links', label: 'Links & Extras', icon: 'fa-link', color: 'notes', count: (topicData['Notes & Links'] || []).length }
+            ];
+
+            folders.forEach(folder => {
+                const card = document.createElement('div');
+                card.className = `card glass folder-card ${folder.color}`;
+                card.innerHTML = `
+                    <div class="badge">${folder.count}</div>
+                    <i class="fa-solid ${folder.icon}"></i>
+                    <span>${folder.label}</span>
+                `;
+                card.onclick = () => {
+                    currentFolder = folder.key;
+                    renderContentItems(batchName, comboKey, subjectName, topicName, folder.key);
+                    playSound();
+                };
+                grid.appendChild(card);
+            });
+            navTo('view-folders');
+        }
+
+        function renderContentItems(batchName, comboKey, subjectName, topicName, folderKey) {
+            const listContainer = document.getElementById('content-list');
+            const titleEl = document.getElementById('content-main-title');
+            if(!listContainer) return;
+            listContainer.innerHTML = '';
+            titleEl.innerText = `${topicName} [${folderKey}]`;
+
+            const items = db[batchName][comboKey].subjects[subjectName][topicName][folderKey] || [];
+            if(items.length === 0) {
+                listContainer.innerHTML = '<p style="color:var(--text-muted); text-align:center; padding:20px;">No content available in this section.</p>';
+            }
+
+            items.forEach((itemData) => {
+                const item = document.createElement('div');
+                item.className = 'list-item glass';
+                
+                let iconClass = 'fa-file';
+                let actionBtnHTML = '';
+
+                if(folderKey === 'Videos') {
+                    iconClass = 'fa-play';
+                    actionBtnHTML = `
+                        <button class="btn-play" onclick="playVideo('${encodeURIComponent(itemData.url)}', '${encodeURIComponent(itemData.title)}')"><i class="fa-solid fa-play"></i></button>
+                    `;
+                } else {
+                    iconClass = 'fa-file-pdf';
+                    actionBtnHTML = `
+                        <a href="${itemData.url}" target="_blank" class="btn-dl"><i class="fa-solid fa-book-open"></i></a>
+                    `;
+                }
+
+                item.innerHTML = `
+                    <div class="item-info">
+                        <div class="item-icon"><i class="fa-solid ${iconClass}" style="color:var(--primary);"></i></div>
+                        <div class="item-title">${itemData.title}</div>
+                    </div>
+                    <div class="action-btns">
+                        ${actionBtnHTML}
+                    </div>
+                `;
+                listContainer.appendChild(item);
+            });
+            navTo('view-content');
+        }
+
+        let player = null;
+        function playVideo(encodedUrl, encodedTitle) {
+            const url = decodeURIComponent(encodedUrl);
+            const title = decodeURIComponent(encodedTitle);
+            
+            document.getElementById('now-playing-title').innerText = title;
+            document.getElementById('player-modal').style.display = 'flex';
+            
+            const container = document.getElementById('player-container');
+            container.innerHTML = `<video id="player" controls crossorigin playsinline></video>`;
+            
+            const videoElement = document.getElementById('player');
+            
+            if (Hls.isSupported() && url.includes('.m3u8')) {
+                const hls = new Hls();
+                hls.loadSource(url);
+                hls.attachMedia(videoElement);
+                window.hlsInstance = hls;
+            } else {
+                videoElement.src = url;
+            }
+            
+            window.player = new Plyr(videoElement, {
+                controls: ['play-large', 'play', 'progress', 'current-time', 'mute', 'volume', 'captions', 'settings', 'pip', 'airplay', 'fullscreen'],
+                settings: ['quality', 'speed']
+            });
+        }
+
+        function closePlayer() {
+            if(window.player) {
+                window.player.destroy();
+                window.player = null;
+            }
+            if(window.hlsInstance) {
+                window.hlsInstance.destroy();
+                window.hlsInstance = null;
+            }
+            document.getElementById('player-modal').style.display = 'none';
+        }
+
+        function rotateScreen() {
+            const wrapper = document.getElementById('vid-wrapper');
+            wrapper.classList.toggle('rotated');
+        }
+
+        function performSearch() {
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            const resultsContainer = document.getElementById('search-results');
+            resultsContainer.innerHTML = '';
+
+            if(!query.trim()) return;
+
+            let matches = [];
+            Object.keys(db).forEach(batchName => {
+                Object.keys(db[batchName]).forEach(comboKey => {
+                    const subjects = db[batchName][comboKey].subjects;
+                    Object.keys(subjects).forEach(subName => {
+                        Object.keys(subjects[subName]).forEach(topicName => {
+                            const topicData = subjects[subName][topicName];
+                            ['Videos', 'PDFs', 'Notes & Links'].forEach(folderKey => {
+                                (topicData[folderKey] || []).forEach(item => {
+                                    if(item.title.toLowerCase().includes(query)) {
+                                        matches.push({ title: item.title, url: item.url, type: folderKey });
+                                    }
+                                });
+                            });
+                        });
+                    });
+                });
+            });
+
+            if(matches.length === 0) {
+                resultsContainer.innerHTML = '<p style="color:var(--text-muted); text-align:center; padding:20px;">No results found.</p>';
+                return;
+            }
+
+            matches.forEach(item => {
+                const el = document.createElement('div');
+                el.className = 'list-item glass';
+                el.innerHTML = `
+                    <div class="item-info">
+                        <div class="item-icon"><i class="fa-solid fa-file-lines" style="color:var(--primary);"></i></div>
+                        <div>
+                            <div class="item-title">${item.title}</div>
+                            <div style="font-size:11px; color:var(--text-muted);">${item.type}</div>
+                        </div>
+                    </div>
+                    <a href="${item.url}" target="_blank" class="btn-glass" style="background:var(--primary); color:white; border:none;"><i class="fa-solid fa-eye"></i></a>
+                `;
+                resultsContainer.appendChild(el);
+            });
+        }
+    </script>
 </body>
 </html>

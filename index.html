@@ -138,9 +138,16 @@
 
         /* Modals */
         .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); z-index: 2000; display: none; align-items: center; justify-content: center; padding: 20px; }
-        .modal-content { width: 100%; max-width: 450px; border-radius: 30px; padding: 35px; position: relative; animation: popupIn 0.5s ease; text-align:center; }
+        .modal-content { width: 100%; max-width: 480px; border-radius: 30px; padding: 35px; position: relative; animation: popupIn 0.5s ease; text-align:center; }
         .modal-close { position: absolute; top: 20px; right: 25px; font-size: 24px; color: var(--text-muted); cursor: pointer; transition:0.3s; }
         .modal-close:hover { color: var(--accent); transform:rotate(90deg); }
+
+        .auth-input { width: 100%; padding: 14px 20px; border-radius: 14px; border: 1px solid var(--glass-border); background: rgba(0,0,0,0.4); color: white; margin-bottom: 15px; outline: none; font-size: 14px; }
+        
+        /* Auth Tabs UI */
+        .auth-tabs { display: flex; border-bottom: 1px solid var(--glass-border); margin-bottom: 25px; }
+        .auth-tab-btn { flex: 1; padding: 12px; font-weight: 700; font-size: 14px; background: none; border: none; color: var(--text-muted); cursor: pointer; transition: 0.3s; border-bottom: 2px solid transparent; }
+        .auth-tab-btn.active { color: var(--primary); border-bottom-color: var(--primary); }
 
         /* Advanced Video Player Specific */
         .video-wrapper { width: 100%; max-width: 1000px; background: #000; border-radius: 20px; position: relative; border: 1px solid var(--glass-border); box-shadow: 0 20px 50px rgba(0,0,0,0.6); overflow: hidden; }
@@ -149,7 +156,6 @@
         .rotated { transform: rotate(90deg); width: 100vh !important; height: 100vw !important; z-index: 9999; position: fixed; top: 0; left: 0; background: black; border-radius:0; max-height: 100vw; }
         .rotated .plyr, .rotated video, .rotated iframe { height: 100vw !important; width: 100vh !important; max-height: 100vw; border-radius: 0; }
 
-        /* Internal Player Controls */
         .internal-controls { position: absolute; top: 15px; left: 15px; z-index: 100; display: flex; gap: 10px; background: rgba(0, 0, 0, 0.5); padding: 8px; border-radius: 14px; backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.1); transition: opacity 0.3s; opacity: 0; }
         .video-wrapper:hover .internal-controls, .internal-controls:hover { opacity: 1; }
         .btn-ctrl { background: rgba(255, 255, 255, 0.15); border: none; color: white; width: 38px; height: 38px; border-radius: 10px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: 0.3s; font-size: 15px; text-decoration: none; }
@@ -158,16 +164,12 @@
         .search-bar { width: 100%; padding: 18px 25px; border-radius: 50px; border: 1px solid var(--primary); background: rgba(0,0,0,0.3); color: var(--text-main); font-size: 16px; margin-bottom: 25px; outline: none; transition: 0.3s; box-shadow: inset 0 2px 5px rgba(0,0,0,0.2); backdrop-filter: blur(10px); }
         .search-bar:focus { box-shadow: 0 0 20px rgba(59,130,246,0.4); }
         
-        /* Premium Settings UI */
         .premium-setting-row { display: flex; justify-content: space-between; align-items: center; padding: 18px; background: rgba(255,255,255,0.03); border: 1px solid var(--glass-border); border-radius: 20px; margin-bottom: 15px; transition: 0.3s; }
         .premium-setting-row:hover { background: rgba(255,255,255,0.08); transform: translateY(-3px); }
         .premium-select { background: rgba(0,0,0,0.6); color: var(--text-main); border: 1px solid var(--glass-border); padding: 10px 15px; border-radius: 12px; outline: none; font-family: 'Poppins', sans-serif; cursor: pointer; font-size: 14px; }
         
-        /* Notification System */
         #toast-container { position: fixed; top: 20px; right: 20px; z-index: 9999; display: flex; flex-direction: column; gap: 10px; }
-        .toast { background: var(--glass-bg); backdrop-filter: blur(15px); border: 1px solid var(--glass-border); padding: 15px 25px; border-radius: 15px; color: white; font-weight: 600; display: flex; align-items: center; gap: 10px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); animation: slideInRight 0.3s forwards, fadeOut 0.3s 2.7s forwards; }
-        @keyframes slideInRight { from { transform: translateX(100%); opacity:0; } to { transform: translateX(0); opacity:1; } }
-        @keyframes fadeOut { from { opacity:1; } to { opacity:0; } }
+        .toast { background: var(--glass-bg); backdrop-filter: blur(15px); border: 1px solid var(--glass-border); padding: 15px 25px; border-radius: 15px; color: white; font-weight: 600; display: flex; align-items: center; gap: 10px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
     </style>
 </head>
 <body>
@@ -190,12 +192,26 @@
             <a href="https://www.youtube.com/@becomeadroit" target="_blank" class="btn-glass" style="color:#ff0000;" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
             <a href="https://www.instagram.com/adroit_krishna_kushwaha?dlrf=aTh0bGx4a2V1emZp" target="_blank" class="btn-glass" style="color:#e1306c;" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
             <a href="https://wa.me/919610279787" target="_blank" class="btn-glass" style="color:#25d366;" title="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+            <button class="btn-glass" id="auth-nav-btn" onclick="openAuthModal('login')"><i class="fa-solid fa-user-lock"></i> Login / Register</button>
+            <button class="btn-glass" id="admin-nav-btn" style="display:none; background:var(--accent); color:white; border:none;" onclick="openAdminModal()"><i class="fa-solid fa-user-shield"></i> Admin Panel</button>
         </div>
     </header>
 
     <main class="container">
-        <!-- VIEW 1: 8 TOPICS / BATCHES -->
-        <div id="view-batches" class="view-section active">
+        <!-- VIEW 0: RESTRICTED / PENDING APPROVAL SCREEN -->
+        <div id="view-locked" class="view-section active" style="text-align: center; padding: 60px 20px;">
+            <div style="font-size: 70px; color: var(--accent); margin-bottom: 20px;"><i class="fa-solid fa-lock"></i></div>
+            <h2 id="lock-title" style="font-weight: 800; font-size: 26px; margin-bottom: 10px;">Student Access Restricted</h2>
+            <p id="lock-desc" style="color: var(--text-muted); max-width: 480px; margin: 0 auto 30px auto; font-size: 14px;">Please login or create a new student account. All study modules and notes will unlock once approved by Adroit Sir.</p>
+            <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+                <button class="btn-glass" style="background: var(--primary); color: white; border: none; padding: 14px 25px; font-size: 15px;" onclick="openAuthModal('login')">Login</button>
+                <button class="btn-glass" style="background: #10b981; color: white; border: none; padding: 14px 25px; font-size: 15px;" onclick="openAuthModal('register')"><i class="fa-solid fa-user-plus"></i> New Student Register</button>
+                <a href="https://wa.me/919610279787?text=Sir%20please%20approve%20my%20Adroit%20Study%20Hub%20account" target="_blank" class="btn-glass" style="background: #25d366; color: white; border: none; padding: 14px 25px; font-size: 15px;"><i class="fa-brands fa-whatsapp"></i> Get Instant Approval</a>
+            </div>
+        </div>
+
+        <!-- VIEW 1: 8 TOPICS / BATCHES (Unlocked Content) -->
+        <div id="view-batches" class="view-section">
             <h3 style="margin-bottom: 25px; font-weight:800; display:flex; align-items:center; gap:10px;"><i class="fa-solid fa-layer-group" style="color:var(--primary);"></i> Class 10th Study Hub (All 8 Modules)</h3>
             <div class="grid" id="batch-grid"></div>
         </div>
@@ -254,12 +270,62 @@
         </div>
     </main>
 
-    <footer class="glass">
+    <footer class="glass" id="app-footer" style="display: none;">
         <div class="nav-item active" onclick="switchTab('view-batches', this); playSound();"><i class="fa-solid fa-house"></i><span>Home</span></div>
         <div class="nav-item" onclick="switchTab('view-search', this); playSound();"><i class="fa-solid fa-magnifying-glass"></i><span>Search</span></div>
         <div class="nav-item" onclick="switchTab('view-playlist', this); loadPlaylist(); playSound();"><i class="fa-solid fa-bookmark"></i><span>Saved</span></div>
         <div class="nav-item" onclick="openSettings(); playSound();"><i class="fa-solid fa-gear"></i><span>Settings</span></div>
     </footer>
+
+    <!-- AUTH MODAL (Login / Register Tabs) -->
+    <div id="auth-modal" class="modal-overlay">
+        <div class="modal-content glass">
+            <i class="fa-solid fa-xmark modal-close" onclick="closeModal('auth-modal')"></i>
+            
+            <div class="auth-tabs">
+                <button class="auth-tab-btn active" id="tab-login-btn" onclick="switchAuthTab('login')">Login</button>
+                <button class="auth-tab-btn" id="tab-register-btn" onclick="switchAuthTab('register')">New Register</button>
+            </div>
+
+            <!-- LOGIN FORM -->
+            <div id="form-login" style="text-align: left;">
+                <label style="font-size: 12px; color: var(--text-muted); display: block; margin-bottom: 5px;">Email or Mobile Number</label>
+                <input type="text" id="login-id" class="auth-input" placeholder="Enter ID / Mobile">
+                
+                <label style="font-size: 12px; color: var(--text-muted); display: block; margin-bottom: 5px;">Password</label>
+                <input type="password" id="login-pass" class="auth-input" placeholder="Enter Password">
+                
+                <button class="btn-glass" style="width:100%; justify-content:center; margin-top: 10px; background:var(--primary); color:white; border:none; padding:14px; font-size:15px;" onclick="handleLogin()">Login to Account</button>
+            </div>
+
+            <!-- REGISTRATION FORM -->
+            <div id="form-register" style="text-align: left; display: none;">
+                <label style="font-size: 12px; color: var(--text-muted); display: block; margin-bottom: 5px;">Full Student Name</label>
+                <input type="text" id="reg-name" class="auth-input" placeholder="e.g. Rahul Sharma">
+
+                <label style="font-size: 12px; color: var(--text-muted); display: block; margin-bottom: 5px;">Email or Mobile Number</label>
+                <input type="text" id="reg-id" class="auth-input" placeholder="Enter Mobile / Email">
+
+                <label style="font-size: 12px; color: var(--text-muted); display: block; margin-bottom: 5px;">Class / Exam</label>
+                <input type="text" id="reg-class" class="auth-input" placeholder="e.g. Class 10th / REET / NEET">
+
+                <label style="font-size: 12px; color: var(--text-muted); display: block; margin-bottom: 5px;">Create Password</label>
+                <input type="password" id="reg-pass" class="auth-input" placeholder="Create new password">
+
+                <button class="btn-glass" style="width:100%; justify-content:center; margin-top: 10px; background:#10b981; color:white; border:none; padding:14px; font-size:15px;" onclick="handleRegister()">Register Student Account</button>
+                <p style="font-size:11px; color:var(--text-muted); margin-top:10px; text-align:center;">Account requires approval by Adroit Sir after registration.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ADMIN APPROVAL MODAL -->
+    <div id="admin-modal" class="modal-overlay">
+        <div class="modal-content glass" style="max-width: 650px;">
+            <i class="fa-solid fa-xmark modal-close" onclick="closeModal('admin-modal')"></i>
+            <h3 style="margin-bottom:20px; font-weight:800;"><i class="fa-solid fa-user-shield"></i> Teacher Approval Dashboard</h3>
+            <div id="pending-students-list" style="max-height: 400px; overflow-y: auto; text-align: left;"></div>
+        </div>
+    </div>
 
     <!-- Video Player Modal -->
     <div id="player-modal" class="modal-overlay">
@@ -306,6 +372,7 @@
                     <option value="light">Light Glass</option>
                 </select>
             </div>
+            <button class="btn-glass" style="width:100%; justify-content:center; background:var(--accent); color:white; border:none; padding:12px; margin-top: 15px;" onclick="logoutStudent()"><i class="fa-solid fa-right-from-bracket"></i> Logout</button>
         </div>
     </div>
 
@@ -322,58 +389,6 @@
     <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
     <script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js"></script>
     <script>
-        // Shared Chapter Definitions
-        const scienceChapters = [
-            { title: "Ch 1: Chemical Reactions and Equations", url: "javascript:alert('Opening: Chemical Reactions and Equations');" },
-            { title: "Ch 2: Acids, Bases and Salts", url: "javascript:alert('Opening: Acids, Bases and Salts');" },
-            { title: "Ch 3: Metals and Non-metals", url: "javascript:alert('Opening: Metals and Non-metals');" },
-            { title: "Ch 4: Carbon and its Compounds", url: "javascript:alert('Opening: Carbon and its Compounds');" },
-            { title: "Ch 5: Life Processes", url: "javascript:alert('Opening: Life Processes');" },
-            { title: "Ch 6: Control and Coordination", url: "javascript:alert('Opening: Control and Coordination');" },
-            { title: "Ch 7: How do Organisms Reproduce?", url: "javascript:alert('Opening: How do Organisms Reproduce?');" },
-            { title: "Ch 8: Heredity and Evolution", url: "javascript:alert('Opening: Heredity and Evolution');" },
-            { title: "Ch 9: Light – Reflection & Refraction", url: "javascript:alert('Opening: Light – Reflection & Refraction');" },
-            { title: "Ch 10: Human Eye & Colourful World", url: "javascript:alert('Opening: Human Eye & Colourful World');" },
-            { title: "Ch 11: Electricity", url: "javascript:alert('Opening: Electricity');" },
-            { title: "Ch 12: Magnetic Effects of Electric Current", url: "javascript:alert('Opening: Magnetic Effects of Electric Current');" },
-            { title: "Ch 13: Our Environment", url: "javascript:alert('Opening: Our Environment');" }
-        ];
-
-        const historyChapters = [
-            { title: "Ch 1: The Rise of Nationalism in Europe", url: "javascript:alert('Opening History Ch 1');" },
-            { title: "Ch 2: Nationalism in India", url: "javascript:alert('Opening History Ch 2');" },
-            { title: "Ch 3: The Making of a Global World", url: "javascript:alert('Opening History Ch 3');" },
-            { title: "Ch 4: The Age of Industrialisation", url: "javascript:alert('Opening History Ch 4');" },
-            { title: "Ch 5: Print Culture and the Modern World", url: "javascript:alert('Opening History Ch 5');" }
-        ];
-
-        const geoChapters = [
-            { title: "Ch 1: Resources and Development", url: "javascript:alert('Opening Geography Ch 1');" },
-            { title: "Ch 2: Forest and Wildlife Resources", url: "javascript:alert('Opening Geography Ch 2');" },
-            { title: "Ch 3: Water Resources", url: "javascript:alert('Opening Geography Ch 3');" },
-            { title: "Ch 4: Agriculture", url: "javascript:alert('Opening Geography Ch 4');" },
-            { title: "Ch 5: Minerals and Energy Resources", url: "javascript:alert('Opening Geography Ch 5');" },
-            { title: "Ch 6: Manufacturing Industries", url: "javascript:alert('Opening Geography Ch 6');" },
-            { title: "Ch 7: Lifelines of National Economy", url: "javascript:alert('Opening Geography Ch 7');" }
-        ];
-
-        const polSciChapters = [
-            { title: "Ch 1: Power Sharing", url: "javascript:alert('Opening Pol Sci Ch 1');" },
-            { title: "Ch 2: Federalism", url: "javascript:alert('Opening Pol Sci Ch 2');" },
-            { title: "Ch 3: Gender, Religion and Caste", url: "javascript:alert('Opening Pol Sci Ch 3');" },
-            { title: "Ch 4: Political Parties", url: "javascript:alert('Opening Pol Sci Ch 4');" },
-            { title: "Ch 5: Outcomes of Democracy", url: "javascript:alert('Opening Pol Sci Ch 5');" }
-        ];
-
-        const ecoChapters = [
-            { title: "Ch 1: Development", url: "javascript:alert('Opening Economics Ch 1');" },
-            { title: "Ch 2: Sectors of the Indian Economy", url: "javascript:alert('Opening Economics Ch 2');" },
-            { title: "Ch 3: Money and Credit", url: "javascript:alert('Opening Economics Ch 3');" },
-            { title: "Ch 4: Globalisation and the Indian Economy", url: "javascript:alert('Opening Economics Ch 4');" },
-            { title: "Ch 5: Consumer Rights", url: "javascript:alert('Opening Economics Ch 5');" }
-        ];
-
-        // Database containing all 8 modules with complete chapter buttons in every section
         const db = {
             "1. Complete Notes (Science & SST)": {
                 "Science Notes & Chapters": {
@@ -382,9 +397,23 @@
                         "Science (13 Chapters)": {
                             "Chapter Notes": {
                                 "Videos": [
-                                    { title: "Science Full Course Overview Video", url: "https://www.w3schools.com/html/mov_bbb.mp4" }
+                                    { title: "Science Full Course Overview", url: "https://www.w3schools.com/html/mov_bbb.mp4" }
                                 ],
-                                "PDFs": scienceChapters,
+                                "PDFs": [
+                                    { title: "Chemical Reactions and Equations", url: "notes/science-ch1.html" },
+                                    { title: "Acids, Bases and Salts", url: "notes/science-ch2.html" },
+                                    { title: "Metals and Non-metals", url: "notes/science-ch3.html" },
+                                    { title: "Carbon and its Compounds", url: "notes/science-ch4.html" },
+                                    { title: "Life Processes", url: "notes/science-ch5.html" },
+                                    { title: "Control and Coordination", url: "notes/science-ch6.html" },
+                                    { title: "How do Organisms Reproduce?", url: "notes/science-ch7.html" },
+                                    { title: "Heredity and Evolution", url: "notes/science-ch8.html" },
+                                    { title: "Light – Reflection & Refraction", url: "notes/science-ch9.html" },
+                                    { title: "Human Eye & Colourful World", url: "notes/science-ch10.html" },
+                                    { title: "Electricity", url: "notes/science-ch11.html" },
+                                    { title: "Magnetic Effects of Electric Current", url: "notes/science-ch12.html" },
+                                    { title: "Our Environment", url: "notes/science-ch13.html" }
+                                ],
                                 "Notes & Links": []
                             }
                         }
@@ -396,28 +425,54 @@
                         "History (इतिहास)": {
                             "Chapters": {
                                 "Videos": [],
-                                "PDFs": historyChapters,
+                                "PDFs": [
+                                    { title: "The Rise of Nationalism in Europe", url: "notes/sst-ch1.html" },
+                                    { title: "Nationalism in India", url: "notes/sst-ch2.html" },
+                                    { title: "The Making of a Global World", url: "notes/sst-ch3.html" },
+                                    { title: "The Age of Industrialisation", url: "notes/sst-ch4.html" },
+                                    { title: "Print Culture and the Modern World", url: "notes/sst-ch5.html" }
+                                ],
                                 "Notes & Links": []
                             }
                         },
                         "Geography (भूगोल)": {
                             "Chapters": {
                                 "Videos": [],
-                                "PDFs": geoChapters,
+                                "PDFs": [
+                                    { title: "Resources and Development", url: "notes/sst-ch6.html" },
+                                    { title: "Forest and Wildlife Resources", url: "notes/sst-ch7.html" },
+                                    { title: "Water Resources", url: "notes/sst-ch8.html" },
+                                    { title: "Agriculture", url: "notes/sst-ch9.html" },
+                                    { title: "Minerals and Energy Resources", url: "notes/sst-ch10.html" },
+                                    { title: "Manufacturing Industries", url: "notes/sst-ch11.html" },
+                                    { title: "Lifelines of National Economy", url: "notes/sst-ch12.html" }
+                                ],
                                 "Notes & Links": []
                             }
                         },
                         "Political Science (राजनीति विज्ञान)": {
                             "Chapters": {
                                 "Videos": [],
-                                "PDFs": polSciChapters,
+                                "PDFs": [
+                                    { title: "Power Sharing", url: "notes/sst-ch13.html" },
+                                    { title: "Federalism", url: "notes/sst-ch14.html" },
+                                    { title: "Gender, Religion and Caste", url: "notes/sst-ch15.html" },
+                                    { title: "Political Parties", url: "notes/sst-ch16.html" },
+                                    { title: "Outcomes of Democracy", url: "notes/sst-ch17.html" }
+                                ],
                                 "Notes & Links": []
                             }
                         },
                         "Economics (अर्थशास्त्र)": {
                             "Chapters": {
                                 "Videos": [],
-                                "PDFs": ecoChapters,
+                                "PDFs": [
+                                    { title: "Development", url: "notes/sst-ch18.html" },
+                                    { title: "Sectors of the Indian Economy", url: "notes/sst-ch19.html" },
+                                    { title: "Money and Credit", url: "notes/sst-ch20.html" },
+                                    { title: "Globalisation and the Indian Economy", url: "notes/sst-ch21.html" },
+                                    { title: "Consumer Rights", url: "notes/sst-ch22.html" }
+                                ],
                                 "Notes & Links": []
                             }
                         }
@@ -425,79 +480,52 @@
                 }
             },
             "2. Previous Years Question Papers": {
-                "Science Board Papers": {
+                "PYQ Sets": {
                     "thumb": "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=600&q=80",
                     "subjects": {
-                        "Science Papers by Chapter": {
-                            "Chapterwise PYQs": {
+                        "Board Exam Papers (2020-2025)": {
+                            "Papers": {
                                 "Videos": [],
-                                "PDFs": scienceChapters.map(ch => ({ title: `${ch.title} - PYQs (2013-2025)`, url: "#" })),
+                                "PDFs": [
+                                    { title: "CBSE Class 10 Science Board Paper 2025", url: "pyq/science-2025.html" },
+                                    { title: "CBSE Class 10 Science Board Paper 2024", url: "pyq/science-2024.html" },
+                                    { title: "CBSE Class 10 Social Science Board Paper 2025", url: "pyq/sst-2025.html" },
+                                    { title: "CBSE Class 10 Social Science Board Paper 2024", url: "pyq/sst-2024.html" }
+                                ],
                                 "Notes & Links": []
                             }
-                        }
-                    }
-                },
-                "Social Science Board Papers": {
-                    "thumb": "https://images.unsplash.com/photo-1506784983877-45594efa4cbe?auto=format&fit=crop&w=600&q=80",
-                    "subjects": {
-                        "History PYQs": {
-                            "Chapters": { "Videos": [], "PDFs": historyChapters.map(ch => ({ title: `${ch.title} - Board Papers`, url: "#" })), "Notes & Links": [] }
-                        },
-                        "Geography PYQs": {
-                            "Chapters": { "Videos": [], "PDFs": geoChapters.map(ch => ({ title: `${ch.title} - Board Papers`, url: "#" })), "Notes & Links": [] }
-                        },
-                        "Political Science PYQs": {
-                            "Chapters": { "Videos": [], "PDFs": polSciChapters.map(ch => ({ title: `${ch.title} - Board Papers`, url: "#" })), "Notes & Links": [] }
-                        },
-                        "Economics PYQs": {
-                            "Chapters": { "Videos": [], "PDFs": ecoChapters.map(ch => ({ title: `${ch.title} - Board Papers`, url: "#" })), "Notes & Links": [] }
                         }
                     }
                 }
             },
             "3. PYQ Papers with Solutions": {
-                "Science Solved PYQs": {
+                "PYQ Solutions": {
                     "thumb": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=600&q=80",
                     "subjects": {
-                        "Science Solutions": {
-                            "Chapter Solutions": {
+                        "Solved Board Papers": {
+                            "Solutions": {
                                 "Videos": [],
-                                "PDFs": scienceChapters.map(ch => ({ title: `${ch.title} - Solved Solutions`, url: "#" })),
+                                "PDFs": [
+                                    { title: "Solved Science Board Paper 2025 (With Answers)", url: "pyq/solved-science-2025.html" },
+                                    { title: "Solved Social Science Board Paper 2025 (With Answers)", url: "pyq/solved-sst-2025.html" }
+                                ],
                                 "Notes & Links": []
                             }
                         }
-                    }
-                },
-                "Social Science Solved PYQs": {
-                    "thumb": "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&w=600&q=80",
-                    "subjects": {
-                        "History Solved Papers": { "Chapters": { "Videos": [], "PDFs": historyChapters.map(ch => ({ title: `${ch.title} - Answer Key`, url: "#" })), "Notes & Links": [] } },
-                        "Geography Solved Papers": { "Chapters": { "Videos": [], "PDFs": geoChapters.map(ch => ({ title: `${ch.title} - Answer Key`, url: "#" })), "Notes & Links": [] } },
-                        "Political Science Solved Papers": { "Chapters": { "Videos": [], "PDFs": polSciChapters.map(ch => ({ title: `${ch.title} - Answer Key`, url: "#" })), "Notes & Links": [] } },
-                        "Economics Solved Papers": { "Chapters": { "Videos": [], "PDFs": ecoChapters.map(ch => ({ title: `${ch.title} - Answer Key`, url: "#" })), "Notes & Links": [] } }
                     }
                 }
             },
             "4. All Science & SST Diagrams": {
-                "Science Diagrams": {
+                "Diagram Bank": {
                     "thumb": "https://images.unsplash.com/photo-1507668077129-56e32842fceb?auto=format&fit=crop&w=600&q=80",
                     "subjects": {
-                        "Biology & Physics Diagrams": {
-                            "Diagram Bank": {
+                        "Important Diagrams": {
+                            "Diagrams": {
                                 "Videos": [],
-                                "PDFs": scienceChapters.map(ch => ({ title: `${ch.title} - Diagrams & Flowcharts`, url: "#" })),
-                                "Notes & Links": []
-                            }
-                        }
-                    }
-                },
-                "SST Maps & Charts": {
-                    "thumb": "https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?auto=format&fit=crop&w=600&q=80",
-                    "subjects": {
-                        "Geography & History Maps": {
-                            "Map Work": {
-                                "Videos": [],
-                                "PDFs": [...historyChapters, ...geoChapters].map(ch => ({ title: `${ch.title} - Map Work & Diagrams`, url: "#" })),
+                                "PDFs": [
+                                    { title: "Class 10 Science Important Biology & Physics Diagrams", url: "diagrams/science-diagrams.html" },
+                                    { title: "Class 10 SST Important Maps & Diagrams", url: "diagrams/sst-maps.html" }
+                                ],
                                 "Notes & Links": []
                             }
                         }
@@ -505,100 +533,75 @@
                 }
             },
             "5. Test Papers & Mock Tests": {
-                "Science Chapter Tests": {
+                "Mock Tests": {
                     "thumb": "https://images.unsplash.com/photo-1606326608606-aa0b62935f2b?auto=format&fit=crop&w=600&q=80",
                     "subjects": {
-                        "Science Tests": {
-                            "Mock Test Series": {
+                        "Chapter-wise Tests": {
+                            "Tests": {
                                 "Videos": [],
-                                "PDFs": scienceChapters.map(ch => ({ title: `${ch.title} - Test Paper`, url: "#" })),
+                                "PDFs": [
+                                    { title: "Science Chapter-wise Test Series (Mock Test 1)", url: "tests/science-mock-1.html" },
+                                    { title: "Social Science Full Mock Test (Mock Test 1)", url: "tests/sst-mock-1.html" }
+                                ],
                                 "Notes & Links": []
                             }
                         }
-                    }
-                },
-                "SST Chapter Tests": {
-                    "thumb": "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=600&q=80",
-                    "subjects": {
-                        "History Tests": { "Chapters": { "Videos": [], "PDFs": historyChapters.map(ch => ({ title: `${ch.title} - Test Paper`, url: "#" })), "Notes & Links": [] } },
-                        "Geography Tests": { "Chapters": { "Videos": [], "PDFs": geoChapters.map(ch => ({ title: `${ch.title} - Test Paper`, url: "#" })), "Notes & Links": [] } },
-                        "Political Science Tests": { "Chapters": { "Videos": [], "PDFs": polSciChapters.map(ch => ({ title: `${ch.title} - Test Paper`, url: "#" })), "Notes & Links": [] } },
-                        "Economics Tests": { "Chapters": { "Videos": [], "PDFs": ecoChapters.map(ch => ({ title: `${ch.title} - Test Paper`, url: "#" })), "Notes & Links": [] } }
                     }
                 }
             },
             "6. MCQ Quizzes": {
-                "Science Chapter MCQs": {
+                "MCQ Practice": {
                     "thumb": "https://images.unsplash.com/photo-1543269865-cbf427effbad?auto=format&fit=crop&w=600&q=80",
                     "subjects": {
-                        "Science Practice": {
-                            "MCQ Sheets": {
+                        "Objective Questions": {
+                            "Quizzes": {
                                 "Videos": [],
-                                "PDFs": scienceChapters.map(ch => ({ title: `${ch.title} - MCQs & Online Quiz`, url: "#" })),
+                                "PDFs": [
+                                    { title: "Science Chapter 1 MCQ Quiz", url: "quizzes/science-ch1-quiz.html" },
+                                    { title: "Social Science History MCQ Quiz", url: "quizzes/sst-history-quiz.html" }
+                                ],
                                 "Notes & Links": []
                             }
                         }
-                    }
-                },
-                "SST Chapter MCQs": {
-                    "thumb": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=600&q=80",
-                    "subjects": {
-                        "History MCQs": { "Chapters": { "Videos": [], "PDFs": historyChapters.map(ch => ({ title: `${ch.title} - MCQ Bank`, url: "#" })), "Notes & Links": [] } },
-                        "Geography MCQs": { "Chapters": { "Videos": [], "PDFs": geoChapters.map(ch => ({ title: `${ch.title} - MCQ Bank`, url: "#" })), "Notes & Links": [] } },
-                        "Political Science MCQs": { "Chapters": { "Videos": [], "PDFs": polSciChapters.map(ch => ({ title: `${ch.title} - MCQ Bank`, url: "#" })), "Notes & Links": [] } },
-                        "Economics MCQs": { "Chapters": { "Videos": [], "PDFs": ecoChapters.map(ch => ({ title: `${ch.title} - MCQ Bank`, url: "#" })), "Notes & Links": [] } }
                     }
                 }
             },
             "7. Most Important Questions": {
-                "Science Important Questions": {
+                "Imp Q&A": {
                     "thumb": "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&w=600&q=80",
                     "subjects": {
-                        "Science Board Highlights": {
-                            "Imp Q&A": {
+                        "Board Question Bank": {
+                            "Questions": {
                                 "Videos": [],
-                                "PDFs": scienceChapters.map(ch => ({ title: `${ch.title} - Most Important Questions`, url: "#" })),
+                                "PDFs": [
+                                    { title: "Most Important Science Board Questions (Top 50)", url: "notes/imp-science-questions.html" },
+                                    { title: "Most Important SST Board Questions (Top 50)", url: "notes/imp-sst-questions.html" }
+                                ],
                                 "Notes & Links": []
                             }
                         }
-                    }
-                },
-                "SST Important Questions": {
-                    "thumb": "https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?auto=format&fit=crop&w=600&q=80",
-                    "subjects": {
-                        "History Imp Questions": { "Chapters": { "Videos": [], "PDFs": historyChapters.map(ch => ({ title: `${ch.title} - Top Expected Qs`, url: "#" })), "Notes & Links": [] } },
-                        "Geography Imp Questions": { "Chapters": { "Videos": [], "PDFs": geoChapters.map(ch => ({ title: `${ch.title} - Top Expected Qs`, url: "#" })), "Notes & Links": [] } },
-                        "Pol Sci Imp Questions": { "Chapters": { "Videos": [], "PDFs": polSciChapters.map(ch => ({ title: `${ch.title} - Top Expected Qs`, url: "#" })), "Notes & Links": [] } },
-                        "Economics Imp Questions": { "Chapters": { "Videos": [], "PDFs": ecoChapters.map(ch => ({ title: `${ch.title} - Top Expected Qs`, url: "#" })), "Notes & Links": [] } }
                     }
                 }
             },
             "8. NCERT Textbooks": {
-                "Science Textbook": {
+                "NCERT Textbook": {
                     "thumb": "https://images.unsplash.com/photo-1497633762265-9d179a990aa6?auto=format&fit=crop&w=600&q=80",
                     "subjects": {
-                        "Science NCERT Chapters": {
-                            "Official Textbooks": {
+                        "Official Textbooks": {
+                            "Books": {
                                 "Videos": [],
-                                "PDFs": scienceChapters.map(ch => ({ title: `${ch.title} - NCERT PDF`, url: "#" })),
+                                "PDFs": [
+                                    { title: "NCERT Class 10 Science Digital Textbook", url: "notes/ncert-science.html" },
+                                    { title: "NCERT Class 10 Social Science Digital Textbook", url: "notes/ncert-sst.html" }
+                                ],
                                 "Notes & Links": []
                             }
                         }
-                    }
-                },
-                "Social Science Textbooks": {
-                    "thumb": "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&w=600&q=80",
-                    "subjects": {
-                        "History Textbook": { "Chapters": { "Videos": [], "PDFs": historyChapters.map(ch => ({ title: `${ch.title} - NCERT PDF`, url: "#" })), "Notes & Links": [] } },
-                        "Geography Textbook": { "Chapters": { "Videos": [], "PDFs": geoChapters.map(ch => ({ title: `${ch.title} - NCERT PDF`, url: "#" })), "Notes & Links": [] } },
-                        "Pol Sci Textbook": { "Chapters": { "Videos": [], "PDFs": polSciChapters.map(ch => ({ title: `${ch.title} - NCERT PDF`, url: "#" })), "Notes & Links": [] } },
-                        "Economics Textbook": { "Chapters": { "Videos": [], "PDFs": ecoChapters.map(ch => ({ title: `${ch.title} - NCERT PDF`, url: "#" })), "Notes & Links": [] } }
                     }
                 }
             }
         };
 
-        // --- Core Application Logic ---
         let currentBatch = '';
         let currentCombo = '';
         let currentSubject = '';
@@ -613,6 +616,8 @@
                     setTimeout(() => loader.style.display = 'none', 500);
                 }
             }, 400);
+            
+            checkSession();
             renderBatches();
 
             const savedNotes = localStorage.getItem('user_study_notes');
@@ -653,6 +658,145 @@
             document.getElementById(modalId).style.display = 'none';
         }
 
+        function openAuthModal(defaultTab = 'login') {
+            document.getElementById('auth-modal').style.display = 'flex';
+            switchAuthTab(defaultTab);
+        }
+
+        function switchAuthTab(type) {
+            if(type === 'login') {
+                document.getElementById('form-login').style.display = 'block';
+                document.getElementById('form-register').style.display = 'none';
+                document.getElementById('tab-login-btn').classList.add('active');
+                document.getElementById('tab-register-btn').classList.remove('active');
+            } else {
+                document.getElementById('form-login').style.display = 'none';
+                document.getElementById('form-register').style.display = 'block';
+                document.getElementById('tab-register-btn').classList.add('active');
+                document.getElementById('tab-login-btn').classList.remove('active');
+            }
+        }
+
+        function handleLogin() {
+            const email = document.getElementById('login-id').value.trim();
+            const pass = document.getElementById('login-pass').value.trim();
+            if(!email || !pass) { alert("Please fill all fields"); return; }
+
+            // Admin Master Credentials
+            if(email === "admin@adroit.com" && pass === "adroit123") {
+                localStorage.setItem('current_user', JSON.stringify({ email: "Admin", role: "admin", approved: true }));
+                closeModal('auth-modal');
+                checkSession();
+                showToast("Logged in as Admin!");
+                return;
+            }
+
+            let students = JSON.parse(localStorage.getItem('registered_students')) || [];
+            let student = students.find(s => s.email === email && s.pass === pass);
+            
+            if(student) {
+                if(!student.approved) {
+                    alert("Your account is pending approval by Adroit Sir. Please contact via WhatsApp for instant approval.");
+                    return;
+                }
+                localStorage.setItem('current_user', JSON.stringify({ email: student.email, role: "student", approved: true }));
+                closeModal('auth-modal');
+                checkSession();
+                showToast("Login Successful!");
+            } else {
+                alert("Invalid credentials or account not registered.");
+            }
+        }
+
+        function handleRegister() {
+            const name = document.getElementById('reg-name').value.trim();
+            const email = document.getElementById('reg-id').value.trim();
+            const studentClass = document.getElementById('reg-class').value.trim();
+            const pass = document.getElementById('reg-pass').value.trim();
+
+            if(!name || !email || !studentClass || !pass) {
+                alert("Please fill in all registration fields.");
+                return;
+            }
+
+            let students = JSON.parse(localStorage.getItem('registered_students')) || [];
+            if(students.some(s => s.email === email)) {
+                alert("This Email / Mobile is already registered!");
+                return;
+            }
+
+            students.push({ name, email, class: studentClass, pass, approved: false });
+            localStorage.setItem('registered_students', JSON.stringify(students));
+            alert("Registration submitted successfully! Your account will be activated once approved by Adroit Sir.");
+            switchAuthTab('login');
+        }
+
+        function openAdminModal() {
+            document.getElementById('admin-modal').style.display = 'flex';
+            let students = JSON.parse(localStorage.getItem('registered_students')) || [];
+            let listEl = document.getElementById('pending-students-list');
+            listEl.innerHTML = '';
+
+            if(students.length === 0) {
+                listEl.innerHTML = '<p style="color:var(--text-muted); text-align:center; padding:20px;">No students registered yet.</p>';
+                return;
+            }
+
+            students.forEach((stu, index) => {
+                let div = document.createElement('div');
+                div.className = 'list-item glass';
+                div.innerHTML = `
+                    <div>
+                        <div style="font-weight:700; font-size:14px; color:var(--text-main);">${stu.name || stu.email}</div>
+                        <div style="font-size:12px; color:var(--text-muted);">${stu.email} • ${stu.class || 'N/A'}</div>
+                        <div style="font-size:11px; color:${stu.approved ? '#10b981' : '#f59e0b'}; font-weight:700;">${stu.approved ? 'Approved' : 'Pending Approval'}</div>
+                    </div>
+                    <div>
+                        ${stu.approved ? 
+                            `<button class="btn-glass" style="background:var(--accent); color:white; border:none;" onclick="toggleApprove(${index}, false)">Block</button>` : 
+                            `<button class="btn-glass" style="background:#10b981; color:white; border:none;" onclick="toggleApprove(${index}, true)">Approve</button>`
+                        }
+                    </div>
+                `;
+                listEl.appendChild(div);
+            });
+        }
+
+        function toggleApprove(index, status) {
+            let students = JSON.parse(localStorage.getItem('registered_students')) || [];
+            students[index].approved = status;
+            localStorage.setItem('registered_students', JSON.stringify(students));
+            openAdminModal();
+            showToast(status ? "Student Approved!" : "Approval Revoked.");
+        }
+
+        function checkSession() {
+            let user = JSON.parse(localStorage.getItem('current_user'));
+            if(user && user.approved) {
+                document.getElementById('view-locked').classList.remove('active');
+                document.getElementById('view-batches').classList.add('active');
+                document.getElementById('app-footer').style.display = 'flex';
+                document.getElementById('auth-nav-btn').style.display = 'none';
+                
+                if(user.role === 'admin') {
+                    document.getElementById('admin-nav-btn').style.display = 'flex';
+                }
+            } else {
+                document.querySelectorAll('.view-section').forEach(el => el.classList.remove('active'));
+                document.getElementById('view-locked').classList.add('active');
+                document.getElementById('app-footer').style.display = 'none';
+                document.getElementById('auth-nav-btn').style.display = 'flex';
+                document.getElementById('admin-nav-btn').style.display = 'none';
+            }
+        }
+
+        function logoutStudent() {
+            localStorage.removeItem('current_user');
+            closeModal('settings-modal');
+            checkSession();
+            showToast("Logged out successfully.");
+        }
+
         function openSettings() {
             document.getElementById('settings-modal').style.display = 'flex';
         }
@@ -673,6 +817,15 @@
             anchor.href = window.URL.createObjectURL(blob);
             anchor.download = 'StudyNotes.txt';
             anchor.click();
+        }
+
+        function showToast(message) {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = 'toast glass';
+            toast.innerHTML = `<i class="fa-solid fa-circle-check" style="color:var(--primary);"></i> ${message}`;
+            container.appendChild(toast);
+            setTimeout(() => toast.remove(), 3000);
         }
 
         function renderBatches() {

@@ -76,7 +76,7 @@
                 -webkit-print-color-adjust: exact;
                 print-color-adjust: exact;
             }
-            .header-banner, .topic-box, .keyword-box, .mnemonics-box, th, .note, .teacher-tip, .exam-alert, .pyq-box {
+            .header-banner, .topic-box, .keyword-box, th, .note, .teacher-tip, .exam-alert, .pyq-box {
                 -webkit-print-color-adjust: exact;
                 print-color-adjust: exact;
             }
@@ -137,17 +137,6 @@
         }
         .keyword-box strong {
             color: #e65100;
-        }
-        .mnemonics-box {
-            background-color: #e8f5e9;
-            border: 1px solid #a5d6a7;
-            border-left: 5px solid #4caf50;
-            padding: 10px 15px;
-            margin: 15px 0;
-            page-break-inside: avoid;
-        }
-        .mnemonics-box strong {
-            color: #2e7d32;
         }
         .teacher-tip {
             background-color: #f3e5f5;
@@ -287,6 +276,27 @@
             border-left: 3px solid #e74c3c;
             margin: 10px 0;
         }
+
+        /* Diagram Container Styles */
+        .diagram-container {
+            text-align: center;
+            margin: 15px 0;
+            page-break-inside: avoid;
+        }
+        .diagram-container img {
+            max-width: 65%;
+            height: auto;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            padding: 5px;
+            background: #fff;
+        }
+        .diagram-caption {
+            font-size: 9pt;
+            font-weight: bold;
+            color: #7f8c8d;
+            margin-top: 5px;
+        }
     </style>
 </head>
 <body>
@@ -304,13 +314,13 @@
 
     <div class="topic-box">
         <h3>Topic-1: Chemical Reaction and Equations</h3>
-        <p><strong>Concepts Covered:</strong> Chemical reaction and examples, Skeletal and balanced chemical equation, Steps to balance a chemical equation, Important NCERT Experiments.</p>
+        <p><strong>Concepts Covered:</strong> Chemical reaction and examples, Skeletal and balanced chemical equation, Steps to balance a chemical equation, Important NCERT Experiments, Qualitative and Quantitative information conveyed by chemical equations.</p>
     </div>
 
     <h2 class="section-title">Revision Notes</h2>
 
     <h3>A chemical reaction</h3>
-    <p>A chemical reaction is a process in which the original substance(s) loses its nature and identity and forms new substance(s) with different properties.</p>
+    <p>A chemical reaction is a process in which original substance(s) loses its nature and identity and forms new substance(s) with different properties. Chemical reactions involve the breaking of chemical bonds in reacting substances and making of new chemical bonds to produce new substances through atomic rearrangement.</p>
     <ul>
         <li>Breaking of the chemical bonds and formation of new chemical bonds is responsible for the occurrence of a chemical reaction.</li>
         <li>The substances which take part in a chemical reaction are called <strong>Reactants</strong>.</li>
@@ -351,7 +361,7 @@
                 <td>3.</td>
                 <td>Evolution of gas</td>
                 <td>The chemical reaction between zinc and dilute sulphuric acid is characterized by hydrogen gas.<br>
-                <span class="math">Zn(s) + H<sub>2</sub>SO<sub>4</sub>(aq) <div class="rxn-arrow"><span class="top"></span><span class="arr-line"></span><span class="bottom"></span></div> ZnSO<sub>4</sub>(aq) + H<sub>2</sub>(g)</span></td>
+                <span class="math">Zn(s) + H<sub>2</sub>SO<sub>4</sub>(aq) <span class="rxn-arrow"><span class="top"></span><span class="arr-line"></span><span class="bottom"></span></span> ZnSO<sub>4</sub>(aq) + H<sub>2</sub>(g)</span></td>
             </tr>
             <tr>
                 <td>4.</td>
@@ -362,60 +372,86 @@
                 <td>5.</td>
                 <td>Formation of a precipitate</td>
                 <td>When an aqueous solution of sodium sulphate is mixed with the aqueous solution of barium chloride, barium sulphate comes in the form of white precipitate.<br>
-                <span class="math">Na<sub>2</sub>SO<sub>4</sub>(aq) + BaCl<sub>2</sub>(aq) <div class="rxn-arrow"><span class="top"></span><span class="arr-line"></span><span class="bottom"></span></div> BaSO<sub>4</sub>(s) + 2NaCl(aq)</span></td>
+                <span class="math">Na<sub>2</sub>SO<sub>4</sub>(aq) + BaCl<sub>2</sub>(aq) <span class="rxn-arrow"><span class="top"></span><span class="arr-line"></span><span class="bottom"></span></span> BaSO<sub>4</sub>(s) + 2NaCl(aq)</span></td>
             </tr>
         </tbody>
     </table>
 
     <div class="teacher-tip">
-        <strong>YouTube Teacher's Special Concept: Detailed NCERT Activity Breakdown (Activity 1.1)</strong><br>
+        <strong>Special Concept: Detailed NCERT Activity Breakdown (Activity 1.1)</strong><br>
         <strong>Burning of Magnesium Ribbon:</strong>
         <ul>
             <li><strong>Question Asked in Board Exams:</strong> Why is a magnesium ribbon cleaned with sandpaper before burning in air?</li>
             <li><strong>Answer:</strong> Magnesium is a reactive metal. When exposed to air, it forms a protective layer of <em>Magnesium Oxide (MgO)</em> or <em>Basic Magnesium Carbonate</em> on its surface. This layer prevents further reaction with oxygen. Sandpaper removes this layer so it burns smoothly.</li>
-            <li><strong>Observation:</strong> Burns with a dazzling white flame and changes into a white powder of Magnesium Oxide (<span class="math">2Mg + O<sub>2</sub> <div class="rxn-arrow"><span class="top">&Delta;</span><span class="arr-line"></span><span class="bottom">Ignition</span></div> 2MgO</span>).</li>
+            <li><strong>Observation:</strong> Burns with a dazzling white flame and changes into a white powder of Magnesium Oxide (<span class="math">2Mg + O<sub>2</sub> <span class="rxn-arrow"><span class="top">&Delta;</span><span class="arr-line"></span><span class="bottom">Ignition</span></span> 2MgO</span>).</li>
             <li><strong>Safety Note:</strong> Wear suitable eyeglasses because the dazzling white light can damage eyes.</li>
         </ul>
+    </div>
+
+    <!-- Diagram 1: Burning of Magnesium Ribbon in Air -->
+    <div class="diagram-container">
+    
+        <img src="https://physicscatalyst.com/article/wp-content/uploads/2023/03/activity-1-1-class-10-science.png" alt="Burning of Magnesium Ribbon in Air">
+        <div class="diagram-caption">Fig 1.1: Burning of magnesium ribbon in air and collecting magnesium oxide in a watch glass</div>
     </div>
 
     <h3>Chemical equations</h3>
     <p>A chemical equation is the symbolic representation of a chemical reaction in the form of symbols and formulae. It is a way to represent the chemical reaction in a concise and informative way.</p>
     <p>For example,<br>
-    Magnesium + Oxygen <div class="rxn-arrow"><span class="top"></span><span class="arr-line"></span><span class="bottom"></span></div> Magnesium oxide<br>
-    (Reactants) <div class="rxn-arrow"><span class="top"></span><span class="arr-line"></span><span class="bottom"></span></div> (Product)</p>
+    Magnesium + Oxygen <span class="rxn-arrow"><span class="top"></span><span class="arr-line"></span><span class="bottom"></span></span> Magnesium oxide<br>
+    (Reactants) <span class="rxn-arrow"><span class="top"></span><span class="arr-line"></span><span class="bottom"></span></span> (Product)</p>
     <p>This equation is called a <strong>word equation</strong>. The word equation can be written into a chemical equation by writing symbols and formulae of the substance in place of their name.</p>
     
-    <div class="math-center"><span class="math">2Mg + O<sub>2</sub> <div class="rxn-arrow"><span class="top">&Delta;</span><span class="arr-line"></span><span class="bottom"></span></div> 2MgO</span></div>
+    <div class="math-center"><span class="math">2Mg + O<sub>2</sub> <span class="rxn-arrow"><span class="top">&Delta;</span><span class="arr-line"></span><span class="bottom"></span></span> 2MgO</span></div>
+
+    <h3>Information Conveyed by a Balanced Chemical Equation</h3>
+    <p>A balanced chemical equation provides two distinct types of information:</p>
+    <ol type="1">
+        <li><strong>Qualitative Information:</strong>
+            <ul>
+                <li>The names of the reactants taking part in the chemical reaction.</li>
+                <li>The names of the products formed in the chemical reaction.</li>
+            </ul>
+        </li>
+        <li><strong>Quantitative Information:</strong>
+            <ul>
+                <li>The relative number of atoms or molecules of reactants and products taking part.</li>
+                <li>The relative number of moles of each substance involved.</li>
+                <li>The mass of each substance taking part in or produced by the reaction.</li>
+                <li>Mass-mass, mass-volume, or volume-volume relationships between reactants and products.</li>
+            </ul>
+        </li>
+    </ol>
 
     <h3>Writing a chemical equation</h3>
     <ol type="i">
         <li>The symbols of elements and the formulae of reacting substances (reactants) are written on the left hand side of the equation, with a plus (+) sign between them.</li>
         <li>The symbols and formulae of the substances formed (products) are written on the right hand side of the equation, with a plus sign (+) between them.</li>
-        <li>An arrow sign (<div class="rxn-arrow"><span class="top"></span><span class="arr-line"></span><span class="bottom"></span></div>) is put between the reactants and the products.</li>
+        <li>An arrow sign (<span class="rxn-arrow"><span class="top"></span><span class="arr-line"></span><span class="bottom"></span></span>) is put between the reactants and the products.</li>
         <li>The physical states of the reactants and products are also mentioned in a chemical equation.</li>
     </ol>
 
     <p><strong>Skeletal chemical equation:</strong> A chemical equation which simply represents the symbols and formulas of reactants and products taking part in the reaction is known as skeletal chemical equation for a reaction.<br>
-    For example: For the burning of Magnesium in the air, <span class="math">Mg + O<sub>2</sub> <div class="rxn-arrow"><span class="top"></span><span class="arr-line"></span><span class="bottom"></span></div> MgO</span> is the skeletal equation.</p>
+    For example: For the burning of Magnesium in the air, <span class="math">Mg + O<sub>2</sub> <span class="rxn-arrow"><span class="top"></span><span class="arr-line"></span><span class="bottom"></span></span> MgO</span> is the skeletal equation.</p>
 
     <p><strong>Balanced Equation:</strong> The equation in which atoms of various elements on both sides of a chemical equation are equal in accordance with the law of conservation of mass.</p>
     <p>The example of balanced chemical equation :</p>
     <ol type="i">
-        <li><span class="math">CO(g) + 2H<sub>2</sub>(g) <div class="rxn-arrow"><span class="top">340 atm</span><span class="arr-line"></span><span class="bottom">300°C / ZnO+CrO</span></div> CH<sub>3</sub>OH(l)</span></li>
-        <li><span class="math">6CO<sub>2</sub>(g) + 6H<sub>2</sub>O(l) <div class="rxn-arrow"><span class="top">Sunlight</span><span class="arr-line"></span><span class="bottom">Chlorophyll</span></div> C<sub>6</sub>H<sub>12</sub>O<sub>6</sub>(aq) + 6O<sub>2</sub>(g)</span> (Glucose)</li>
+        <li><span class="math">CO(g) + 2H<sub>2</sub>(g) <span class="rxn-arrow"><span class="top">340 atm</span><span class="arr-line"></span><span class="bottom">300°C / ZnO+CrO</span></span> CH<sub>3</sub>OH(l)</span></li>
+        <li><span class="math">6CO<sub>2</sub>(g) + 6H<sub>2</sub>O(l) <span class="rxn-arrow"><span class="top">Sunlight</span><span class="arr-line"></span><span class="bottom">Chlorophyll</span></span> C<sub>6</sub>H<sub>12</sub>O<sub>6</sub>(aq) + 6O<sub>2</sub>(g)</span> (Glucose)</li>
     </ol>
 
-    <p>The process of equalizing the atoms of various elements both on either sides of an equation is called the balancing of chemical equation. This is known as hit and trial method. Let us understand this with the help of an example given below:</p>
+    <p>The process of equalizing the atoms of various elements both on either sides of an equation is called the balancing of chemical equation. Methods include the Hit and Trial (Inspection) method and Partial Equation method. Let us understand this with the help of an example given below:</p>
 
     <div class="keyword-box">
         <p><strong>Key Word: Law of conservation of mass</strong><br>
         It states that, "The matter can neither be created nor destroyed in a chemical reaction. "OR"<br>
-        the total mass of reactants = total mass of products".</p>
+        the total mass of reactants = total mass of products". Balancing ensures material balance/mass balance so that no atoms are lost or gained.</p>
     </div>
 
     <h3>Example 1: Balancing a chemical equation</h3>
     <p><strong>Step 1.</strong> Write the chemical equation and draw boxes around each formula.<br>
-    <span class="math">Fe + H<sub>2</sub>O <div class="rxn-arrow"><span class="top"></span><span class="arr-line"></span><span class="bottom"></span></div> Fe<sub>3</sub>O<sub>4</sub> + H<sub>2</sub></span></p>
+    <span class="math">Fe + H<sub>2</sub>O <span class="rxn-arrow"><span class="top"></span><span class="arr-line"></span><span class="bottom"></span></span> Fe<sub>3</sub>O<sub>4</sub> + H<sub>2</sub></span></p>
 
     <p><strong>Step 2.</strong> Count the number of atoms of each element on both the sides of the arrow:</p>
     <table>
@@ -434,169 +470,222 @@
     </table>
 
     <p><strong>Step 3.</strong> Equalize the number of the atoms of element which has the maximum number of atoms (oxygen).<br>
-    <span class="math">Fe + 4H<sub>2</sub>O <div class="rxn-arrow"><span class="top"></span><span class="arr-line"></span><span class="bottom"></span></div> Fe<sub>3</sub>O<sub>4</sub> + H<sub>2</sub></span></p>
+    <span class="math">Fe + 4H<sub>2</sub>O <span class="rxn-arrow"><span class="top"></span><span class="arr-line"></span><span class="bottom"></span></span> Fe<sub>3</sub>O<sub>4</sub> + H<sub>2</sub></span></p>
 
     <p><strong>Step 4.</strong> Try to equalize all the atoms of elements on reactant and product side by adding coefficient in front of it.<br>
-    <span class="math">3Fe + 4H<sub>2</sub>O <div class="rxn-arrow"><span class="top"></span><span class="arr-line"></span><span class="bottom"></span></div> Fe<sub>3</sub>O<sub>4</sub> + 4H<sub>2</sub></span><br>
+    <span class="math">3Fe + 4H<sub>2</sub>O <span class="rxn-arrow"><span class="top"></span><span class="arr-line"></span><span class="bottom"></span></span> Fe<sub>3</sub>O<sub>4</sub> + 4H<sub>2</sub></span><br>
     Now, all the atoms of elements are equal on both sides.</p>
 
     <p><strong>Step 5.</strong> Write the physical states of reactants and products.<br>
-    <span class="math">3Fe(s) + 4H<sub>2</sub>O(g) <div class="rxn-arrow"><span class="top">Steam</span><span class="arr-line"></span><span class="bottom">Red Hot</span></div> Fe<sub>3</sub>O<sub>4</sub>(s) + 4H<sub>2</sub>(g)</span><br>
+    <span class="math">3Fe(s) + 4H<sub>2</sub>O(g) <span class="rxn-arrow"><span class="top">Steam</span><span class="arr-line"></span><span class="bottom">Red Hot</span></span> Fe<sub>3</sub>O<sub>4</sub>(s) + 4H<sub>2</sub>(g)</span><br>
     Solid state = (s), Liquid state = (l), Gaseous state = (g), Aqueous state = (aq)</p>
 
     <p><strong>Step 6.</strong> Write necessary conditions of temperature, pressure or catalyst at above or below the arrow.</p>
 
+    <!-- Diagram 2: Zinc granules reacting with dilute H2SO4 -->
+    <div class="diagram-container">
+        <img src="https://physicscatalyst.com/article/wp-content/uploads/2023/03/activity-1-3-class-10-science.png" alt="Reaction of zinc granules with dilute sulphuric acid">
+        <div class="diagram-caption">Fig 1.2: Formation of hydrogen gas by action of dilute sulphuric acid on zinc</div>
+    </div>
+
     <div class="topic-box">
         <h3>Topic-2: Types of Chemical Reactions</h3>
-        <p><strong>Concepts Covered:</strong> Combination reaction, Decomposition reaction, Displacement reaction, Double displacement reaction, Redox reaction, Oxidation and reduction reaction, Exothermic and endothermic reaction, Detailed NCERT Practical Activities.</p>
+        <p><strong>Concepts Covered:</strong> Combination reaction, Decomposition reaction, Displacement reaction, Double displacement reaction, Redox reaction, Oxidation and reduction reaction, Precipitation reaction, Exothermic and endothermic reaction, Detailed NCERT Practical Activities.</p>
     </div>
 
     <h2 class="section-title">Types of Chemical Reactions</h2>
     
     <p><strong>I. Combination Reaction:</strong> The reaction in which two or more reactants combine to form a single product.</p>
-    <p>e.g., (i) Burning of coal: <span class="math">C(s) + O<sub>2</sub>(g) <div class="rxn-arrow"><span class="top">&Delta;</span><span class="arr-line"></span><span class="bottom">Ignition</span></div> CO<sub>2</sub>(g)</span></p>
-    <p>(ii) Formation of water: <span class="math">2H<sub>2</sub>(g) + O<sub>2</sub>(g) <div class="rxn-arrow"><span class="top">Spark</span><span class="arr-line"></span><span class="bottom">25°C</span></div> 2H<sub>2</sub>O(l)</span></p>
-    <p>(iii) <span class="math">CaO(s) + H<sub>2</sub>O(l) <div class="rxn-arrow"><span class="top">Exothermic</span><span class="arr-line"></span><span class="bottom">Room Temp</span></div> Ca(OH)<sub>2</sub>(aq) + Heat</span> (Quick lime <div class="rxn-arrow"><span class="top"></span><span class="arr-line"></span><span class="bottom"></span></div> Slaked lime)</p>
+    <p>e.g., (i) Burning of coal: <span class="math">C(s) + O<sub>2</sub>(g) <span class="rxn-arrow"><span class="top">&Delta;</span><span class="arr-line"></span><span class="bottom">Ignition</span></span> CO<sub>2</sub>(g) + 393.3 kJ</span> (12g pure carbon burning in excess air releases 393.3 kJ of heat)</p>
+    <p>(ii) Formation of water: <span class="math">2H<sub>2</sub>(g) + O<sub>2</sub>(g) <span class="rxn-arrow"><span class="top">Spark</span><span class="arr-line"></span><span class="bottom">25°C</span></span> 2H<sub>2</sub>O(l)</span></p>
+    <p>(iii) <span class="math">CaO(s) + H<sub>2</sub>O(l) <span class="rxn-arrow"><span class="top">Exothermic</span><span class="arr-line"></span><span class="bottom">Room Temp</span></span> Ca(OH)<sub>2</sub>(aq) + Heat</span> (Quick lime <span class="rxn-arrow"><span class="top"></span><span class="arr-line"></span><span class="bottom"></span></span> Slaked lime)</p>
+    <p>(iv) <span class="math">SO<sub>2</sub>(g) + O<sub>2</sub>(g) <span class="rxn-arrow"><span class="top"></span><span class="arr-line"></span><span class="bottom"></span></span> SO<sub>3</sub>(g)</span> (Sulphur dioxide + Oxygen <span class="rxn-arrow"><span class="top"></span><span class="arr-line"></span><span class="bottom"></span></span> Sulphur trioxide)</p>
+    <p>(v) <span class="math">CaO(s) + CO<sub>2</sub>(g) <span class="rxn-arrow"><span class="top"></span><span class="arr-line"></span><span class="bottom"></span></span> CaCO<sub>3</sub>(s)</span> (Calcium oxide + Carbon dioxide <span class="rxn-arrow"><span class="top"></span><span class="arr-line"></span><span class="bottom"></span></span> Calcium carbonate)</p>
 
     <div class="exam-alert">
         <strong>Important Board Question on Slaked Lime Solution:</strong><br>
         A solution of slaked lime <span class="math">Ca(OH)<sub>2</sub></span> is used for white-washing walls. Calcium hydroxide reacts slowly with the carbon dioxide in air to form a thin layer of calcium carbonate on the walls, giving a shiny finish to the walls after 2 to 3 days.<br>
-        <span class="math">Ca(OH)<sub>2</sub>(aq) + CO<sub>2</sub>(g) <div class="rxn-arrow"><span class="top">Slow</span><span class="arr-line"></span><span class="bottom">2-3 Days</span></div> CaCO<sub>3</sub>(s) + H<sub>2</sub>O(l)</span> (Marble has the same formula: <span class="math">CaCO<sub>3</sub></span>).
+        <span class="math">Ca(OH)<sub>2</sub>(aq) + CO<sub>2</sub>(g) <span class="rxn-arrow"><span class="top">Slow</span><span class="arr-line"></span><span class="bottom">2-3 Days</span></span> CaCO<sub>3</sub>(s) + H<sub>2</sub>O(l)</span> (Marble has the same formula: <span class="math">CaCO<sub>3</sub></span>).
     </div>
 
-    <p><strong>Exothermic Reactions:</strong> Reaction in which heat is released along with formation of products.</p>
-    <p>e.g., (i) Burning of natural gas: <span class="math">CH<sub>4</sub>(g) + 2O<sub>2</sub>(g) <div class="rxn-arrow"><span class="top">&Delta;</span><span class="arr-line"></span><span class="bottom">Ignition</span></div> CO<sub>2</sub>(g) + 2H<sub>2</sub>O(g) + Heat</span></p>
+    <p><strong>Exothermic Reactions:</strong> Reaction in which heat is liberated/released along with formation of products.</p>
+    <p>e.g., (i) Burning of natural gas: <span class="math">CH<sub>4</sub>(g) + 2O<sub>2</sub>(g) <span class="rxn-arrow"><span class="top">&Delta;</span><span class="arr-line"></span><span class="bottom">Ignition</span></span> CO<sub>2</sub>(g) + 2H<sub>2</sub>O(g) + Heat</span></p>
     <p>(ii) Respiration is also an exothermic reaction: <br>
-    <span class="math">C<sub>6</sub>H<sub>12</sub>O<sub>6</sub>(aq) + 6O<sub>2</sub>(g) <div class="rxn-arrow"><span class="top">Enzymes</span><span class="arr-line"></span><span class="bottom">37°C</span></div> 6CO<sub>2</sub>(aq) + 6H<sub>2</sub>O(l) + energy</span> (Glucose)</p>
-    <p>(iii) Decomposition of vegetable matter into compost is also an example of an exothermic reaction.</p>
+    <span class="math">C<sub>6</sub>H<sub>12</sub>O<sub>6</sub>(aq) + 6O<sub>2</sub>(g) <span class="rxn-arrow"><span class="top">Enzymes</span><span class="arr-line"></span><span class="bottom">37°C</span></span> 6CO<sub>2</sub>(aq) + 6H<sub>2</sub>O(l) + energy</span> (Glucose)</p>
+    <p>(iii) Burning of Carbon: <span class="math">C(s) + O<sub>2</sub>(g) <span class="rxn-arrow"><span class="top"></span><span class="arr-line"></span><span class="bottom"></span></span> CO<sub>2</sub>(g) + Heat (393.3 kJ)</span></p>
+    <p>(iv) Decomposition of vegetable matter into compost is also an example of an exothermic reaction.</p>
 
-    <p><strong>II. Decomposition Reaction:</strong> The reaction in which a compound splits into two or more simpler substances is called decomposition reaction.<br>
-    <span class="math">A <div class="rxn-arrow"><span class="top">Energy</span><span class="arr-line"></span><span class="bottom"></span></div> B + C</span></p>
+    <p><strong>II. Decomposition Reaction:</strong> The reaction in which a substance / compound splits into two or more simpler substances is called decomposition reaction.<br>
+    <span class="math">A <span class="rxn-arrow"><span class="top">Energy</span><span class="arr-line"></span><span class="bottom"></span></span> B + C</span></p>
     
     <p><strong>(a) Thermal decomposition:</strong> When decomposition is carried out by heating.</p>
-    <p>e.g., (i) <span class="math">2FeSO<sub>4</sub>(s) <div class="rxn-arrow"><span class="top">&Delta; (Heat)</span><span class="arr-line"></span><span class="bottom">Strong</span></div> Fe<sub>2</sub>O<sub>3</sub>(s) + SO<sub>2</sub>(g) + SO<sub>3</sub>(g)</span><br>
+    <p>e.g., (i) <span class="math">2FeSO<sub>4</sub>(s) <span class="rxn-arrow"><span class="top">&Delta; (Heat)</span><span class="arr-line"></span><span class="bottom">Strong</span></span> Fe<sub>2</sub>O<sub>3</sub>(s) + SO<sub>2</sub>(g) + SO<sub>3</sub>(g)</span><br>
     (Ferrous sulphate crystals [Green colour: <span class="math">FeSO<sub>4</sub>&middot;7H<sub>2</sub>O</span>] on heating lose water and change color to white, then decompose to brown Ferric oxide with pungent suffocating smell of burning sulphur gases <span class="math">SO<sub>2</sub></span> and <span class="math">SO<sub>3</sub></span>).</p>
-    <p>(ii) <span class="math">CaCO<sub>3</sub>(s) <div class="rxn-arrow"><span class="top">1000°C</span><span class="arr-line"></span><span class="bottom">&Delta; (Heat)</span></div> CaO(s) + CO<sub>2</sub>(g)</span><br>
-    (Lime stone <div class="rxn-arrow"><span class="top"></span><span class="arr-line"></span><span class="bottom"></span></div> Quick lime; used in manufacturing of cement).</p>
-    <p>(iii) <strong>Decomposition of Lead Nitrate (Activity 1.6):</strong><br>
-    <span class="math">2Pb(NO<sub>3</sub>)<sub>2</sub>(s) <div class="rxn-arrow"><span class="top">&Delta; (Heat)</span><span class="arr-line"></span><span class="bottom">Boiling Tube</span></div> 2PbO(s) + 4NO<sub>2</sub>(g) + O<sub>2</sub>(g)</span><br>
+    <p>(ii) <span class="math">CaCO<sub>3</sub>(s) <span class="rxn-arrow"><span class="top">1000°C</span><span class="arr-line"></span><span class="bottom">&Delta; (Heat)</span></span> CaO(s) + CO<sub>2</sub>(g)</span><br>
+    (Lime stone <span class="rxn-arrow"><span class="top"></span><span class="arr-line"></span><span class="bottom"></span></span> Quick lime; used in manufacturing of cement).</p>
+    <p>(iii) <span class="math">2KClO<sub>3</sub>(s) <span class="rxn-arrow"><span class="top">&Delta; (Heat)</span><span class="arr-line"></span><span class="bottom"></span></span> 2KCl(s) + 3O<sub>2</sub>(g)</span> (Decomposition of potassium chlorate to oxygen)</p>
+    <p>(iv) <strong>Decomposition of Lead Nitrate (Activity 1.6):</strong><br>
+    <span class="math">2Pb(NO<sub>3</sub>)<sub>2</sub>(s) <span class="rxn-arrow"><span class="top">&Delta; (Heat)</span><span class="arr-line"></span><span class="bottom">Boiling Tube</span></span> 2PbO(s) + 4NO<sub>2</sub>(g) + O<sub>2</sub>(g)</span><br>
     <em>Observation:</em> Emission of <strong>brown fumes of Nitrogen Dioxide (<span class="math">NO<sub>2</sub></span>)</strong> and a yellow residue of Lead Oxide (<span class="math">PbO</span>) remains in the boiling tube.</p>
 
+    <!-- Diagram 3: Thermal decomposition of ferrous sulphate crystals -->
+    <div class="diagram-container">
+        <img src="https://physicscatalyst.com/article/wp-content/uploads/2023/03/activity-1-5-class-10-science.png" alt="Thermal decomposition of ferrous sulphate in a boiling tube">
+        <div class="diagram-caption">Fig 1.3: Heating of ferrous sulphate crystals in a boiling tube</div>
+    </div>
+
     <p><strong>(b) Electrolytic Decomposition:</strong> When decomposition is carried out by passing electricity.<br>
-    e.g., <span class="math">2H<sub>2</sub>O(l) <div class="rxn-arrow"><span class="top">Electricity</span><span class="arr-line"></span><span class="bottom">Dil. H<sub>2</sub>SO<sub>4</sub></span></div> 2H<sub>2</sub>(g) + O<sub>2</sub>(g)</span></p>
+    e.g., <span class="math">2H<sub>2</sub>O(l) <span class="rxn-arrow"><span class="top">Electricity</span><span class="arr-line"></span><span class="bottom">Dil. H<sub>2</sub>SO<sub>4</sub></span></span> 2H<sub>2</sub>(g) + O<sub>2</sub>(g)</span></p>
+
+    <!-- Diagram 4: Electrolysis of Water -->
+    <div class="diagram-container">
+        <img src="https://physicscatalyst.com/article/wp-content/uploads/2023/03/activity-1-7-class-10-science.png" alt="Electrolysis of water setup showing hydrogen and oxygen gas collection">
+        <div class="diagram-caption">Fig 1.4: Electrolysis of water</div>
+    </div>
 
     <div class="teacher-tip">
-        <strong>YouTube Teacher's High-Yield Concept: Electrolysis of Water (Activity 1.7)</strong>
+        <strong>High-Yield Concept: Electrolysis of Water (Activity 1.7)</strong>
         <ul>
             <li>Volume of gas collected at <strong>Cathode (-ve electrode)</strong> is double the volume of gas collected at <strong>Anode (+ve electrode)</strong> because water contains 2 parts hydrogen and 1 part oxygen by volume.</li>
-            <li><strong>Gas at Cathode:</strong> Hydrogen (<span class="math">H<sub>2</sub></span>) - test by bringing glowing splinter <div class="rxn-arrow"><span class="top"></span><span class="arr-line"></span><span class="bottom"></span></div> pops.</li>
+            <li><strong>Gas at Cathode:</strong> Hydrogen (<span class="math">H<sub>2</sub></span>) - test by bringing glowing splinter <span class="rxn-arrow"><span class="top"></span><span class="arr-line"></span><span class="bottom"></span></span> pops.</li>
             <li><strong>Gas at Anode:</strong> Oxygen (<span class="math">O<sub>2</sub></span>) - rekindles a glowing flame.</li>
             <li>A few drops of dilute <span class="math">H<sub>2</sub>SO<sub>4</sub></span> are added to pure water to make it conducting because pure water is a poor conductor of electricity.</li>
         </ul>
     </div>
 
     <p><strong>(c) Photolytic Decomposition:</strong> When decomposition is carried out in presence of sunlight.</p>
-    <p>e.g., (i) <span class="math">2AgCl(s) <div class="rxn-arrow"><span class="top">Sunlight</span><span class="arr-line"></span><span class="bottom">h&nu;</span></div> 2Ag(s) + Cl<sub>2</sub>(g)</span> (White silver chloride turns grey in sunlight)</p>
-    <p>(ii) <span class="math">2AgBr(s) <div class="rxn-arrow"><span class="top">Sunlight</span><span class="arr-line"></span><span class="bottom">h&nu;</span></div> 2Ag(s) + Br<sub>2</sub>(g)</span></p>
+    <p>e.g., (i) <span class="math">2AgCl(s) <span class="rxn-arrow"><span class="top">Sunlight</span><span class="arr-line"></span><span class="bottom">h&nu;</span></span> 2Ag(s) + Cl<sub>2</sub>(g)</span> (White silver chloride turns grey in sunlight)</p>
+    <p>(ii) <span class="math">2AgBr(s) <span class="rxn-arrow"><span class="top">Sunlight</span><span class="arr-line"></span><span class="bottom">h&nu;</span></span> 2Ag(s) + Br<sub>2</sub>(g)</span></p>
     <p><em>Application:</em> Both these reactions are used in <strong>black and white photography</strong>.</p>
 
-    <p><strong>Endothermic Reaction:</strong> The reactions which require energy in the form of heat, light or electricity to break reactants are called endothermic reactions. All decomposition reactions are endothermic reactions.</p>
+    <p><strong>Endothermic Reaction:</strong> The reactions which proceed with the absorption of heat or energy (light/electricity) to break reactants. All decomposition reactions are endothermic reactions.</p>
+    <p><em>Notable Example:</em> Reaction between Nitrogen and Oxygen at high temperature (e.g., during lightning strike in atmosphere):<br>
+    <span class="math">N<sub>2</sub>(g) + O<sub>2</sub>(g) <span class="rxn-arrow"><span class="top">3000°C</span><span class="arr-line"></span><span class="bottom">&Delta; Heat</span></span> 2NO(g)</span> (Nitric Oxide)</p>
 
-    <p><strong>III. Displacement Reaction:</strong> The chemical reactions in which more reactive element displaces less reactive element from its salt solution.</p>
-    <p>e.g., (i) <span class="math">Fe(s) + CuSO<sub>4</sub>(aq) <div class="rxn-arrow"><span class="top">Room Temp</span><span class="arr-line"></span><span class="bottom">Displacement</span></div> FeSO<sub>4</sub>(aq) + Cu(s)</span><br>
-    (Iron + Copper sulphate <div class="rxn-arrow"><span class="top"></span><span class="arr-line"></span><span class="bottom"></span></div> Ferrous sulphate + Copper)<br>
+    <p><strong>III. Displacement (Substitution) Reaction:</strong> The chemical reactions in which one part (an atom or a group of atoms) of a molecule is replaced by another, or a more reactive element displaces a less reactive element from its salt solution.<br>
+    General form: <span class="math">A + BC <span class="rxn-arrow"><span class="top"></span><span class="arr-line"></span><span class="bottom"></span></span> AC + B</span></p>
+    <p>e.g., (i) <span class="math">Fe(s) + CuSO<sub>4</sub>(aq) <span class="rxn-arrow"><span class="top">Room Temp</span><span class="arr-line"></span><span class="bottom">Displacement</span></span> FeSO<sub>4</sub>(aq) + Cu(s)</span><br>
+    (Iron + Copper sulphate <span class="rxn-arrow"><span class="top"></span><span class="arr-line"></span><span class="bottom"></span></span> Ferrous sulphate + Copper)<br>
     The iron nail becomes brownish in colour by deposition of Cu and blue colour of CuSO<sub>4</sub> changes into dirty green colour due to formation of FeSO<sub>4</sub>.</p>
     <p>(ii) Zinc displaces copper forming zinc sulphate. Zn is more reactive than copper.<br>
-    <span class="math">Zn(s) + CuSO<sub>4</sub>(aq) <div class="rxn-arrow"><span class="top">Fast</span><span class="arr-line"></span><span class="bottom">Exothermic</span></div> ZnSO<sub>4</sub>(aq) + Cu(s)</span></p>
+    <span class="math">Zn(s) + CuSO<sub>4</sub>(aq) <span class="rxn-arrow"><span class="top">Fast</span><span class="arr-line"></span><span class="bottom">Exothermic</span></span> ZnSO<sub>4</sub>(aq) + Cu(s)</span></p>
     <p>(iii) Lead displaces copper:<br>
-    <span class="math">Pb(s) + CuCl<sub>2</sub>(aq) <div class="rxn-arrow"><span class="top">Aqueous</span><span class="arr-line"></span><span class="bottom">Displacement</span></div> PbCl<sub>2</sub>(aq) + Cu(s)</span></p>
+    <span class="math">Pb(s) + CuCl<sub>2</sub>(aq) <span class="rxn-arrow"><span class="top">Aqueous</span><span class="arr-line"></span><span class="bottom">Displacement</span></span> PbCl<sub>2</sub>(aq) + Cu(s)</span></p>
 
-    <p><strong>IV. Double Displacement Reaction:</strong> A reaction in which new compounds are formed by mutual exchange of ions between two compounds.</p>
-    <p><span class="math">Na<sub>2</sub>SO<sub>4</sub>(aq) + BaCl<sub>2</sub>(aq) <div class="rxn-arrow"><span class="top">Ion Exchange</span><span class="arr-line"></span><span class="bottom">Instant</span></div> BaSO<sub>4</sub>(s) + 2NaCl(aq)</span><br>
-    (Sodium sulphate + Barium chloride <div class="rxn-arrow"><span class="top"></span><span class="arr-line"></span><span class="bottom"></span></div> Barium sulphate + Sodium chloride)<br>
-    White precipitate of BaSO<sub>4</sub> is formed, so it is also called precipitation reaction.</p>
-    <p>Another classic example (Activity 1.2):<br>
-    <span class="math">Pb(NO<sub>3</sub>)<sub>2</sub>(aq) + 2KI(aq) <div class="rxn-arrow"><span class="top">Precipitation</span><span class="arr-line"></span><span class="bottom">Aqueous</span></div> PbI<sub>2</sub>(s)&darr; + 2KNO<sub>3</sub>(aq)</span><br>
-    (Forms a brilliant <strong>yellow precipitate of Lead Iodide <span class="math">PbI<sub>2</sub></span></strong>).</p>
-
-    <p><strong>V. Oxidation and Reduction (Redox Reactions):</strong></p>
-    <ul>
-        <li><strong>Oxidation:</strong> Addition of oxygen to a substance OR removal of hydrogen from a substance OR loss of electrons.<br>
-        <span class="math">2Cu + O<sub>2</sub> <div class="rxn-arrow"><span class="top">&Delta; (Heat)</span><span class="arr-line"></span><span class="bottom">Air</span></div> 2CuO</span> (Reddish brown copper turns black due to copper oxide coating).</li>
-        <li><strong>Reduction:</strong> Addition of hydrogen to a substance OR removal of oxygen from a substance OR gain of electrons.<br>
-        <span class="math">CuO + H<sub>2</sub> <div class="rxn-arrow"><span class="top">&Delta; (Heat)</span><span class="arr-line"></span><span class="bottom">Reduction</span></div> Cu + H<sub>2</sub>O</span> (Black CuO turns brown back to Cu).</li>
-        <li><strong>Oxidising Agent:</strong> The substance which gives oxygen for oxidation or removes hydrogen (gets reduced itself).</li>
-        <li><strong>Reducing Agent:</strong> The substance which gives hydrogen for reduction or removes oxygen (gets oxidised itself).</li>
-    </ul>
-
-    <div class="mnemonics-box">
-        <p><strong>Mnemonics</strong></p>
-        <p><strong>Concept:</strong> Types of decomposition reaction<br>
-        <strong>Mnemonics:</strong> PET<br>
-        <strong>Interpretations:</strong> Photolytic reaction, Electrolytic reaction, Thermal reaction</p>
-        <hr style="border:0; border-top:1px solid #a5d6a7; margin:8px 0;">
-        <p><strong>Concept:</strong> Oxidation and reduction reaction<br>
-        <strong>Mnemonics:</strong> OIL RIG<br>
-        <strong>Interpretations:</strong> Oxidation Is Loss of electrons, Reduction Is Gain of electrons</p>
-        <hr style="border:0; border-top:1px solid #a5d6a7; margin:8px 0;">
-        <p><strong>Concept:</strong> Types of chemical reactions<br>
-        <strong>Mnemonics:</strong> ROC.D<sup>3</sup><br>
-        <strong>Interpretations:</strong> Reduction, Oxidation, Combination, Decomposition, Displacement, Double Displacement</p>
+    <!-- Diagram 5: Iron nails dipped in copper sulphate solution -->
+    <div class="diagram-container">
+        <img src="https://physicscatalyst.com/article/wp-content/uploads/2023/05/activity-1-9-class-10-science.png" alt="Iron nails dipped in copper sulphate solution">
+        <div class="diagram-caption">Fig 1.5: Iron nails and copper sulphate solutions compared before and after the experiment</div>
     </div>
 
-    <p><strong>VI. Important equation</strong></p>
+    <p><strong>IV. Double Displacement Reaction:</strong> A reaction in which two reacting ionic compounds exchange their corresponding ions to form new compounds.</p>
+    <p>e.g., (i) <span class="math">Na<sub>2</sub>SO<sub>4</sub>(aq) + BaCl<sub>2</sub>(aq) <span class="rxn-arrow"><span class="top">Ion Exchange</span><span class="arr-line"></span><span class="bottom">Instant</span></span> BaSO<sub>4</sub>(s) + 2NaCl(aq)</span><br>
+    (Sodium sulphate + Barium chloride <span class="rxn-arrow"><span class="top"></span><span class="arr-line"></span><span class="bottom"></span></span> Barium sulphate + Sodium chloride)<br>
+    White precipitate of BaSO<sub>4</sub> is formed, so it is also called precipitation reaction.</p>
+    <p>(ii) <span class="math">AgNO<sub>3</sub>(aq) + NaCl(aq) <span class="rxn-arrow"><span class="top">Ion Exchange</span><span class="arr-line"></span><span class="bottom"></span></span> AgCl(s)&darr; + NaNO<sub>3</sub>(aq)</span><br>
+    (Silver nitrate + Sodium chloride <span class="rxn-arrow"><span class="top"></span><span class="arr-line"></span><span class="bottom"></span></span> Silver chloride [White ppt] + Sodium nitrate)</p>
+    <p>Another classic example (Activity 1.2):<br>
+    <span class="math">Pb(NO<sub>3</sub>)<sub>2</sub>(aq) + 2KI(aq) <span class="rxn-arrow"><span class="top">Precipitation</span><span class="arr-line"></span><span class="bottom">Aqueous</span></span> PbI<sub>2</sub>(s)&darr; + 2KNO<sub>3</sub>(aq)</span><br>
+    (Forms a brilliant <strong>yellow precipitate of Lead Iodide <span class="math">PbI<sub>2</sub></span></strong>).</p>
+
+    <p><strong>V. Precipitation Reaction:</strong> Reactions that involve the formation of an insoluble solid product (precipitate) when two solutions are mixed or when a gas is bubbled into a solution.</p>
+    <p>e.g., (i) <span class="math">Pb(NO<sub>3</sub>)<sub>2</sub> + 2KI <span class="rxn-arrow"><span class="top"></span><span class="arr-line"></span><span class="bottom"></span></span> PbI<sub>2</sub>(s)&darr; + 2KNO<sub>3</sub></span></p>
+    <p>(ii) Passing carbon dioxide gas into limewater:<br>
+    <span class="math">CO<sub>2</sub>(g) + Ca(OH)<sub>2</sub>(aq) <span class="rxn-arrow"><span class="top"></span><span class="arr-line"></span><span class="bottom"></span></span> CaCO<sub>3</sub>(s)&darr; + H<sub>2</sub>O(l)</span></p>
+
+    <p><strong>VI. Oxidation and Reduction (Redox Reactions):</strong></p>
+    <ul>
+        <li><strong>Oxidation:</strong> Addition of oxygen or electronegative element OR removal of hydrogen or electropositive element OR loss of electrons.<br>
+        Examples:<br>
+        - Addition of Oxygen: <span class="math">S + O<sub>2</sub> <span class="rxn-arrow"><span class="top"></span><span class="arr-line"></span><span class="bottom"></span></span> SO<sub>2</sub></span><br>
+        - Addition of Electronegative Element: <span class="math">2FeCl<sub>2</sub> + Cl<sub>2</sub> <span class="rxn-arrow"><span class="top"></span><span class="arr-line"></span><span class="bottom"></span></span> 2FeCl<sub>3</sub></span><br>
+        - Removal of Hydrogen: <span class="math">H<sub>2</sub>S + Cl<sub>2</sub> <span class="rxn-arrow"><span class="top"></span><span class="arr-line"></span><span class="bottom"></span></span> 2HCl + S</span><br>
+        - Removal of Electropositive Element: <span class="math">2KI + H<sub>2</sub>O<sub>2</sub> <span class="rxn-arrow"><span class="top"></span><span class="arr-line"></span><span class="bottom"></span></span> I<sub>2</sub> + 2KOH</span><br>
+        - Heating copper: <span class="math">2Cu + O<sub>2</sub> <span class="rxn-arrow"><span class="top">&Delta; (Heat)</span><span class="arr-line"></span><span class="bottom">Air</span></span> 2CuO</span></li>
+        
+        <li><strong>Reduction:</strong> Addition of hydrogen or electropositive element OR removal of oxygen or electronegative element OR gain of electrons.<br>
+        Examples:<br>
+        - Addition of Hydrogen: <span class="math">H<sub>2</sub> + Cl<sub>2</sub> <span class="rxn-arrow"><span class="top"></span><span class="arr-line"></span><span class="bottom"></span></span> 2HCl</span><br>
+        - Addition of Electropositive Element: <span class="math">2HgCl<sub>2</sub> + SnCl<sub>2</sub> <span class="rxn-arrow"><span class="top"></span><span class="arr-line"></span><span class="bottom"></span></span> Hg<sub>2</sub>Cl<sub>2</sub> + SnCl<sub>4</sub></span><br>
+        - Removal of Oxygen: <span class="math">ZnO + C <span class="rxn-arrow"><span class="top"></span><span class="arr-line"></span><span class="bottom"></span></span> Zn + CO</span><br>
+        - Removal of Electronegative Element: <span class="math">2FeCl<sub>3</sub> + H<sub>2</sub> <span class="rxn-arrow"><span class="top"></span><span class="arr-line"></span><span class="bottom"></span></span> 2FeCl<sub>2</sub> + 2HCl</span><br>
+        - Reduction of CuO: <span class="math">CuO + H<sub>2</sub> <span class="rxn-arrow"><span class="top">&Delta; (Heat)</span><span class="arr-line"></span><span class="bottom">Reduction</span></span> Cu + H<sub>2</sub>O</span></li>
+        
+        <li><strong>Oxidising Agent:</strong> The substance which gives oxygen/electronegative element or removes hydrogen/electropositive element (gets reduced itself).</li>
+        <li><strong>Reducing Agent:</strong> The substance which gives hydrogen/electropositive element or removes oxygen/electronegative element (gets oxidised itself).</li>
+    </ul>
+
+    <!-- Diagram 6: Oxidation of copper to copper oxide -->
+    <div class="diagram-container">
+        <img src="https://physicscatalyst.com/article/wp-content/uploads/2023/05/activity-1-11-class-10-science.png" alt="Oxidation of copper to copper oxide in china dish">
+        <div class="diagram-caption">Fig 1.6: Oxidation of copper to copper oxide</div>
+    </div>
+
+    <p><strong>VII. Important equation</strong></p>
     <p><strong>Redox (Oxidation and Reduction) Reaction:</strong><br>
-    <span class="math">MnO<sub>2</sub>(s) + 4HCl(conc.) <div class="rxn-arrow"><span class="top">&Delta;</span><span class="arr-line"></span><span class="bottom">Redox</span></div> MnCl<sub>2</sub>(aq) + Cl<sub>2</sub>(g) + 2H<sub>2</sub>O</span><br>
+    <span class="math">MnO<sub>2</sub>(s) + 4HCl(conc.) <span class="rxn-arrow"><span class="top">&Delta;</span><span class="arr-line"></span><span class="bottom">Redox</span></span> MnCl<sub>2</sub>(aq) + Cl<sub>2</sub>(g) + 2H<sub>2</sub>O</span><br>
     (HCl is oxidized to Cl<sub>2</sub>, MnO<sub>2</sub> is reduced to MnCl<sub>2</sub>. Here HCl acts as reducing agent and MnO<sub>2</sub> as oxidising agent.)</p>
 
-    <p><strong>VII. Some usually asked equations in exams for balancing:</strong></p>
+    <p><strong>VIII. Some usually asked equations in exams for balancing:</strong></p>
     <ul>
-        <li><span class="math">2CO(g) + O<sub>2</sub>(g) <div class="rxn-arrow"><span class="top">&Delta;</span><span class="arr-line"></span><span class="bottom">Spark</span></div> 2CO<sub>2</sub>(g)</span></li>
-        <li><span class="math">ZnCO<sub>3</sub> <div class="rxn-arrow"><span class="top">&Delta; (Heat)</span><span class="arr-line"></span><span class="bottom">Calcination</span></div> ZnO + CO<sub>2</sub></span></li>
-        <li><span class="math">2FeSO<sub>4</sub>(s) <div class="rxn-arrow"><span class="top">&Delta; (Heat)</span><span class="arr-line"></span><span class="bottom">Strong</span></div> Fe<sub>2</sub>O<sub>3</sub>(s) + SO<sub>2</sub>(g) + SO<sub>3</sub>(g)</span></li>
-        <li><span class="math">Pb(NO<sub>3</sub>)<sub>2</sub> + 2KI <div class="rxn-arrow"><span class="top">PPT</span><span class="arr-line"></span><span class="bottom">Aqueous</span></div> PbI<sub>2</sub> + 2KNO<sub>3</sub></span></li>
-        <li><span class="math">CaO(s) + H<sub>2</sub>O <div class="rxn-arrow"><span class="top">Exothermic</span><span class="arr-line"></span><span class="bottom">Room Temp</span></div> Ca(OH)<sub>2</sub></span></li>
-        <li><span class="math">NaCl + AgNO<sub>3</sub> <div class="rxn-arrow"><span class="top">PPT</span><span class="arr-line"></span><span class="bottom">Fast</span></div> AgCl + NaNO<sub>3</sub></span></li>
-        <li><span class="math">Ca + 2HNO<sub>3</sub> <div class="rxn-arrow"><span class="top">Dilute</span><span class="arr-line"></span><span class="bottom">Acid-Metal</span></div> Ca(NO<sub>3</sub>)<sub>2</sub> + H<sub>2</sub>&uarr;</span></li>
-        <li><span class="math">2Al + 3H<sub>2</sub>SO<sub>4</sub> <div class="rxn-arrow"><span class="top">Dilute</span><span class="arr-line"></span><span class="bottom">Fast</span></div> Al<sub>2</sub>(SO<sub>4</sub>)<sub>3</sub> + 3H<sub>2</sub>&uarr;</span></li>
-        <li><span class="math">Ca(OH)<sub>2</sub> + CO<sub>2</sub> <div class="rxn-arrow"><span class="top">Limewater</span><span class="arr-line"></span><span class="bottom">Test</span></div> CaCO<sub>3</sub> + H<sub>2</sub>O</span></li>
-        <li><span class="math">Zn + 2HCl <div class="rxn-arrow"><span class="top">Dilute</span><span class="arr-line"></span><span class="bottom">Room Temp</span></div> ZnCl<sub>2</sub> + H<sub>2</sub>&uarr;</span></li>
-        <li><span class="math">Zn + 2NaOH <div class="rxn-arrow"><span class="top">&Delta; (Heat)</span><span class="arr-line"></span><span class="bottom">Conc. Base</span></div> Na<sub>2</sub>ZnO<sub>2</sub> + H<sub>2</sub>&uarr;</span></li>
-        <li><span class="math">Mg + 2HNO<sub>3</sub> <div class="rxn-arrow"><span class="top">Very Dil. (1%)</span><span class="arr-line"></span><span class="bottom">Cold</span></div> Mg(NO<sub>3</sub>)<sub>2</sub> + H<sub>2</sub>&uarr;</span></li>
-        <li><span class="math">Na<sub>2</sub>CO<sub>3</sub> + 2HCl <div class="rxn-arrow"><span class="top">Effervescence</span><span class="arr-line"></span><span class="bottom">Dilute</span></div> 2NaCl + H<sub>2</sub>O + CO<sub>2</sub></span></li>
-        <li><span class="math">Zn + H<sub>2</sub>SO<sub>4</sub> <div class="rxn-arrow"><span class="top">Dilute</span><span class="arr-line"></span><span class="bottom">Lab Prep H<sub>2</sub></span></div> ZnSO<sub>4</sub> + H<sub>2</sub>&uarr;</span></li>
-        <li><span class="math">4Zn + 10HNO<sub>3</sub> <div class="rxn-arrow"><span class="top">Dilute (5%)</span><span class="arr-line"></span><span class="bottom">Warm</span></div> 4Zn(NO<sub>3</sub>)<sub>2</sub> + 5H<sub>2</sub>O + N<sub>2</sub>O</span></li>
+        <li><span class="math">2CO(g) + O<sub>2</sub>(g) <span class="rxn-arrow"><span class="top">&Delta;</span><span class="arr-line"></span><span class="bottom">Spark</span></span> 2CO<sub>2</sub>(g)</span></li>
+        <li><span class="math">ZnCO<sub>3</sub> <span class="rxn-arrow"><span class="top">&Delta; (Heat)</span><span class="arr-line"></span><span class="bottom">Calcination</span></span> ZnO + CO<sub>2</sub></span></li>
+        <li><span class="math">2FeSO<sub>4</sub>(s) <span class="rxn-arrow"><span class="top">&Delta; (Heat)</span><span class="arr-line"></span><span class="bottom">Strong</span></span> Fe<sub>2</sub>O<sub>3</sub>(s) + SO<sub>2</sub>(g) + SO<sub>3</sub>(g)</span></li>
+        <li><span class="math">Pb(NO<sub>3</sub>)<sub>2</sub> + 2KI <span class="rxn-arrow"><span class="top">PPT</span><span class="arr-line"></span><span class="bottom">Aqueous</span></span> PbI<sub>2</sub> + 2KNO<sub>3</sub></span></li>
+        <li><span class="math">CaO(s) + H<sub>2</sub>O <span class="rxn-arrow"><span class="top">Exothermic</span><span class="arr-line"></span><span class="bottom">Room Temp</span></span> Ca(OH)<sub>2</sub></span></li>
+        <li><span class="math">NaCl + AgNO<sub>3</sub> <span class="rxn-arrow"><span class="top">PPT</span><span class="arr-line"></span><span class="bottom">Fast</span></span> AgCl + NaNO<sub>3</sub></span></li>
+        <li><span class="math">Ca + 2HNO<sub>3</sub> <span class="rxn-arrow"><span class="top">Dilute</span><span class="arr-line"></span><span class="bottom">Acid-Metal</span></span> Ca(NO<sub>3</sub>)<sub>2</sub> + H<sub>2</sub>&uarr;</span></li>
+        <li><span class="math">2Al + 3H<sub>2</sub>SO<sub>4</sub> <span class="rxn-arrow"><span class="top">Dilute</span><span class="arr-line"></span><span class="bottom">Fast</span></span> Al<sub>2</sub>(SO<sub>4</sub>)<sub>3</sub> + 3H<sub>2</sub>&uarr;</span></li>
+        <li><span class="math">Ca(OH)<sub>2</sub> + CO<sub>2</sub> <span class="rxn-arrow"><span class="top">Limewater</span><span class="arr-line"></span><span class="bottom">Test</span></span> CaCO<sub>3</sub> + H<sub>2</sub>O</span></li>
+        <li><span class="math">Zn + 2HCl <span class="rxn-arrow"><span class="top">Dilute</span><span class="arr-line"></span><span class="bottom">Room Temp</span></span> ZnCl<sub>2</sub> + H<sub>2</sub>&uarr;</span></li>
+        <li><span class="math">Zn + 2NaOH <span class="rxn-arrow"><span class="top">&Delta; (Heat)</span><span class="arr-line"></span><span class="bottom">Conc. Base</span></span> Na<sub>2</sub>ZnO<sub>2</sub> + H<sub>2</sub>&uarr;</span></li>
+        <li><span class="math">Mg + 2HNO<sub>3</sub> <span class="rxn-arrow"><span class="top">Very Dil. (1%)</span><span class="arr-line"></span><span class="bottom">Cold</span></span> Mg(NO<sub>3</sub>)<sub>2</sub> + H<sub>2</sub>&uarr;</span></li>
+        <li><span class="math">Na<sub>2</sub>CO<sub>3</sub> + 2HCl <span class="rxn-arrow"><span class="top">Effervescence</span><span class="arr-line"></span><span class="bottom">Dilute</span></span> 2NaCl + H<sub>2</sub>O + CO<sub>2</sub></span></li>
+        <li><span class="math">Zn + H<sub>2</sub>SO<sub>4</sub> <span class="rxn-arrow"><span class="top">Dilute</span><span class="arr-line"></span><span class="bottom">Lab Prep H<sub>2</sub></span></span> ZnSO<sub>4</sub> + H<sub>2</sub>&uarr;</span></li>
+        <li><span class="math">4Zn + 10HNO<sub>3</sub> <span class="rxn-arrow"><span class="top">Dilute (5%)</span><span class="arr-line"></span><span class="bottom">Warm</span></span> 4Zn(NO<sub>3</sub>)<sub>2</sub> + 5H<sub>2</sub>O + N<sub>2</sub>O</span></li>
     </ul>
 
     <h3>Effects of oxidation reactions in everyday life:</h3>
-    <p><strong>1. Corrosion:</strong> Corrosion is a process in which metals are deteriorated by action of air, moisture, chemicals, etc. It is a redox reaction where metal gets oxidised to metal oxide and oxygen gets reduced to oxide ion.</p>
+    <p><strong>1. Corrosion:</strong> Corrosion is defined as the chemical process of slow destruction / eating up of metal surfaces when exposed to air, moisture, and chemicals over time. The corrosion of metals involves transfer of electrons from the metal to oxygen through water.</p>
+    
+    <p><strong>Detailed Chemical Mechanism of Iron Corrosion (Rusting):</strong></p>
+    <ul>
+        <li><strong>Oxidation Step:</strong> Iron atom loses electrons and oxidizes to Iron (III) ions:<br>
+        <span class="math">Fe <span class="rxn-arrow"><span class="top">Oxidation</span><span class="arr-line"></span><span class="bottom"></span></span> Fe<sup>3+</sup> + 3e<sup>-</sup></span></li>
+        <li><strong>Reduction Step:</strong> Oxygen gas in presence of moisture gains electrons and reduces to oxide ion:<br>
+        <span class="math">O<sub>2</sub> + 4e<sup>-</sup> <span class="rxn-arrow"><span class="top">Reduction</span><span class="arr-line"></span><span class="bottom"></span></span> 2O<sup>2-</sup></span></li>
+        <li><strong>Compound Formation:</strong> Iron (III) ions and oxide ions combine to form Iron (III) Oxide:<br>
+        <span class="math">2Fe<sup>3+</sup> + 3O<sup>2-</sup> <span class="rxn-arrow"><span class="top"></span><span class="arr-line"></span><span class="bottom"></span></span> Fe<sub>2</sub>O<sub>3</sub></span><br>
+        Also, Iron (III) ions react with hydroxide ions from moisture to form Iron (III) Hydroxide:<br>
+        <span class="math">Fe<sup>3+</sup> + 3OH<sup>-</sup> <span class="rxn-arrow"><span class="top"></span><span class="arr-line"></span><span class="bottom"></span></span> Fe(OH)<sub>3</sub></span></li>
+    </ul>
+
+    <p><strong>Conditions Necessary for Corrosion:</strong><br>
+    (i) Presence of oxygen in the air.<br>
+    (ii) Presence of moisture or water in the air.<br>
+    <em>Note:</em> Rate of corrosion increases if two metals are in contact or if air contains acidic pollutant gases like <span class="math">SO<sub>2</sub>, NO<sub>2</sub>, CO<sub>2</sub></span>.</p>
+
     <p><strong>Examples:</strong><br>
-    (a) Corrosion of iron is called rusting. Iron objects when left in moist open air for sometime get coated with a reddish brown powder. The process is known as rusting.<br>
-    (b) Green coating on Copper articles (Basic copper carbonate <span class="math">CuCO<sub>3</sub>&middot;Cu(OH)<sub>2</sub></span>) and black coating on silver ornaments (Silver sulphide <span class="math">Ag<sub>2</sub>S</span>) are another example of corrosion.</p>
+    (a) Rusting of iron (reddish brown powder).<br>
+    (b) Green coating on Copper articles (Basic copper carbonate <span class="math">CuCO<sub>3</sub>&middot;Cu(OH)<sub>2</sub></span>).<br>
+    (c) Black coating on Silver articles (Silver sulphide <span class="math">Ag<sub>2</sub>S</span>).</p>
 
     <p><strong>Effects of corrosion:</strong><br>
-    (a) Rusting causes damage to ships, car bodies, bridges, railings.<br>
-    (b) Corrosion is a wasteful process because it leads to wastage of tonnes of various metals every year and lot of money is spent to repair or replace it.</p>
+    (a) Damage to ships, car bodies, bridges, railings, railway tracks, and buildings.<br>
+    (b) Wasteful process leading to financial losses and metal destruction.</p>
 
-    <p><strong>Prevention of Rusting:</strong><br>
-    (a) The iron articles should be painted.<br>
-    (b) The machine parts should be oiled and greased.<br>
-    (c) Galvanised iron pipes should be used for water supply.<br>
-    (d) Iron can be coated with chromium to prevent rusting.</p>
+    <p><strong>Prevention of Rusting/Corrosion:</strong><br>
+    (a) Coating with paint, varnish, or grease.<br>
+    (b) Applying a thin layer of oil over metal surface.<br>
+    (c) Coating thick layer of corrosion resistant metal like Zinc (Galvanisation), Tin, or Chromium.<br>
+    (d) Alloying with other metals like chromium and nickel (e.g., Stainless Steel).</p>
 
-    <div class="mnemonics-box">
-        <p><strong>Mnemonics</strong></p>
-        <p><strong>Concept:</strong> Preventive ways of rusting<br>
-        <strong>Mnemonics:</strong> POGG<br>
-        <strong>Interpretations:</strong> Painting, Oiling, Greasing, Galvanising</p>
-    </div>
-
-    <p><strong>2. Rancidity:</strong> Rancidity is the process of slow oxidation of oil and fat, present in the food materials resulting in the production of foul odour and taste in them. When cooked food items are placed for a long time, they become rancid and unsuitable for the consumption.</p>
+    <p><strong>2. Rancidity:</strong> Rancidity is the process of slow oxidation of oils and fats present in food materials resulting in volatile bad smelling compounds causing foul odour and stale taste (common in cheese, curd, oily snacks left for long periods, especially in summer).</p>
     <p><strong>Rancidity can be prevented by the following ways:</strong><br>
-    (a) Storing the food in refrigerator.<br>
-    (b) Storing the food in air-tight container.<br>
-    (c) Addition of anti-oxidants (e.g., BHA - Butylated Hydroxyanisole, BHT) to food.<br>
-    (d) Storing the food in flush bags with unreactive gas, such as nitrogen to prevent the oxidation process.</p>
+    (a) Addition of food additives called <strong>Anti-oxidants</strong> (e.g., BHA - Butylated Hydroxyanisole, BHT) to check oxidation.<br>
+    (b) Storing food in air-tight containers to prevent oxygen access.<br>
+    (c) Storing food in refrigerator (low temperature slows reaction rate).<br>
+    (d) Flushing potato chip bags with unreactive gas like Nitrogen (<span class="math">N<sub>2</sub></span>) to exclude oxygen.</p>
 
     <!-- PYQ SECTION: CHAPTER 1 -->
     <div class="pyq-box">
@@ -615,17 +704,17 @@
         <div class="pyq-item">
             <span class="pyq-meta">[3M] (RBSE 2013)</span>
             <strong>3.</strong> Identify X, Y and Z in the following equations:<br>
-            i) <span class="math">Cu + CO<sub>2</sub> <div class="rxn-arrow"><span class="top">moisture</span><span class="arr-line"></span><span class="bottom"></span></div></span> Green compound (X)<br>
-            ii) <span class="math">Ag + Y <div class="rxn-arrow"><span class="top">air</span><span class="arr-line"></span><span class="bottom"></span></div></span> Black compound (<span class="math">Ag<sub>2</sub>S</span>)<br>
-            iii) <span class="math">FeSO<sub>4</sub> <div class="rxn-arrow"><span class="top">heat</span><span class="arr-line"></span><span class="bottom"></span></div> Fe<sub>2</sub>O<sub>3</sub> + SO<sub>3</sub> + Z</span>
+            i) <span class="math">Cu + CO<sub>2</sub> <span class="rxn-arrow"><span class="top">moisture</span><span class="arr-line"></span><span class="bottom"></span></span></span> Green compound (X)<br>
+            ii) <span class="math">Ag + Y <span class="rxn-arrow"><span class="top">air</span><span class="arr-line"></span><span class="bottom"></span></span></span> Black compound (<span class="math">Ag<sub>2</sub>S</span>)<br>
+            iii) <span class="math">FeSO<sub>4</sub> <span class="rxn-arrow"><span class="top">heat</span><span class="arr-line"></span><span class="bottom"></span></span> Fe<sub>2</sub>O<sub>3</sub> + SO<sub>3</sub> + Z</span>
         </div>
 
         <div class="pyq-item">
             <span class="pyq-meta">[3M] (RBSE 2013)</span>
             <strong>4.</strong> What happens when -<br>
-            i) <span class="math">CuSO<sub>4</sub>(aq) + Fe(s) <div class="rxn-arrow"><span class="top"></span><span class="arr-line"></span><span class="bottom"></span></div> ?</span><br>
-            ii) <span class="math">Zn(s) + H<sub>2</sub>SO<sub>4</sub>(l) <div class="rxn-arrow"><span class="top"></span><span class="arr-line"></span><span class="bottom"></span></div> ?</span><br>
-            iii) <span class="math">Na(s) + O<sub>2</sub>(g) <div class="rxn-arrow"><span class="top"></span><span class="arr-line"></span><span class="bottom"></span></div> ?</span>
+            i) <span class="math">CuSO<sub>4</sub>(aq) + Fe(s) <span class="rxn-arrow"><span class="top"></span><span class="arr-line"></span><span class="bottom"></span></span> ?</span><br>
+            ii) <span class="math">Zn(s) + H<sub>2</sub>SO<sub>4</sub>(l) <span class="rxn-arrow"><span class="top"></span><span class="arr-line"></span><span class="bottom"></span></span> ?</span><br>
+            iii) <span class="math">Na(s) + O<sub>2</sub>(g) <span class="rxn-arrow"><span class="top"></span><span class="arr-line"></span><span class="bottom"></span></span> ?</span>
         </div>
 
         <div class="pyq-item">
@@ -638,8 +727,8 @@
             <span class="pyq-meta">[3M] (RBSE 2013)</span>
             <strong>6.</strong> (a) What is displacement reaction?<br>
             (b) Identify A in the following reactions:<br>
-            (i) <span class="math">Zn + CuSO<sub>4</sub> <div class="rxn-arrow"><span class="top"></span><span class="arr-line"></span><span class="bottom"></span></div> A + Cu</span><br>
-            (ii) <span class="math">Na<sub>2</sub>SO<sub>4</sub> + BaCl<sub>2</sub> <div class="rxn-arrow"><span class="top"></span><span class="arr-line"></span><span class="bottom"></span></div> A + 2NaCl</span>
+            (i) <span class="math">Zn + CuSO<sub>4</sub> <span class="rxn-arrow"><span class="top"></span><span class="arr-line"></span><span class="bottom"></span></span> A + Cu</span><br>
+            (ii) <span class="math">Na<sub>2</sub>SO<sub>4</sub> + BaCl<sub>2</sub> <span class="rxn-arrow"><span class="top"></span><span class="arr-line"></span><span class="bottom"></span></span> A + 2NaCl</span>
         </div>
 
         <div class="pyq-item">
@@ -649,7 +738,7 @@
 
         <div class="pyq-item">
             <span class="pyq-meta">[3M] (RBSE 2015)</span>
-            <strong>8.</strong> In the reaction <span class="math">CuO + H<sub>2</sub> <div class="rxn-arrow"><span class="top"></span><span class="arr-line"></span><span class="bottom"></span></div> Cu + H<sub>2</sub>O</span> which substance gets oxidised and which gets reduced? Give one more example of such type of reaction.
+            <strong>8.</strong> In the reaction <span class="math">CuO + H<sub>2</sub> <span class="rxn-arrow"><span class="top"></span><span class="arr-line"></span><span class="bottom"></span></span> Cu + H<sub>2</sub>O</span> which substance gets oxidised and which gets reduced? Give one more example of such type of reaction.
         </div>
 
         <div class="pyq-item">
@@ -659,7 +748,7 @@
 
         <div class="pyq-item">
             <span class="pyq-meta">[3M] (RBSE 2014, 2016)</span>
-            <strong>10.</strong> What is redox reaction? In the reaction <span class="math">ZnO + C <div class="rxn-arrow"><span class="top"></span><span class="arr-line"></span><span class="bottom"></span></div> Zn + CO</span> which substance gets oxidised and which gets reduced?
+            <strong>10.</strong> What is redox reaction? In the reaction <span class="math">ZnO + C <span class="rxn-arrow"><span class="top"></span><span class="arr-line"></span><span class="bottom"></span></span> Zn + CO</span> which substance gets oxidised and which gets reduced?
         </div>
 
         <div class="pyq-item">
@@ -669,13 +758,13 @@
 
         <div class="pyq-item">
             <span class="pyq-meta">[1M] (RBSE 2017)</span>
-            <strong>12.</strong> Complete the reaction: <span class="math">2Mg + O<sub>2</sub> <div class="rxn-arrow"><span class="top"></span><span class="arr-line"></span><span class="bottom"></span></div> ?</span>
+            <strong>12.</strong> Complete the reaction: <span class="math">2Mg + O<sub>2</sub> <span class="rxn-arrow"><span class="top"></span><span class="arr-line"></span><span class="bottom"></span></span> ?</span>
         </div>
 
         <div class="pyq-item">
             <span class="pyq-meta">[3M] (RBSE 2017)</span>
             <strong>13.</strong> (a) What is done to prevent rancidity in foods containing fats?<br>
-            (b) In <span class="math">CuO + H<sub>2</sub> <div class="rxn-arrow"><span class="top"></span><span class="arr-line"></span><span class="bottom"></span></div> Cu + H<sub>2</sub>O</span>, which substance is being oxidized and which is reduced?
+            (b) In <span class="math">CuO + H<sub>2</sub> <span class="rxn-arrow"><span class="top"></span><span class="arr-line"></span><span class="bottom"></span></span> Cu + H<sub>2</sub>O</span>, which substance is being oxidized and which is reduced?
         </div>
 
         <div class="pyq-item">
@@ -692,8 +781,8 @@
         <div class="pyq-item">
             <span class="pyq-meta">[2M] (RBSE 2019)</span>
             <strong>16.</strong> In the following chemical equations:<br>
-            (i) <span class="math">C + O<sub>2</sub> <div class="rxn-arrow"><span class="top"></span><span class="arr-line"></span><span class="bottom"></span></div> CO<sub>2</sub></span><br>
-            (ii) <span class="math">2H<sub>2</sub>O <div class="rxn-arrow"><span class="top">Electric Current</span><span class="arr-line"></span><span class="bottom"></span></div> 2H<sub>2</sub> + O<sub>2</sub></span><br>
+            (i) <span class="math">C + O<sub>2</sub> <span class="rxn-arrow"><span class="top"></span><span class="arr-line"></span><span class="bottom"></span></span> CO<sub>2</sub></span><br>
+            (ii) <span class="math">2H<sub>2</sub>O <span class="rxn-arrow"><span class="top">Electric Current</span><span class="arr-line"></span><span class="bottom"></span></span> 2H<sub>2</sub> + O<sub>2</sub></span><br>
             a) Identify equation (i) and (ii) and write its types.<br>
             b) Write any one difference between equation (i) and (ii).
         </div>
@@ -711,18 +800,18 @@
         <div class="pyq-item">
             <span class="pyq-meta">[3M] (RBSE 2022)</span>
             <strong>19.</strong> i) Explain the oxidation reaction with example.<br>
-            ii) Balance the following chemical equation: <span class="math">NH<sub>3</sub> + CuO <div class="rxn-arrow"><span class="top"></span><span class="arr-line"></span><span class="bottom"></span></div> Cu + N<sub>2</sub> + H<sub>2</sub>O</span>
+            ii) Balance the following chemical equation: <span class="math">NH<sub>3</sub> + CuO <span class="rxn-arrow"><span class="top"></span><span class="arr-line"></span><span class="bottom"></span></span> Cu + N<sub>2</sub> + H<sub>2</sub>O</span>
         </div>
 
         <div class="pyq-item">
             <span class="pyq-meta">[3M] (RBSE 2022)</span>
             <strong>20.</strong> i) Explain the reduction reaction with example.<br>
-            ii) Balance the following chemical equation: <span class="math">NaOH + H<sub>2</sub>SO<sub>4</sub> <div class="rxn-arrow"><span class="top"></span><span class="arr-line"></span><span class="bottom"></span></div> Na<sub>2</sub>SO<sub>4</sub> + H<sub>2</sub>O</span>
+            ii) Balance the following chemical equation: <span class="math">NaOH + H<sub>2</sub>SO<sub>4</sub> <span class="rxn-arrow"><span class="top"></span><span class="arr-line"></span><span class="bottom"></span></span> Na<sub>2</sub>SO<sub>4</sub> + H<sub>2</sub>O</span>
         </div>
 
         <div class="pyq-item">
             <span class="pyq-meta">[1M] (RBSE 2023)</span>
-            <strong>21.</strong> In <span class="math">CuO + H<sub>2</sub> <div class="rxn-arrow"><span class="top">Heat</span><span class="arr-line"></span><span class="bottom"></span></div> Cu + H<sub>2</sub>O</span>, write the name of reactant reduced in above reaction.
+            <strong>21.</strong> In <span class="math">CuO + H<sub>2</sub> <span class="rxn-arrow"><span class="top">Heat</span><span class="arr-line"></span><span class="bottom"></span></span> Cu + H<sub>2</sub>O</span>, write the name of reactant reduced in above reaction.
         </div>
 
         <div class="pyq-item">
@@ -734,7 +823,7 @@
 
         <div class="pyq-item">
             <span class="pyq-meta">[1M] (RBSE 2024)</span>
-            <strong>23.</strong> In <span class="math">3Fe + H<sub>2</sub>O <div class="rxn-arrow"><span class="top"></span><span class="arr-line"></span><span class="bottom"></span></div> Fe<sub>3</sub>O<sub>4</sub> + H<sub>2</sub></span>, coefficient of Fe in balanced equation of the above reaction will be:<br>
+            <strong>23.</strong> In <span class="math">3Fe + H<sub>2</sub>O <span class="rxn-arrow"><span class="top"></span><span class="arr-line"></span><span class="bottom"></span></span> Fe<sub>3</sub>O<sub>4</sub> + H<sub>2</sub></span>, coefficient of Fe in balanced equation of the above reaction will be:<br>
             (A) 1 &nbsp;&nbsp;&nbsp;&nbsp; (B) 2 &nbsp;&nbsp;&nbsp;&nbsp; (C) 3 &nbsp;&nbsp;&nbsp;&nbsp; (D) 4
         </div>
 
@@ -764,7 +853,7 @@
 
         <div class="pyq-item">
             <span class="pyq-meta">[2M] (RBSE 2025)</span>
-            <strong>28.</strong> Identify the oxidised and reduced substances in the following reaction: <span class="math">MnO<sub>2</sub> + 4HCl <div class="rxn-arrow"><span class="top"></span><span class="arr-line"></span><span class="bottom"></span></div> MnCl<sub>2</sub> + 2H<sub>2</sub>O + Cl<sub>2</sub></span>.
+            <strong>28.</strong> Identify the oxidised and reduced substances in the following reaction: <span class="math">MnO<sub>2</sub> + 4HCl <span class="rxn-arrow"><span class="top"></span><span class="arr-line"></span><span class="bottom"></span></span> MnCl<sub>2</sub> + 2H<sub>2</sub>O + Cl<sub>2</sub></span>.
         </div>
 
         <div class="pyq-item">
@@ -792,17 +881,17 @@
         (ii) Barium chloride + Aluminium sulphate &rarr; Barium sulphate + Aluminium chloride<br>
         (iii) Sodium + Water &rarr; Sodium hydroxide + Hydrogen</p>
         <p><strong>Ans:</strong><br>
-        (i) <span class="math">H<sub>2</sub>(g) + Cl<sub>2</sub>(g) <div class="rxn-arrow"><span class="top"></span><span class="arr-line"></span><span class="bottom"></span></div> 2HCl(g)</span><br>
-        (ii) <span class="math">3BaCl<sub>2</sub>(aq) + Al<sub>2</sub>(SO<sub>4</sub>)<sub>3</sub>(aq) <div class="rxn-arrow"><span class="top"></span><span class="arr-line"></span><span class="bottom"></span></div> 3BaSO<sub>4</sub>(s)&darr; + 2AlCl<sub>3</sub>(aq)</span><br>
-        (iii) <span class="math">2Na(s) + 2H<sub>2</sub>O(l) <div class="rxn-arrow"><span class="top"></span><span class="arr-line"></span><span class="bottom"></span></div> 2NaOH(aq) + H<sub>2</sub>(g)&uarr;</span></p>
+        (i) <span class="math">H<sub>2</sub>(g) + Cl<sub>2</sub>(g) <span class="rxn-arrow"><span class="top"></span><span class="arr-line"></span><span class="bottom"></span></span> 2HCl(g)</span><br>
+        (ii) <span class="math">3BaCl<sub>2</sub>(aq) + Al<sub>2</sub>(SO<sub>4</sub>)<sub>3</sub>(aq) <span class="rxn-arrow"><span class="top"></span><span class="arr-line"></span><span class="bottom"></span></span> 3BaSO<sub>4</sub>(s)&darr; + 2AlCl<sub>3</sub>(aq)</span><br>
+        (iii) <span class="math">2Na(s) + 2H<sub>2</sub>O(l) <span class="rxn-arrow"><span class="top"></span><span class="arr-line"></span><span class="bottom"></span></span> 2NaOH(aq) + H<sub>2</sub>(g)&uarr;</span></p>
         <hr style="border:0; border-top:1px solid #bdc3c7; margin:10px 0;">
 
         <p><strong>Q3 (Page 6): Write a balanced chemical equation with state symbols for the following reactions:</strong><br>
         (i) Solutions of barium chloride and sodium sulphate in water react to give insoluble barium sulphate and the solution of sodium chloride.<br>
         (ii) Sodium hydroxide solution (in water) reacts with hydrochloric acid solution (in water) to produce sodium chloride solution and water.</p>
         <p><strong>Ans:</strong><br>
-        (i) <span class="math">BaCl<sub>2</sub>(aq) + Na<sub>2</sub>SO<sub>4</sub>(aq) <div class="rxn-arrow"><span class="top"></span><span class="arr-line"></span><span class="bottom"></span></div> BaSO<sub>4</sub>(s)&darr; + 2NaCl(aq)</span><br>
-        (ii) <span class="math">NaOH(aq) + HCl(aq) <div class="rxn-arrow"><span class="top"></span><span class="arr-line"></span><span class="bottom"></span></div> NaCl(aq) + H<sub>2</sub>O(l)</span></p>
+        (i) <span class="math">BaCl<sub>2</sub>(aq) + Na<sub>2</sub>SO<sub>4</sub>(aq) <span class="rxn-arrow"><span class="top"></span><span class="arr-line"></span><span class="bottom"></span></span> BaSO<sub>4</sub>(s)&darr; + 2NaCl(aq)</span><br>
+        (ii) <span class="math">NaOH(aq) + HCl(aq) <span class="rxn-arrow"><span class="top"></span><span class="arr-line"></span><span class="bottom"></span></span> NaCl(aq) + H<sub>2</sub>O(l)</span></p>
         <hr style="border:0; border-top:1px solid #bdc3c7; margin:10px 0;">
 
         <!-- Page 10 -->
@@ -811,7 +900,7 @@
         (ii) Write the reaction of the substance ‘X’ named in (i) above with water.</p>
         <p><strong>Ans:</strong><br>
         (i) The substance ‘X’ is <strong>Quicklime</strong> (Calcium oxide). Formula: <span class="math">CaO</span>.<br>
-        (ii) <span class="math">CaO(s) + H<sub>2</sub>O(l) <div class="rxn-arrow"><span class="top">Exothermic</span><span class="arr-line"></span><span class="bottom"></span></div> Ca(OH)<sub>2</sub>(aq) + Heat</span></p>
+        (ii) <span class="math">CaO(s) + H<sub>2</sub>O(l) <span class="rxn-arrow"><span class="top">Exothermic</span><span class="arr-line"></span><span class="bottom"></span></span> Ca(OH)<sub>2</sub>(aq) + Heat</span></p>
         <hr style="border:0; border-top:1px solid #bdc3c7; margin:10px 0;">
 
         <p><strong>Q5 (Page 10): Why is the amount of gas collected in one of the test tubes in Activity 1.7 (electrolysis of water) double of the amount collected in the other? Name this gas.</strong></p>
@@ -821,17 +910,17 @@
         <!-- Page 13 -->
         <p><strong>Q6 (Page 13): Why does the colour of copper sulphate solution change when an iron nail is dipped in it?</strong></p>
         <p><strong>Ans:</strong> Iron is more reactive than copper. It displaces copper from copper sulphate solution to form ferrous sulphate, causing the blue colour of the solution to fade to light green:<br>
-        <span class="math">Fe(s) + CuSO<sub>4</sub>(aq) <div class="rxn-arrow"><span class="top">Displacement</span><span class="arr-line"></span><span class="bottom"></span></div> FeSO<sub>4</sub>(aq) + Cu(s)</span></p>
+        <span class="math">Fe(s) + CuSO<sub>4</sub>(aq) <span class="rxn-arrow"><span class="top">Displacement</span><span class="arr-line"></span><span class="bottom"></span></span> FeSO<sub>4</sub>(aq) + Cu(s)</span></p>
         <hr style="border:0; border-top:1px solid #bdc3c7; margin:10px 0;">
 
         <p><strong>Q7 (Page 13): Give an example of a double displacement reaction other than the one given in Activity 1.10.</strong></p>
         <p><strong>Ans:</strong> Lead nitrate reacts with potassium iodide to form a yellow precipitate of lead iodide and potassium nitrate solution:<br>
-        <span class="math">Pb(NO<sub>3</sub>)<sub>2</sub>(aq) + 2KI(aq) <div class="rxn-arrow"><span class="top">Precipitation</span><span class="arr-line"></span><span class="bottom"></span></div> PbI<sub>2</sub>(s)&darr; + 2KNO<sub>3</sub>(aq)</span></p>
+        <span class="math">Pb(NO<sub>3</sub>)<sub>2</sub>(aq) + 2KI(aq) <span class="rxn-arrow"><span class="top">Precipitation</span><span class="arr-line"></span><span class="bottom"></span></span> PbI<sub>2</sub>(s)&darr; + 2KNO<sub>3</sub>(aq)</span></p>
         <hr style="border:0; border-top:1px solid #bdc3c7; margin:10px 0;">
 
         <p><strong>Q8 (Page 13): Identify the substances that are oxidized and the substances that are reduced in the following reactions:</strong><br>
-        (i) <span class="math">4Na(s) + O<sub>2</sub>(g) <div class="rxn-arrow"><span class="top"></span><span class="arr-line"></span><span class="bottom"></span></div> 2Na<sub>2</sub>O(s)</span><br>
-        (ii) <span class="math">CuO(s) + H<sub>2</sub>(g) <div class="rxn-arrow"><span class="top"></span><span class="arr-line"></span><span class="bottom"></span></div> Cu(s) + H<sub>2</sub>O(l)</span></p>
+        (i) <span class="math">4Na(s) + O<sub>2</sub>(g) <span class="rxn-arrow"><span class="top"></span><span class="arr-line"></span><span class="bottom"></span></span> 2Na<sub>2</sub>O(s)</span><br>
+        (ii) <span class="math">CuO(s) + H<sub>2</sub>(g) <span class="rxn-arrow"><span class="top"></span><span class="arr-line"></span><span class="bottom"></span></span> Cu(s) + H<sub>2</sub>O(l)</span></p>
         <p><strong>Ans:</strong><br>
         (i) <strong>Oxidized:</strong> Sodium (<span class="math">Na</span>); <strong>Reduced:</strong> Oxygen (<span class="math">O<sub>2</sub></span>).<br>
         (ii) <strong>Oxidized:</strong> Hydrogen (<span class="math">H<sub>2</sub></span>); <strong>Reduced:</strong> Copper oxide (<span class="math">CuO</span>).</p>

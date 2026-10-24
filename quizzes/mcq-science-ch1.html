@@ -1,0 +1,1003 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Class 10 Science - Ch 1: Chemical Reactions & Equations</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <!-- Google Fonts Inter -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: #f1f5f9;
+      border-radius: 4px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 4px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col antialiased selection:bg-indigo-500 selection:text-white">
+
+  <!-- Header -->
+  <header class="bg-indigo-700 text-white shadow-lg sticky top-0 z-30">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-wrap justify-between items-center gap-4">
+      <div class="flex items-center space-x-3">
+        <div class="bg-white/10 p-2.5 rounded-xl backdrop-blur-sm border border-white/10">
+          <i class="fa-solid fa-flask text-2xl text-amber-300"></i>
+        </div>
+        <div>
+          <h1 class="text-xl font-bold tracking-tight">Class 10 Science Quiz</h1>
+          <p class="text-xs text-indigo-200">Chapter 1: Chemical Reactions and Equations</p>
+        </div>
+      </div>
+      
+      <!-- Stats Pill -->
+      <div class="flex items-center gap-3 bg-indigo-800/80 px-4 py-2 rounded-xl border border-indigo-500/30 text-sm">
+        <div class="flex items-center gap-1.5">
+          <i class="fa-solid fa-trophy text-amber-400"></i>
+          <span class="font-medium text-indigo-200">Score:</span>
+          <span id="score-display" class="font-bold text-white text-base">0</span>
+          <span class="text-xs text-indigo-300">/ <span id="total-answered">0</span></span>
+        </div>
+        <div class="h-4 w-px bg-indigo-600"></div>
+        <div class="flex items-center gap-1.5">
+          <i class="fa-solid fa-chart-line text-emerald-400"></i>
+          <span class="font-medium text-indigo-200">Accuracy:</span>
+          <span id="accuracy-display" class="font-bold text-white">0%</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Progress Bar Container -->
+    <div class="w-full bg-indigo-950/40 h-2">
+      <div id="progress-bar" class="bg-amber-400 h-2 transition-all duration-300 ease-out" style="width: 0%"></div>
+    </div>
+  </header>
+
+  <!-- Navigation / Filter Toolbar -->
+  <section class="bg-white border-b border-slate-200 shadow-sm sticky top-[72px] z-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex flex-col md:flex-row gap-3 items-center justify-between">
+      
+      <!-- Search Box -->
+      <div class="relative w-full md:w-80">
+        <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
+        <input type="text" id="search-input" placeholder="Search keywords, reactions..." 
+          class="w-full pl-9 pr-4 py-2 text-sm bg-slate-100 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:bg-white transition-all"/>
+      </div>
+
+      <!-- Jump Grid Pill Drawer -->
+      <div class="flex items-center gap-2 w-full md:w-auto overflow-x-auto pb-1 md:pb-0 custom-scrollbar">
+        <span class="text-xs font-semibold text-slate-500 uppercase tracking-wider whitespace-nowrap">Jump To:</span>
+        <div id="question-navigator" class="flex gap-1.5 items-center">
+          <!-- Question buttons injected dynamically -->
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="flex items-center gap-2 self-end md:self-auto shrink-0">
+        <button id="reset-quiz-btn" class="text-xs font-semibold bg-rose-50 text-rose-600 hover:bg-rose-100 px-3 py-2 rounded-lg transition border border-rose-200 flex items-center gap-1.5">
+          <i class="fa-solid fa-rotate-right"></i> Reset
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-1 w-full">
+    
+    <!-- Score Summary Modal Banner (Shown when finished or via trigger) -->
+    <div id="result-card" class="hidden mb-8 bg-gradient-to-r from-indigo-900 to-slate-900 text-white rounded-2xl p-6 sm:p-8 shadow-xl relative overflow-hidden border border-indigo-700">
+      <div class="relative z-10 flex flex-col md:flex-row items-center justify-between gap-6">
+        <div class="space-y-2 text-center md:text-left">
+          <span class="bg-amber-400/20 text-amber-300 border border-amber-400/30 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Quiz Completed!</span>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-white">Great Job Finishing the Practice!</h2>
+          <p class="text-indigo-200 text-sm max-w-lg">Review your scores and explanations below to solidify your understanding of Chapter 1 concepts before exams.</p>
+        </div>
+        <div class="flex items-center gap-6 bg-white/10 p-4 rounded-xl backdrop-blur-md border border-white/10">
+          <div class="text-center">
+            <div id="final-score" class="text-3xl font-extrabold text-amber-300">0/50</div>
+            <div class="text-xs text-indigo-200 font-medium mt-1">Final Score</div>
+          </div>
+          <div class="h-10 w-px bg-white/20"></div>
+          <div class="text-center">
+            <div id="final-accuracy" class="text-3xl font-extrabold text-emerald-300">0%</div>
+            <div class="text-xs text-indigo-200 font-medium mt-1">Accuracy</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Active Question Card Container -->
+    <div id="quiz-container" class="space-y-6">
+      <!-- Questions cards will be dynamically rendered here -->
+    </div>
+
+    <!-- Empty State for Search -->
+    <div id="no-results" class="hidden text-center py-16 bg-white rounded-2xl border border-slate-200">
+      <i class="fa-solid fa-file-circle-xmark text-5xl text-slate-300 mb-4"></i>
+      <h3 class="text-lg font-bold text-slate-700">No matching questions found</h3>
+      <p class="text-sm text-slate-500 mt-1">Try searching with another chemical term like "Redox", "Lead nitrate", or "Exothermic".</p>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-white border-t border-slate-200 py-6 text-center text-xs text-slate-500 mt-auto">
+    <div class="max-w-7xl mx-auto px-4">
+      <p class="font-medium">Class 10 Science • Chapter 1: Chemical Reactions and Equations</p>
+      <p class="mt-1 text-slate-400">Interactive Revision Portal • Designed for Board Exam Preparation</p>
+    </div>
+  </footer>
+
+  <!-- JavaScript App Logic & Question Bank -->
+  <script>
+    // 50 Questions Data Bank
+    const quizData = [
+      {
+        id: 1,
+        question: "Which of the following is a physical change?",
+        options: [
+          "Burning of wood",
+          "Melting of ice",
+          "Rusting of iron",
+          "Digestion of food"
+        ],
+        answer: 1,
+        explanation: "Melting of ice is a physical change because no new chemical substance is formed. The chemical composition of ice and water remains H₂O. All other options involve chemical changes with new substances."
+      },
+      {
+        id: 2,
+        question: "When magnesium ribbon is burnt in air, the ash formed is white in color. What is this white powder chemically?",
+        options: [
+          "Magnesium oxide",
+          "Magnesium hydroxide",
+          "Magnesium carbonate",
+          "Magnesium sulfate"
+        ],
+        answer: 0,
+        explanation: "Magnesium reacts with atmospheric oxygen on burning to form Magnesium Oxide (MgO), which appears as a dazzling white flame leaving behind a white powder: 2Mg + O₂ → 2MgO."
+      },
+      {
+        id: 3,
+        question: "Why is magnesium ribbon cleaned with sandpaper before burning in air?",
+        options: [
+          "To make it shiny for better heat absorption",
+          "To remove the protective layer of basic magnesium oxide/carbonate",
+          "To increase its ignition temperature",
+          "To prevent production of toxic smoke"
+        ],
+        answer: 1,
+        explanation: "Magnesium reacts slowly with moist air to form a protective layer of basic magnesium carbonate/oxide on its surface. Cleaning it with sandpaper removes this layer so it burns smoothly."
+      },
+      {
+        id: 4,
+        question: "Which law is satisfied by balancing a chemical equation?",
+        options: [
+          "Law of Definite Proportions",
+          "Law of Multiple Proportions",
+          "Law of Conservation of Mass",
+          "Law of Conservation of Energy"
+        ],
+        answer: 2,
+        explanation: "The Law of Conservation of Mass states that mass can neither be created nor destroyed in a chemical reaction. Thus, total mass of reactants must equal total mass of products."
+      },
+      {
+        id: 5,
+        question: "Consider the equation: a Fe + b H₂O → c Fe₃O₄ + d H₂. What are the balanced values of a, b, c, and d?",
+        options: [
+          "a=3, b=4, c=1, d=4",
+          "a=1, b=2, c=1, d=2",
+          "a=2, b=3, c=1, d=3",
+          "a=3, b=2, c=1, d=2"
+        ],
+        answer: 0,
+        explanation: "Balancing the equation gives: 3Fe + 4H₂O → Fe₃O₄ + 4H₂. Coefficients are a=3, b=4, c=1, d=4."
+      },
+      {
+        id: 6,
+        question: "Which gas is evolved when dilute hydrochloric acid is added to reactive metals like zinc?",
+        options: [
+          "Oxygen gas",
+          "Hydrogen gas",
+          "Chlorine gas",
+          "Carbon dioxide gas"
+        ],
+        answer: 1,
+        explanation: "Metals react with acids to liberate hydrogen gas along with salt formation: Zn + 2HCl → ZnCl₂ + H₂↑. Hydrogen gas burns with a characteristic pop sound."
+      },
+      {
+        id: 7,
+        question: "What type of reaction is represented by: CaO(s) + H₂O(l) → Ca(OH)₂(aq) + Heat?",
+        options: [
+          "Decomposition and Endothermic",
+          "Combination and Exothermic",
+          "Displacement and Endothermic",
+          "Double displacement and Exothermic"
+        ],
+        answer: 1,
+        explanation: "Two reactants combine to form a single product (Combination reaction), and a large amount of heat energy is released (Exothermic reaction)."
+      },
+      {
+        id: 8,
+        question: "What is the common name of Calcium Hydroxide [Ca(OH)₂]?",
+        options: [
+          "Quick lime",
+          "Slaked lime",
+          "Limestone",
+          "Plaster of Paris"
+        ],
+        answer: 1,
+        explanation: "Calcium oxide (CaO) is quicklime, Calcium hydroxide [Ca(OH)₂] is slaked lime, and Calcium carbonate (CaCO₃) is limestone."
+      },
+      {
+        id: 9,
+        question: "Slaked lime solution is applied to walls during whitewashing. What substance gives walls a shiny finish after 2-3 days?",
+        options: [
+          "Calcium oxide",
+          "Calcium hydrogen carbonate",
+          "Calcium carbonate",
+          "Calcium sulfate"
+        ],
+        answer: 2,
+        explanation: "Ca(OH)₂ reacts slowly with CO₂ gas in the air to form a thin shiny layer of Calcium Carbonate (CaCO₃) on the walls: Ca(OH)₂ + CO₂ → CaCO₃ + H₂O."
+      },
+      {
+        id: 10,
+        question: "Respiration is considered which type of chemical process?",
+        options: [
+          "Endothermic reaction",
+          "Exothermic reaction",
+          "Reduction reaction",
+          "Decomposition reaction"
+        ],
+        answer: 1,
+        explanation: "During respiration, glucose reacts with oxygen in body cells to release energy: C₆H₁₂O₆ + 6O₂ → 6CO₂ + 6H₂O + Energy. Hence, it is exothermic."
+      },
+      {
+        id: 11,
+        question: "The decomposition of vegetable matter into compost is an example of:",
+        options: [
+          "Endothermic reaction",
+          "Exothermic reaction",
+          "Displacement reaction",
+          "Double displacement reaction"
+        ],
+        answer: 1,
+        explanation: "Composting is a biological decomposition reaction driven by microbes that liberates thermal energy, making it an exothermic reaction."
+      },
+      {
+        id: 12,
+        question: "When green Ferrous Sulphate crystals (FeSO₄·7H₂O) are heated in a dry test tube, what color change is observed?",
+        options: [
+          "Green to blue",
+          "Green to white then reddish-brown",
+          "Green to black",
+          "Green to yellow"
+        ],
+        answer: 1,
+        explanation: "Ferrous sulphate crystals lose water molecules upon heating turning white (anhydrous FeSO₄), and further decompose into ferric oxide (Fe₂O₃) which is reddish-brown."
+      },
+      {
+        id: 13,
+        question: "What gases are evolved during thermal decomposition of Ferrous Sulphate crystals?",
+        options: [
+          "SO₂ and SO₃",
+          "NO₂ and O₂",
+          "CO and CO₂",
+          "H₂ and O₂"
+        ],
+        answer: 0,
+        explanation: "Thermal decomposition equation: 2FeSO₄(s) --Heat--> Fe₂O₃(s) + SO₂(g) + SO₃(g). The gases SO₂ and SO₃ have a burning sulfur smell."
+      },
+      {
+        id: 14,
+        question: "On heating lead nitrate powder in a test tube, brown fumes are emitted. These brown fumes consist of:",
+        options: [
+          "Lead oxide (PbO)",
+          "Nitrogen dioxide (NO₂)",
+          "Oxygen (O₂)",
+          "Nitrous oxide (N₂O)"
+        ],
+        answer: 1,
+        explanation: "Heating Lead Nitrate [2Pb(NO₃)₂] yields 2PbO (yellow residue) + 4NO₂ (brown fumes) + O₂ gas."
+      },
+      {
+        id: 15,
+        question: "The chemical reaction involved in silver halide black-and-white photography is an example of:",
+        options: [
+          "Thermal decomposition",
+          "Photolytic decomposition",
+          "Electrolytic decomposition",
+          "Displacement reaction"
+        ],
+        answer: 1,
+        explanation: "Silver chloride/bromide decomposes into silver and halogen in the presence of sunlight (light energy). Example: 2AgCl --Sunlight--> 2Ag + Cl₂."
+      },
+      {
+        id: 16,
+        question: "When white Silver Chloride (AgCl) is placed in sunlight for some time, it turns:",
+        options: [
+          "Yellow",
+          "Grey",
+          "Red",
+          "Blue"
+        ],
+        answer: 1,
+        explanation: "AgCl turns grey in sunlight due to the decomposition of silver chloride into metallic silver element: 2AgCl(s) → 2Ag(s) [Grey] + Cl₂(g)."
+      },
+      {
+        id: 17,
+        question: "Electrolysis of water is a decomposition reaction. The mole ratio of hydrogen and oxygen gases liberated at cathode and anode is:",
+        options: [
+          "1:1",
+          "2:1",
+          "1:2",
+          "4:1"
+        ],
+        answer: 1,
+        explanation: "Water decomposition equation: 2H₂O(l) → 2H₂(g) + O₂(g). 2 volumes of H₂ gas are produced for every 1 volume of O₂ gas, giving a 2:1 mole ratio."
+      },
+      {
+        id: 18,
+        question: "During electrolysis of water, at which electrode is hydrogen gas collected?",
+        options: [
+          "Anode (+ electrode)",
+          "Cathode (- electrode)",
+          "At both electrodes equally",
+          "In the electrolyte liquid only"
+        ],
+        answer: 1,
+        explanation: "Hydrogen ions (H⁺) are positively charged and move toward the negatively charged electrode (Cathode) to form Hydrogen gas."
+      },
+      {
+        id: 19,
+        question: "Reactions in which energy/heat is absorbed from surroundings are called:",
+        options: [
+          "Exothermic reactions",
+          "Endothermic reactions",
+          "Redox reactions",
+          "Precipitation reactions"
+        ],
+        answer: 1,
+        explanation: "Endothermic reactions absorb energy (heat, light, electrical energy) to break chemical bonds in reactants."
+      },
+      {
+        id: 20,
+        question: "When an iron nail is dipped in blue copper sulphate solution (CuSO₄), what change occurs after a few hours?",
+        options: [
+          "Solution turns green and brown deposit forms on iron nail",
+          "Solution turns colorless and iron nail dissolves completely",
+          "Solution turns dark blue and nail becomes shiny",
+          "No visible change occurs"
+        ],
+        answer: 0,
+        explanation: "Iron is more reactive than Copper. It displaces copper: Fe + CuSO₄ (blue) → FeSO₄ (light green) + Cu (brown deposit on nail)."
+      },
+      {
+        id: 21,
+        question: "Which element is more reactive than copper among the following?",
+        options: [
+          "Gold (Au)",
+          "Silver (Ag)",
+          "Zinc (Zn)",
+          "Platinum (Pt)"
+        ],
+        answer: 2,
+        explanation: "According to the reactivity series, Zinc (Zn) and Iron (Fe) are above Copper (Cu), while Ag, Au, and Pt are below Copper."
+      },
+      {
+        id: 22,
+        question: "Which of the following is a displacement reaction?",
+        options: [
+          "CaCO₃ → CaO + CO₂",
+          "CaO + H₂O → Ca(OH)₂",
+          "Fe + CuSO₄ → FeSO₄ + Cu",
+          "NaOH + HCl → NaCl + H₂O"
+        ],
+        answer: 2,
+        explanation: "In Fe + CuSO₄ → FeSO₄ + Cu, the more reactive iron displaces copper from copper sulphate solution."
+      },
+      {
+        id: 23,
+        question: "What product is formed as a white precipitate when Sodium Sulphate solution reacts with Barium Chloride solution?",
+        options: [
+          "Sodium Chloride (NaCl)",
+          "Barium Sulphate (BaSO₄)",
+          "Barium Sulphite (BaSO₃)",
+          "Sodium Oxide (Na₂O)"
+        ],
+        answer: 1,
+        explanation: "Double displacement equation: Na₂SO₄(aq) + BaCl₂(aq) → BaSO₄(s) [White ppt] + 2NaCl(aq)."
+      },
+      {
+        id: 24,
+        question: "Any reaction that produces an insoluble solid precipitate in water is known as a:",
+        options: [
+          "Thermal reaction",
+          "Precipitation reaction",
+          "Oxidation reaction",
+          "Combustion reaction"
+        ],
+        answer: 1,
+        explanation: "A reaction in which an insoluble solid called precipitate forms and separates out from the aqueous solution is a precipitation reaction."
+      },
+      {
+        id: 25,
+        question: "Double displacement reactions involve which of the following mechanisms?",
+        options: [
+          "Transfer of electrons only",
+          "Exchange of ions between reactants",
+          "Combination of elements into compounds",
+          "Breakdown of complex molecule by light"
+        ],
+        answer: 1,
+        explanation: "Double displacement reactions occur when two ionic compounds exchange their positive and negative ions to form two new compounds."
+      },
+      {
+        id: 26,
+        question: "In terms of oxygen transfer, Oxidation is defined as:",
+        options: [
+          "Gain of hydrogen or loss of oxygen",
+          "Gain of oxygen or loss of hydrogen",
+          "Loss of electrons only",
+          "Gain of electrons only"
+        ],
+        answer: 1,
+        explanation: "Oxidation involves the addition/gain of oxygen atoms or removal/loss of hydrogen atoms from a substance."
+      },
+      {
+        id: 27,
+        question: "In terms of hydrogen transfer, Reduction is defined as:",
+        options: [
+          "Gain of oxygen",
+          "Loss of hydrogen",
+          "Gain of hydrogen or loss of oxygen",
+          "Loss of both oxygen and hydrogen"
+        ],
+        answer: 2,
+        explanation: "Reduction involves the gain of hydrogen atoms or removal/loss of oxygen atoms from a substance."
+      },
+      {
+        id: 28,
+        question: "Consider the reaction: CuO + H₂ → Cu + H₂O. Which substance is reduced?",
+        options: [
+          "CuO",
+          "H₂",
+          "Cu",
+          "H₂O"
+        ],
+        answer: 0,
+        explanation: "Copper Oxide (CuO) loses oxygen to become elemental Copper (Cu). Loss of oxygen is reduction, so CuO is reduced."
+      },
+      {
+        id: 29,
+        question: "In the reaction: CuO + H₂ → Cu + H₂O, which substance acts as the reducing agent?",
+        options: [
+          "CuO",
+          "H₂",
+          "Cu",
+          "H₂O"
+        ],
+        answer: 1,
+        explanation: "Hydrogen (H₂) gains oxygen and gets oxidized. The substance that undergoes oxidation acts as the reducing agent."
+      },
+      {
+        id: 30,
+        question: "In the redox reaction: MnO₂ + 4HCl → MnCl₂ + 2H₂O + Cl₂, identify the substance oxidized.",
+        options: [
+          "MnO₂",
+          "HCl",
+          "MnCl₂",
+          "Cl₂"
+        ],
+        answer: 1,
+        explanation: "HCl loses hydrogen to form Cl₂ gas. Removal of hydrogen is oxidation, so HCl is oxidized."
+      },
+      {
+        id: 31,
+        question: "When copper powder is heated in a china dish, its surface becomes coated with a black substance. What is this black substance?",
+        options: [
+          "Copper carbonate",
+          "Copper nitrate",
+          "Copper(II) oxide (CuO)",
+          "Copper sulphate"
+        ],
+        answer: 2,
+        explanation: "Copper reacts with atmospheric oxygen upon heating to form black Copper(II) oxide: 2Cu + O₂ --Heat--> 2CuO."
+      },
+      {
+        id: 32,
+        question: "How can the black coating of Copper Oxide (CuO) be reversed back to brown Copper metal?",
+        options: [
+          "By adding cold water",
+          "By passing Hydrogen gas over heated CuO",
+          "By passing Carbon dioxide gas over CuO",
+          "By placing CuO in sunlight"
+        ],
+        answer: 1,
+        explanation: "Passing H₂ gas over heated CuO reduces it back to brown copper metal: CuO + H₂ --Heat--> Cu + H₂O."
+      },
+      {
+        id: 33,
+        question: "Corrosion of iron is commonly called rusting. What is the chemical formula of rust?",
+        options: [
+          "Fe₂O₃",
+          "Fe₃O₄",
+          "Fe₂O₃ · xH₂O",
+          "Fe(OH)₃"
+        ],
+        answer: 2,
+        explanation: "Rust is hydrated ferric oxide with formula Fe₂O₃·xH₂O formed when iron reacts with oxygen and moisture."
+      },
+      {
+        id: 34,
+        question: "What is the color of the coating formed on Silver metal when it undergoes corrosion?",
+        options: [
+          "Green",
+          "Black",
+          "Brown",
+          "White"
+        ],
+        answer: 1,
+        explanation: "Silver reacts with hydrogen sulfide (H₂S) gas present in air to form a black coating of Silver Sulfide (Ag₂S)."
+      },
+      {
+        id: 35,
+        question: "When Copper articles are exposed to moist air for a long time, they acquire a green coating. Chemically, this green coating is:",
+        options: [
+          "Copper sulfate",
+          "Copper nitrate",
+          "Basic copper carbonate [CuCO₃·Cu(OH)₂]",
+          "Copper hydroxide"
+        ],
+        answer: 2,
+        explanation: "Copper reacts slowly with moist CO₂, O₂, and water in air to form a green coating of basic copper carbonate."
+      },
+      {
+        id: 36,
+        question: "Rancidity in food products containing fats and oils is caused due to their:",
+        options: [
+          "Reduction",
+          "Oxidation",
+          "Decomposition by heat",
+          "Hydrolysis"
+        ],
+        answer: 1,
+        explanation: "When fats and oils are exposed to oxygen in air, they undergo slow oxidation, resulting in unpleasant smell and taste (rancidity)."
+      },
+      {
+        id: 37,
+        question: "Which gas is flushed into bags of potato chips to prevent rancidity?",
+        options: [
+          "Oxygen gas",
+          "Hydrogen gas",
+          "Nitrogen gas",
+          "Carbon dioxide gas"
+        ],
+        answer: 2,
+        explanation: "Nitrogen gas is an unreactive inert gas that displaces oxygen in the bag, preventing the oxidation of oils and fats in chips."
+      },
+      {
+        id: 38,
+        question: "Substances added to foods containing fats and oils to prevent their oxidation are called:",
+        options: [
+          "Oxidizers",
+          "Antioxidants",
+          "Catalysts",
+          "Disinfectants"
+        ],
+        answer: 1,
+        explanation: "Antioxidants (like BHA, BHT) slow down or prevent the oxidation process of fat and oil molecules."
+      },
+      {
+        id: 39,
+        question: "Which observation confirms that a chemical reaction has taken place?",
+        options: [
+          "Change in state or color",
+          "Evolution of a gas",
+          "Change in temperature",
+          "All of the above"
+        ],
+        answer: 3,
+        explanation: "Chemical reactions are identified by observable changes including change in state, color change, evolution of gas, formation of precipitate, or temperature change."
+      },
+      {
+        id: 40,
+        question: "When carbon dioxide gas is passed through lime water [Ca(OH)₂] for a short duration, lime water turns milky due to formation of:",
+        options: [
+          "CaCO₃",
+          "Ca(HCO₃)₂",
+          "CaO",
+          "CaCl₂"
+        ],
+        answer: 0,
+        explanation: "CO₂ reacts with lime water to form an insoluble white precipitate of Calcium Carbonate (CaCO₃), making the solution milky."
+      },
+      {
+        id: 41,
+        question: "What happens when excess Carbon Dioxide gas is passed through milky lime water?",
+        options: [
+          "Milkiness increases further",
+          "Milkiness disappears due to formation of soluble Ca(HCO₃)₂",
+          "Solution turns bright red",
+          "A green precipitate is formed"
+        ],
+        answer: 1,
+        explanation: "On passing excess CO₂, insoluble CaCO₃ converts into water-soluble Calcium Hydrogen Carbonate [Ca(HCO₃)₂], making the milkiness disappear."
+      },
+      {
+        id: 42,
+        question: "Which of the following processes represents a chemical reaction?",
+        options: [
+          "Storing oxygen gas under pressure in a gas cylinder",
+          "Liquefaction of air",
+          "Keeping petrol in an open china dish in shade",
+          "Heating copper wire in presence of air at high temperature"
+        ],
+        answer: 3,
+        explanation: "Heating copper wire in air causes a chemical reaction forming copper oxide (CuO). The other three options are physical processes."
+      },
+      {
+        id: 43,
+        question: "A balanced chemical equation complies with which fundamental law?",
+        options: [
+          "Law of Conservation of Mass",
+          "Law of Constant Proportions",
+          "Avogadro's Law",
+          "Gay-Lussac's Law"
+        ],
+        answer: 0,
+        explanation: "The number of atoms of each element remains identical before and after a reaction to preserve total mass (Law of Conservation of Mass)."
+      },
+      {
+        id: 44,
+        question: "Reaction between Zinc and dilute Sulphuric Acid is expressed as Zn + H₂SO₄ → ZnSO₄ + H₂. What type of reaction is this?",
+        options: [
+          "Combination reaction",
+          "Single displacement reaction",
+          "Double displacement reaction",
+          "Decomposition reaction"
+        ],
+        answer: 1,
+        explanation: "Zinc replaces/displaces Hydrogen from dilute sulphuric acid as Zinc is higher than Hydrogen in the reactivity series."
+      },
+      {
+        id: 45,
+        question: "What symbol is used in a chemical equation to indicate an aqueous solution of a substance dissolved in water?",
+        options: [
+          "(s)",
+          "(l)",
+          "(g)",
+          "(aq)"
+        ],
+        answer: 3,
+        explanation: "The state notation '(aq)' stands for aqueous, denoting that the solute reactant/product is dissolved in water."
+      },
+      {
+        id: 46,
+        question: "What is observed when Lead Nitrate solution is mixed with Potassium Iodide solution in a test tube?",
+        options: [
+          "A yellow precipitate of Lead Iodide is formed",
+          "A white precipitate of Potassium Nitrate is formed",
+          "Red brown fumes of NO₂ gas are evolved",
+          "No visible chemical reaction takes place"
+        ],
+        answer: 0,
+        explanation: "Pb(NO₃)₂ + 2KI → PbI₂↓ (bright yellow precipitate) + 2KNO₃. This is a double displacement and precipitation reaction."
+      },
+      {
+        id: 47,
+        question: "Thermal decomposition of Calcium Carbonate (Limestone) produces Quicklime (CaO) and Carbon Dioxide. What is Quicklime used for?",
+        options: [
+          "In manufacture of cement",
+          "In photography",
+          "As an antioxidant in food",
+          "As a fuel in rockets"
+        ],
+        answer: 0,
+        explanation: "Calcium Oxide (CaO / Quicklime) is an important industrial raw material used extensively in the manufacture of cement and glass."
+      },
+      {
+        id: 48,
+        question: "Which of the following is an example of an Endothermic decomposition reaction?",
+        options: [
+          "Burning of natural gas (Methane)",
+          "Photosynthesis in plants",
+          "Electrolysis of molten water",
+          "Both B and C"
+        ],
+        answer: 3,
+        explanation: "Photosynthesis absorbs sunlight energy, and electrolysis of water absorbs electrical energy to decompose water molecules; both are endothermic."
+      },
+      {
+        id: 49,
+        question: "In the equation: Fe₂O₃ + 2Al → Al₂O₃ + 2Fe + Heat (Thermite reaction), aluminum acts as a:",
+        options: [
+          "Oxidizing agent",
+          "Reducing agent",
+          "Catalyst",
+          "Precipitating agent"
+        ],
+        answer: 1,
+        explanation: "Aluminum reduces ferric oxide to liquid iron metal while itself getting oxidized to Al₂O₃. Thus, Aluminum is the reducing agent."
+      },
+      {
+        id: 50,
+        question: "Method used to prevent rusting of iron articles by applying a protective coating of Zinc metal is called:",
+        options: [
+          "Anodizing",
+          "Galvanization",
+          "Alloying",
+          "Electrolysis"
+        ],
+        answer: 1,
+        explanation: "Galvanization is the process of applying a protective coating of sacrificial zinc metal onto iron or steel to prevent rusting."
+      }
+    ];
+
+    // State Management
+    let userAnswers = {}; // { questionId: selectedOptionIndex }
+    let currentFilter = 'all'; // 'all', 'unanswered', 'correct', 'incorrect'
+
+    // DOM Elements
+    const quizContainer = document.getElementById('quiz-container');
+    const scoreDisplay = document.getElementById('score-display');
+    const totalAnsweredDisplay = document.getElementById('total-answered');
+    const accuracyDisplay = document.getElementById('accuracy-display');
+    const progressBar = document.getElementById('progress-bar');
+    const searchInput = document.getElementById('search-input');
+    const questionNavigator = document.getElementById('question-navigator');
+    const resultCard = document.getElementById('result-card');
+    const finalScore = document.getElementById('final-score');
+    const finalAccuracy = document.getElementById('final-accuracy');
+    const noResults = document.getElementById('no-results');
+    const resetBtn = document.getElementById('reset-quiz-btn');
+
+    // Initialize Application
+    function initQuiz() {
+      renderNavigator();
+      renderQuestions(quizData);
+      updateStats();
+
+      // Search Listener
+      searchInput.addEventListener('input', handleSearch);
+
+      // Reset Listener
+      resetBtn.addEventListener('click', resetQuiz);
+    }
+
+    // Render Jump Navigator Buttons
+    function renderNavigator() {
+      questionNavigator.innerHTML = '';
+      quizData.forEach((q, index) => {
+        const btn = document.createElement('button');
+        btn.id = `nav-btn-${q.id}`;
+        btn.className = `w-8 h-8 rounded-lg text-xs font-bold transition flex items-center justify-center shrink-0 border ${getNavBtnStyle(q.id)}`;
+        btn.innerText = index + 1;
+        btn.onclick = () => scrollToQuestion(q.id);
+        questionNavigator.appendChild(btn);
+      });
+    }
+
+    function getNavBtnStyle(qId) {
+      if (userAnswers[qId] === undefined) {
+        return 'bg-slate-100 text-slate-600 border-slate-200 hover:bg-slate-200';
+      }
+      const q = quizData.find(item => item.id === qId);
+      if (userAnswers[qId] === q.answer) {
+        return 'bg-emerald-500 text-white border-emerald-600 shadow-sm';
+      } else {
+        return 'bg-rose-500 text-white border-rose-600 shadow-sm';
+      }
+    }
+
+    // Render Question Cards
+    function renderQuestions(questions) {
+      quizContainer.innerHTML = '';
+      
+      if (questions.length === 0) {
+        noResults.classList.remove('hidden');
+        return;
+      } else {
+        noResults.classList.add('hidden');
+      }
+
+      questions.forEach((q) => {
+        const isAnswered = userAnswers[q.id] !== undefined;
+        const selectedOpt = userAnswers[q.id];
+
+        const card = document.createElement('div');
+        card.id = `question-card-${q.id}`;
+        card.className = "bg-white rounded-2xl p-5 sm:p-6 shadow-sm border border-slate-200/80 transition hover:shadow-md";
+
+        let optionsHTML = '';
+        const labels = ['A', 'B', 'C', 'D'];
+
+        q.options.forEach((opt, idx) => {
+          let btnStyle = "bg-slate-50 border-slate-200 hover:bg-slate-100 text-slate-700";
+          let iconHTML = `<span class="w-6 h-6 rounded-md bg-white border border-slate-300 text-xs font-bold flex items-center justify-center mr-3 text-slate-500">${labels[idx]}</span>`;
+
+          if (isAnswered) {
+            if (idx === q.answer) {
+              // Right option
+              btnStyle = "bg-emerald-50 border-emerald-400 text-emerald-900 font-medium ring-2 ring-emerald-400/30";
+              iconHTML = `<span class="w-6 h-6 rounded-md bg-emerald-500 text-white text-xs font-bold flex items-center justify-center mr-3"><i class="fa-solid fa-check"></i></span>`;
+            } else if (idx === selectedOpt) {
+              // Wrong selected option
+              btnStyle = "bg-rose-50 border-rose-400 text-rose-900 font-medium ring-2 ring-rose-400/30";
+              iconHTML = `<span class="w-6 h-6 rounded-md bg-rose-500 text-white text-xs font-bold flex items-center justify-center mr-3"><i class="fa-solid fa-xmark"></i></span>`;
+            } else {
+              // Other options when disabled
+              btnStyle = "bg-slate-50/50 border-slate-100 text-slate-400 cursor-not-allowed";
+              iconHTML = `<span class="w-6 h-6 rounded-md bg-slate-100 border border-slate-200 text-xs font-bold flex items-center justify-center mr-3 text-slate-400">${labels[idx]}</span>`;
+            }
+          }
+
+          optionsHTML += `
+            <button 
+              ${isAnswered ? 'disabled' : ''} 
+              onclick="selectOption(${q.id}, ${idx})"
+              class="w-full text-left p-3.5 rounded-xl border text-sm sm:text-base flex items-center transition duration-150 ${btnStyle}">
+              ${iconHTML}
+              <span class="flex-1">${opt}</span>
+            </button>
+          `;
+        });
+
+        // Explanation Box Visibility
+        const explanationHTML = isAnswered ? `
+          <div class="mt-5 p-4 rounded-xl bg-indigo-50/70 border border-indigo-100 text-sm text-slate-700 space-y-2 animate-fadeIn">
+            <div class="flex items-center gap-2 font-bold text-indigo-900">
+              <i class="fa-solid fa-circle-info text-indigo-600"></i>
+              <span>Explanation & Key Concepts:</span>
+            </div>
+            <p class="leading-relaxed text-slate-600">${q.explanation}</p>
+          </div>
+        ` : '';
+
+        card.innerHTML = `
+          <div class="flex items-start justify-between gap-4 mb-4">
+            <span class="bg-indigo-100 text-indigo-800 text-xs font-bold px-3 py-1 rounded-full border border-indigo-200">
+              Question ${q.id} of 50
+            </span>
+            ${isAnswered ? (
+              selectedOpt === q.answer ? 
+              `<span class="text-xs font-semibold text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-200"><i class="fa-solid fa-circle-check mr-1"></i> Correct</span>` :
+              `<span class="text-xs font-semibold text-rose-600 bg-rose-50 px-2.5 py-1 rounded-full border border-rose-200"><i class="fa-solid fa-circle-xmark mr-1"></i> Incorrect</span>`
+            ) : ''}
+          </div>
+
+          <h3 class="text-base sm:text-lg font-bold text-slate-800 mb-4 leading-snug">
+            ${q.question}
+          </h3>
+
+          <div class="grid grid-cols-1 gap-2.5">
+            ${optionsHTML}
+          </div>
+
+          ${explanationHTML}
+        `;
+
+        quizContainer.appendChild(card);
+      });
+    }
+
+    // Select Option Handler
+    window.selectOption = function(qId, optionIdx) {
+      if (userAnswers[qId] !== undefined) return; // Prevent re-answering
+      
+      userAnswers[qId] = optionIdx;
+      
+      // Update Stats
+      updateStats();
+
+      // Update Card UI locally
+      const questionsToRender = getFilteredQuestions();
+      renderQuestions(questionsToRender);
+
+      // Update Navigator
+      const navBtn = document.getElementById(`nav-btn-${qId}`);
+      if (navBtn) {
+        navBtn.className = `w-8 h-8 rounded-lg text-xs font-bold transition flex items-center justify-center shrink-0 border ${getNavBtnStyle(qId)}`;
+      }
+    };
+
+    // Update Scores and Progress Bars
+    function updateStats() {
+      const answeredCount = Object.keys(userAnswers).length;
+      let correctCount = 0;
+
+      quizData.forEach(q => {
+        if (userAnswers[q.id] === q.answer) {
+          correctCount++;
+        }
+      });
+
+      const accuracy = answeredCount > 0 ? Math.round((correctCount / answeredCount) * 100) : 0;
+      const progressPercent = Math.round((answeredCount / quizData.length) * 100);
+
+      scoreDisplay.innerText = correctCount;
+      totalAnsweredDisplay.innerText = answeredCount;
+      accuracyDisplay.innerText = `${accuracy}%`;
+      progressBar.style.width = `${progressPercent}%`;
+
+      // Show summary card if all questions answered
+      if (answeredCount === quizData.length) {
+        resultCard.classList.remove('hidden');
+        finalScore.innerText = `${correctCount}/50`;
+        finalAccuracy.innerText = `${accuracy}%`;
+      } else {
+        resultCard.classList.add('hidden');
+      }
+    }
+
+    // Scroll to Specific Question
+    function scrollToQuestion(qId) {
+      const el = document.getElementById(`question-card-${qId}`);
+      if (el) {
+        const offset = 140; // account for sticky header & toolbar
+        const bodyRect = document.body.getBoundingClientRect().top;
+        const elementRect = el.getBoundingClientRect().top;
+        const elementPosition = elementRect - bodyRect;
+        const offsetPosition = elementPosition - offset;
+
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth'
+        });
+      }
+    }
+
+    // Handle Search / Filter
+    function handleSearch() {
+      const query = searchInput.value.toLowerCase().trim();
+      const filtered = quizData.filter(q => 
+        q.question.toLowerCase().includes(query) ||
+        q.explanation.toLowerCase().includes(query) ||
+        q.options.some(opt => opt.toLowerCase().includes(query))
+      );
+      renderQuestions(filtered);
+    }
+
+    function getFilteredQuestions() {
+      const query = searchInput.value.toLowerCase().trim();
+      if (!query) return quizData;
+      return quizData.filter(q => 
+        q.question.toLowerCase().includes(query) ||
+        q.explanation.toLowerCase().includes(query) ||
+        q.options.some(opt => opt.toLowerCase().includes(query))
+      );
+    }
+
+    // Reset Quiz
+    function resetQuiz() {
+      if (Object.keys(userAnswers).length > 0) {
+        if (confirm("Are you sure you want to reset your quiz progress?")) {
+          userAnswers = {};
+          searchInput.value = '';
+          initQuiz();
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+      }
+    }
+
+    // Run Initialization on DOM Load
+    window.onload = initQuiz;
+  </script>
+</body>
+</html>
